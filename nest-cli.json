@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/c4-monitoring-monorepo/src",
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "apps/c4-monitoring-monorepo/tsconfig.app.json"
+  },
+  "monorepo": true,
+  "root": "apps/c4-monitoring-monorepo",
+  "projects": {
+    "c4-monitoring-monorepo": {
+      "type": "application",
+      "root": "apps/c4-monitoring-monorepo",
+      "entryFile": "main",
+      "sourceRoot": "apps/c4-monitoring-monorepo/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/c4-monitoring-monorepo/tsconfig.app.json"
+      }
+    },
+    "api-gateway": {
+      "type": "application",
+      "root": "apps/api-gateway",
+      "entryFile": "main",
+      "sourceRoot": "apps/api-gateway/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/api-gateway/tsconfig.app.json"
+      }
+    },
+    "events": {
+      "type": "application",
+      "root": "apps/events",
+      "entryFile": "main",
+      "sourceRoot": "apps/events/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/events/tsconfig.app.json"
+      }
+    },
+    "members": {
+      "type": "application",
+      "root": "apps/members",
+      "entryFile": "main",
+      "sourceRoot": "apps/members/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/members/tsconfig.app.json"
+      }
+    },
+    "church": {
+      "type": "application",
+      "root": "apps/church",
+      "entryFile": "main",
+      "sourceRoot": "apps/church/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/church/tsconfig.app.json"
+      }
+    },
+    "auth": {
+      "type": "application",
+      "root": "apps/auth",
+      "entryFile": "main",
+      "sourceRoot": "apps/auth/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/auth/tsconfig.app.json"
+      }
+    },
+    "equipping": {
+      "type": "application",
+      "root": "apps/equipping",
+      "entryFile": "main",
+      "sourceRoot": "apps/equipping/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/equipping/tsconfig.app.json"
+      }
+    }
+  }
+}

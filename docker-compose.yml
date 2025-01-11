@@ -1,0 +1,65 @@
+services:
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+    networks:
+      - c4-monitoring-microservice
+
+  c4-auth-service:
+    build:
+      context: .
+      dockerfile: ./apps/auth/Dockerfile
+    container_name: c4-auth-service
+    volumes:
+      - ./apps/auth:/usr/src/app/apps/auth  # Only mount the auth service code if you are focusing on it
+      - ./libs/common:/usr/src/app/libs/common
+      - /usr/src/app/node_modules  # Prevents mounting node_modules, so Docker can use its own node_modules
+    ports:
+      - "3001:3001"
+    depends_on:
+      - rabbitmq
+    environment:
+      - NODE_PATH=./dist
+      - RABBITMQ_URL=${RABBITMQ_SERVER}
+      - CHOKIDAR_USEPOLLING=true
+    command: >
+      bash -c "node -v && npm run start:auth"
+    networks:
+      - c4-monitoring-microservice
+
+
+  api-gateway:
+    build:
+      context: .
+      dockerfile: ./apps/api-gateway/Dockerfile
+    container_name: api-gateway
+    volumes:
+      - ./apps/api-gateway:/usr/src/app/apps/api-gateway  # Only mount the auth service code if you are focusing on it
+      - ./libs/common:/usr/src/app/libs/common
+      - /usr/src/app/node_modules  # Prevents mounting node_modules, so Docker can use its own node_modules
+    ports:
+      - "3000:3000"
+    depends_on:
+      - c4-auth-service
+      - rabbitmq
+    environment:
+      - NODE_PATH=./dist
+      - RABBITMQ_URL=${RABBITMQ_SERVER}
+      - CHOKIDAR_USEPOLLING=true
+    command: >
+      bash -c "node -v && npm run start:gateway"
+    networks:
+      - c4-monitoring-microservice
+
+networks:
+  c4-monitoring-microservice:
+    driver: bridge
+
+volumes:
+  auth-db-data:  # Explicitly defining the volume for auth-db
