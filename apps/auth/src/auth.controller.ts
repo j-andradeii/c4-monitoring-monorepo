@@ -9,7 +9,7 @@ export class AuthController {
   @MessagePattern({ cmd: 'authenticate' })
   async authenticate(data: any): Promise<any> {
     return {
-      name: "Joseph andrade 9"
+      name: "Joseph andrade 10"
     };
   }
 }
