@@ -9,13 +9,13 @@ services:
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
     networks:
-      - c4-monitoring-microservice
+      - monitoring-microservice
 
-  c4-auth-service:
+  auth-service:
     build:
       context: .
       dockerfile: ./apps/auth/Dockerfile
-    container_name: c4-auth-service
+    container_name: auth-service
     volumes:
       - ./apps/auth:/usr/src/app/apps/auth  # Only mount the auth service code if you are focusing on it
       - ./libs/common:/usr/src/app/libs/common
@@ -31,7 +31,29 @@ services:
     command: >
       bash -c "node -v && npm run start:auth"
     networks:
-      - c4-monitoring-microservice
+      - monitoring-microservice
+
+  church-service:
+    build:
+      context: .
+      dockerfile: ./apps/church/Dockerfile
+    container_name: church-service
+    volumes:
+      - ./apps/church:/usr/src/app/apps/church  # Mount the church service code
+      - ./libs/common:/usr/src/app/libs/common
+      - /usr/src/app/node_modules  # Prevents mounting node_modules, so Docker can use its own node_modules
+    ports:
+      - "3002:3002"
+    depends_on:
+      - rabbitmq
+    environment:
+      - NODE_PATH=./dist
+      - RABBITMQ_URL=${RABBITMQ_SERVER}
+      - CHOKIDAR_USEPOLLING=true
+    command: >
+      bash -c "node -v && npm run start:church"
+    networks:
+      - monitoring-microservice
 
 
   api-gateway:
@@ -46,7 +68,8 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - c4-auth-service
+      - church-service
+      - auth-service
       - rabbitmq
     environment:
       - NODE_PATH=./dist
@@ -55,10 +78,10 @@ services:
     command: >
       bash -c "node -v && npm run start:gateway"
     networks:
-      - c4-monitoring-microservice
+      - monitoring-microservice
 
 networks:
-  c4-monitoring-microservice:
+  monitoring-microservice:
     driver: bridge
 
 volumes:

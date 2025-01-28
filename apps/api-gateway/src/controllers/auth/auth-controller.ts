@@ -1,5 +1,5 @@
 import { Controller, Get } from "@nestjs/common";
-import { AuthMicroserviceService } from "../microservices/auth-microservice/auth-microservice.service";
+import { AuthMicroserviceService } from "../../microservices/auth-microservice/auth-microservice.service";
 
 
 @Controller("auth")

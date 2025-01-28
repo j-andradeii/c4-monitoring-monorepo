@@ -9,6 +9,7 @@
     "build": "nest build",
     "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
     "start": "nest start",
+    "start:church": "nodemon --watch 'apps/church/src/**' --exec 'ts-node -r tsconfig-paths/register' apps/church/src/main.ts",
     "start:auth": "nodemon --watch 'apps/auth/src/**' --exec 'ts-node -r tsconfig-paths/register' apps/auth/src/main.ts",
     "start:gateway": "nodemon --watch 'apps/api-gateway/src/**' --exec 'ts-node -r tsconfig-paths/register' apps/api-gateway/src/main.ts",
     "start:dev": "nest start --watch",
