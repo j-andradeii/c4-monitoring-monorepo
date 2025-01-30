@@ -4,7 +4,7 @@ import { ChurchService } from './church.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import typeorm from './orm-config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { church } from './entities/church.entity';
+import { Church } from './entities/church.entity';
 
 @Module({
   imports: [
@@ -22,7 +22,7 @@ import { church } from './entities/church.entity';
       }),
     }),
 
-    TypeOrmModule.forFeature([church]),
+    TypeOrmModule.forFeature([Church]),
   ],
   controllers: [ChurchController],
   providers: [ChurchService],
