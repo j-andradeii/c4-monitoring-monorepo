@@ -11,6 +11,22 @@ services:
     networks:
       - monitoring-microservice
 
+  church-db:
+    image: postgres:13
+    container_name: church-db
+    environment:
+      POSTGRES_USER: auth_user
+      POSTGRES_PASSWORD: auth_password
+      POSTGRES_DB: church_db
+    ports:
+      - "5430:5432"  # Change host port to 3308 or any other available port
+    # volumes:
+      # - auth-db-data:/var/lib/postgresql/data  # Referencing auth-db-data volume
+      # - ./dbconfig/custom_pg_hba.conf:/var/lib/postgresql/data/pg_hba.conf  # Mount your custom pg_hba.conf
+      # - ./dbconfig/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql  # Mount the SQL initialization script
+    networks:
+      - monitoring-microservice
+
   auth-service:
     build:
       context: .
@@ -46,8 +62,15 @@ services:
       - "3002:3002"
     depends_on:
       - rabbitmq
+      - church-db
     environment:
       - NODE_PATH=./dist
+      - DATABASE_URL=postgres://auth_user:auth_password@church-db:5432/church_db
+      - POSTGRES_USER=auth_user
+      - POSTGRES_PASSWORD=auth_password
+      - POSTGRES_DB=church_db
+      - POSTGRES_PORT=5432
+      - POSTGRES_HOST=church-db
       - RABBITMQ_URL=${RABBITMQ_SERVER}
       - CHOKIDAR_USEPOLLING=true
     command: >

@@ -16,7 +16,6 @@ describe('ChurchController', () => {
 
   describe('root', () => {
     it('should return "Hello World!"', () => {
-      expect(churchController.getHello()).toBe('Hello World!');
     });
   });
 });

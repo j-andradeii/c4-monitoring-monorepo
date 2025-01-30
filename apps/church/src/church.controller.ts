@@ -10,7 +10,7 @@ export class ChurchController {
   async authenticate(data: any): Promise<any> {
     console.log("recieved-ChurchControllerchurch controller");
     return {
-      name: "Joseph andrade 10 church"
+      name: "Joseph andrade 10 church-1"
     };
   }
 } 
