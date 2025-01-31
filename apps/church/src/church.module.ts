@@ -8,6 +8,8 @@ import { Church } from './entities/church.entity';
 import { ChurchAddress } from './entities/church-address.entity';
 import { ChurchContactInfo } from './entities/church-contact-info.entity';
 import { ChurchCampus } from './entities/church-campus.entity';
+import { CreateChurchHandler } from './orchestrations/create-church.handler';
+import { CqrsModule } from '@nestjs/cqrs';
 
 @Module({
   imports: [
@@ -26,8 +28,14 @@ import { ChurchCampus } from './entities/church-campus.entity';
     }),
 
     TypeOrmModule.forFeature([Church, ChurchAddress, ChurchContactInfo, ChurchCampus ]),
+    CqrsModule
   ],
-  controllers: [ChurchController],
-  providers: [ChurchService],
+  controllers: [
+    ChurchController
+  ],
+  providers: [  
+    ChurchService,
+    CreateChurchHandler
+  ],
 })
 export class ChurchModule {}
