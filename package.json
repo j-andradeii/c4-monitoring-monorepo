@@ -7,6 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "nest build",
+    "build:all": "nest build common && npx tsc",
     "build:church": "nest build church && npx tsc --project apps/church/tsconfig.app.json",
     "build:members": "nest build members && npx tsc --project apps/members/tsconfig.app.json",
     "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
@@ -92,7 +93,11 @@
     "coverageDirectory": "./coverage",
     "testEnvironment": "node",
     "roots": [
-      "<rootDir>/apps/"
-    ]
+      "<rootDir>/apps/",
+      "<rootDir>/libs/"
+    ],
+    "moduleNameMapper": {
+      "^@app/libs(|/.*)$": "<rootDir>/libs/libs/src/$1"
+    }
   }
 }

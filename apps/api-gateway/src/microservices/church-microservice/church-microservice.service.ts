@@ -1,4 +1,5 @@
 
+import { CHURCH_COMMAND } from '@app/libs';
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 
@@ -10,7 +11,7 @@ export class ChurchMicroserviceService {
     async authenticateUser() {
         
         return this.churchClient.send(
-            { cmd: 'church_authenticate' },  // This command must match the @MessagePattern in the Auth Microservice
+            { cmd: CHURCH_COMMAND.CREATE_CHURCH},  // This command must match the @MessagePattern in the Auth Microservice
             { username: 'test', password: 'testa' }  // This is the payload sent to the microservice
         );
     }
