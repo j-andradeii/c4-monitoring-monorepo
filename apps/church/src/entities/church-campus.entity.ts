@@ -1,5 +1,7 @@
-import { Column, Entity, Index, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, Index, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Church } from './church.entity';
+import { ChurchStaff } from './church-statff.entity';
+import { ChurchCampusStaff } from './church-campus-staff.entity';
 
 
 export enum ChurchCampusType {
@@ -23,4 +25,7 @@ export class ChurchCampus {
     @ManyToOne(() => Church, church => church.church_campuses)  // Many-to-one relationship with Order
     @JoinColumn({ name: 'church_id' })  // Foreign key column for order_id
     church: Church;
+
+    @OneToMany(() => ChurchCampusStaff, churchCampusStaff => churchCampusStaff.church_campus)
+    church_campus_staffs: ChurchCampusStaff[];
 }

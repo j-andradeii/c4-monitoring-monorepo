@@ -1,4 +1,5 @@
-import { Entity, Index, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, Index, PrimaryGeneratedColumn, Column, OneToOne, OneToMany } from 'typeorm';
+import { ChurchCampusMember } from './church-campus-member.entity';
 
 @Entity()
 @Index(['id'], { unique: true })  // Unique composite index on id and user_id
@@ -31,4 +32,8 @@ export class Member {
     @Index()  // Create an index on invited_by
     @Column({ type: 'uuid', name: 'invited_by', nullable: true })
     invited_by: string;
+
+    @OneToMany(() => ChurchCampusMember, churchCampusMember => churchCampusMember.member)
+    church_campus_members: ChurchCampusMember[];
+
 }

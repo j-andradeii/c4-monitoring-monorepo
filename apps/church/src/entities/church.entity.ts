@@ -2,6 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, Index, OneToMany, OneToOne } fr
 import { ChurchCampus } from './church-campus.entity';
 import { ChurchContactInfo } from './church-contact-info.entity';
 import { ChurchAddress } from './church-address.entity';
+import { ChurchStaff } from './church-statff.entity';
 
 
 
@@ -26,6 +27,9 @@ export class Church {
 
   @OneToMany(() => ChurchAddress, churchAddress => churchAddress.church)
   church_addresses: ChurchAddress[];
+
+  @OneToMany(() => ChurchStaff, churchStaff => churchStaff.church)
+  church_staffs: ChurchStaff[];
 
   @OneToOne(() => ChurchContactInfo, churchContactInfo => churchContactInfo.church, {cascade: true, eager: true})
   church_contact_info: ChurchContactInfo;
