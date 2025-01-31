@@ -6,7 +6,7 @@ import { ClientProxy } from '@nestjs/microservices';
 @Injectable()
 export class ChurchMicroserviceService {
 
-    constructor( @Inject('CHURCH_SERVICE') private readonly churchClient: ClientProxy   ) {}
+    constructor(@Inject('CHURCH_SERVICE') private readonly churchClient: ClientProxy   ) {}
  
     async authenticateUser() {
         return this.churchClient.send(
