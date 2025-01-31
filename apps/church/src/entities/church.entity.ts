@@ -1,5 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, Index, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, Index, OneToMany, OneToOne } from 'typeorm';
 import { ChurchCampus } from './church-campus.entity';
+import { ChurchContactInfo } from './church-contact-info.entity';
+import { ChurchAddress } from './church-address.entity';
+
 
 
 @Entity()
@@ -20,5 +23,11 @@ export class Church {
 
   @OneToMany(() => ChurchCampus, churchCampus => churchCampus.church)
   church_campuses: ChurchCampus[];
+
+  @OneToMany(() => ChurchAddress, churchAddress => churchAddress.church)
+  church_addresses: ChurchAddress[];
+
+  @OneToOne(() => ChurchContactInfo, churchContactInfo => churchContactInfo.church, {cascade: true, eager: true})
+  church_contact_info: ChurchContactInfo;
 }
 

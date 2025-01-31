@@ -27,6 +27,22 @@ services:
     networks:
       - monitoring-microservice
 
+  members-db:
+    image: postgres:13
+    container_name: members-db
+    environment:
+      POSTGRES_USER: auth_user
+      POSTGRES_PASSWORD: auth_password
+      POSTGRES_DB: members_db
+    ports:
+      - "5431:5432"  # Change host port to 3308 or any other available port
+    # volumes:
+      # - auth-db-data:/var/lib/postgresql/data  # Referencing auth-db-data volume
+      # - ./dbconfig/custom_pg_hba.conf:/var/lib/postgresql/data/pg_hba.conf  # Mount your custom pg_hba.conf
+      # - ./dbconfig/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql  # Mount the SQL initialization script
+    networks:
+      - monitoring-microservice
+
   auth-service:
     build:
       context: .
@@ -78,6 +94,35 @@ services:
     networks:
       - monitoring-microservice
 
+  members-service:
+    build:
+      context: .
+      dockerfile: ./apps/members/Dockerfile
+    container_name: members-service
+    volumes:
+      - ./apps/members:/usr/src/app/apps/members  # Mount the church service code
+      - ./libs/common:/usr/src/app/libs/common
+      - /usr/src/app/node_modules  # Prevents mounting node_modules, so Docker can use its own node_modules
+    ports:
+      - "3003:3003"
+    depends_on:
+      - rabbitmq
+      - members-db
+    environment:
+      - NODE_PATH=./dist
+      - DATABASE_URL=postgres://auth_user:auth_password@members-db:5432/members_db
+      - POSTGRES_USER=auth_user
+      - POSTGRES_PASSWORD=auth_password
+      - POSTGRES_DB=members_db
+      - POSTGRES_PORT=5432
+      - POSTGRES_HOST=members-db
+      - RABBITMQ_URL=${RABBITMQ_SERVER}
+      - CHOKIDAR_USEPOLLING=true
+    command: >
+      bash -c "node -v && npm run start:members"
+    networks:
+      - monitoring-microservice
+
 
   api-gateway:
     build:
@@ -93,6 +138,7 @@ services:
     depends_on:
       - church-service
       - auth-service
+      - members-service
       - rabbitmq
     environment:
       - NODE_PATH=./dist

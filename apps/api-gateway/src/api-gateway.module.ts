@@ -5,16 +5,20 @@ import { AuthMicroserviceModule } from './microservices/auth-microservice/auth-m
 import { AuthController } from './controllers/auth/auth-controller';
 import { ChurchMicroserviceModule } from './microservices/church-microservice/church-microservice.module';
 import { ChurchController } from './controllers/church/church-controller';
+import { MembersMicroserviceModule } from './microservices/members-microservice/members-microservice.module';
+import { MembersController } from './controllers/members/members-controller';
 
 @Module({
   imports: [
     AuthMicroserviceModule,
-    ChurchMicroserviceModule
+    ChurchMicroserviceModule,
+    MembersMicroserviceModule
   ],
   controllers: [
     ApiGatewayController,
     AuthController,
-    ChurchController
+    ChurchController,
+    MembersController
   ],
   providers: [ApiGatewayService],
 })

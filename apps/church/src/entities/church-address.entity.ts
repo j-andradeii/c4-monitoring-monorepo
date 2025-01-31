@@ -1,26 +1,29 @@
 import { Column, Entity, Index, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Church } from './church.entity';
 
-
-export enum ChurchCampusType {
-    MAIN = 'MAIN',
-    BRANCH = 'BRANCH',
-}
-
 @Entity()
 @Index(['id'], { unique: true })  // Unique composite index on id and user_id
-export class ChurchCampus {
+export class ChurchAddress {
+
     @PrimaryGeneratedColumn('uuid')
     id: string;
-
-    @Column({ type: 'enum', enum: ChurchCampusType, default: ChurchCampusType.MAIN })
-    church_campus_type: ChurchCampusType;
-
-    @Index()  // Create an index on reference_id
-    @Column({ name: 'reference_id' })
-    reference_id: string;
 
     @ManyToOne(() => Church, church => church.church_campuses)  // Many-to-one relationship with Order
     @JoinColumn({ name: 'church_id' })  // Foreign key column for order_id
     church: Church;
+
+    @Column({ type: 'varchar', length: 255, nullable: false })
+    location_name: string;
+
+    @Column({ type: 'varchar', length: 255, nullable: false })
+    street: string;
+
+    @Column({ type: 'varchar', length: 255, nullable: false })
+    city: string;
+
+    @Column({ type: 'varchar', length: 255, nullable: false })
+    state: string;
+
+    @Column({ type: 'varchar', length: 255, nullable: false })
+    zip_code: string;
 }

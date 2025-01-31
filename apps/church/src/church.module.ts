@@ -5,6 +5,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import typeorm from './orm-config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Church } from './entities/church.entity';
+import { ChurchAddress } from './entities/church-address.entity';
+import { ChurchContactInfo } from './entities/church-contact-info.entity';
+import { ChurchCampus } from './entities/church-campus.entity';
 
 @Module({
   imports: [
@@ -22,7 +25,7 @@ import { Church } from './entities/church.entity';
       }),
     }),
 
-    TypeOrmModule.forFeature([Church]),
+    TypeOrmModule.forFeature([Church, ChurchAddress, ChurchContactInfo, ChurchCampus ]),
   ],
   controllers: [ChurchController],
   providers: [ChurchService],
