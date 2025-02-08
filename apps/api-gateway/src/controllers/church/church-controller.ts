@@ -10,7 +10,6 @@ export class ChurchController {
 
     @Get()
     async getAuth(): Promise<any> {
-        console.log("church controller");
         const user = await this.churchMicroserviceService.authenticateUser();
         return user;
     }
