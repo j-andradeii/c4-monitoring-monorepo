@@ -11,7 +11,6 @@ export class ChurchController {
 
   @MessagePattern({ cmd: CHURCH_COMMAND.CREATE_CHURCH })
   async authenticate(data: any): Promise<any> {
-    console.log("recieved-ChurchControllerchurch controller", CHURCH_COMMAND.CREATE_CHURCH);
     await this.commandBus.execute(new CreateChurchCommand(data));
     return {
       name: "Joseph andrade 10 church-1"
