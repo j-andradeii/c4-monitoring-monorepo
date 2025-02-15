@@ -1,4 +1,4 @@
-import { Controller, Get, Post } from "@nestjs/common";
+import { Body, Controller, Get, Post } from "@nestjs/common";
 import { AuthMicroserviceService } from "../../microservices/auth-microservice/auth-microservice.service";
 import { API_PREFIX } from "@app/libs";
 
@@ -11,5 +11,12 @@ export class AuthController {
     @Post()
     async getAuth(): Promise<any> {
         return await this.authMicroserviceService.authenticateUser();
+    }
+
+    @Post('refresh')
+    async refresh(@Body() body: { refresh_token: string }) {
+      const { refresh_token } = body;
+      // Call the Auth microservice to refresh
+      return await this.authMicroserviceService.refreshToken(refresh_token);
     }
 }

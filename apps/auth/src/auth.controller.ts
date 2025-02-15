@@ -18,5 +18,10 @@ export class AuthController {
     return this.authService.validateToken(token);
   }
 
+  @MessagePattern({ cmd: AUTH_COMMAND.REFRESH_TOKEN })
+  async refreshToken(refresh_token: string) {
+    return this.authService.refresh(refresh_token);
+  }
+
 
 }

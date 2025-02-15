@@ -25,6 +25,12 @@ export class AuthService {
     return null;
   }
 
+    // Example user fetch: adapt to your DB/ORM
+    private async getUserById(userId: number) {
+      // In reality, fetch from DB. Hard-coding for example:
+      return { id: userId, email: 'test@example.com' };
+    }
+
 
   async login(email: string, pass: string) {
    
@@ -43,6 +49,46 @@ export class AuthService {
       access_token: accessToken,
       refresh_token: refreshToken,
     };
+  }
+
+  async refresh(refreshToken: string) {
+    try {
+      // Verify refresh token with a dedicated secret (recommended)
+      const payload = this.jwtService.verify(refreshToken, {
+        secret: process.env.JWT_REFRESH_SECRET || 'REFRESH_SECRET',
+      });
+      // payload might have { sub: userId, email, iat, exp }
+
+      // Optionally check if the refresh token is revoked or blacklisted in DB:
+      // if (await this.isRefreshTokenRevoked(refreshToken)) {
+      //   throw new UnauthorizedException('Refresh token revoked');
+      // }
+
+      // Retrieve the user from database
+      const user = await this.getUserById(payload.sub);
+      if (!user) {
+        throw new UnauthorizedException('User not found');
+      }
+
+      // Generate a new access token & refresh token
+      const newAccessToken = this.jwtService.sign(
+        { sub: user.id, email: user.email }
+      );
+      const newRefreshToken = this.jwtService.sign(
+        { sub: user.id, email: user.email },
+        {
+          secret: process.env.JWT_REFRESH_SECRET || 'REFRESH_SECRET',
+          expiresIn: '7d',
+        },
+      );
+
+      return {
+        access_token: newAccessToken,
+        refresh_token: newRefreshToken,
+      };
+    } catch (err) {
+      throw new UnauthorizedException('Invalid or expired refresh token');
+    }
   }
 
   async validateToken(token: string) {

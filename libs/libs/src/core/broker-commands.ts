@@ -1,6 +1,7 @@
 export const AUTH_COMMAND = {
     AUTHENTICATE: "auth_authenticate",
-    VALIDATE_TOKEN: "auth_validateToken"
+    VALIDATE_TOKEN: "auth_validateToken",
+    REFRESH_TOKEN: "auth_refreshToken"
 }
 
 export const CHURCH_COMMAND = {

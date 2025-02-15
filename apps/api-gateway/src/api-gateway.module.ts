@@ -21,7 +21,7 @@ import { JwtStrategy } from './strategy/jwt.strategy';
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
       secret: process.env.JWT_SECRET || 'SECRET_KEY', // match Auth microservice
-      signOptions: { expiresIn: process.env.JWT_EXPIRATION_TIME || '15m' },
+      signOptions: { expiresIn: process.env.JWT_EXPIRES_IN || '15m' },
     }),
   ],
   controllers: [

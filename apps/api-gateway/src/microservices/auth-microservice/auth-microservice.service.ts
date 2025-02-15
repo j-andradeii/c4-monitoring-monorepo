@@ -16,4 +16,12 @@ export class AuthMicroserviceService {
         );
         return await lastValueFrom(user);
     }
+
+    async refreshToken(refresh_token: string) {
+        const token = this.authClient.send(
+            { cmd: AUTH_COMMAND.REFRESH_TOKEN },
+            refresh_token
+        );
+        return await lastValueFrom(token);
+    }
 }
