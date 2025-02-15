@@ -60,6 +60,8 @@ services:
       - NODE_PATH=./dist
       - RABBITMQ_URL=${RABBITMQ_SERVER}
       - CHOKIDAR_USEPOLLING=true
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_EXPIRES_IN=${JWT_EXPIRES_IN}  
     command: >
       bash -c "node -v && npm run start:auth"
     networks:

@@ -1,5 +1,6 @@
 export const AUTH_COMMAND = {
-    AUTHENTICATE: "authenticate"
+    AUTHENTICATE: "auth_authenticate",
+    VALIDATE_TOKEN: "auth_validateToken"
 }
 
 export const CHURCH_COMMAND = {
