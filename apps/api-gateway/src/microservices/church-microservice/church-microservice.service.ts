@@ -21,4 +21,12 @@ export class ChurchMicroserviceService {
             churchCampusCreationDto  // This is the payload sent to the microservice
         );
     }
+
+
+    async getChurches(page: number, limit: number) {
+        return await this.churchClient.send(
+            { cmd: CHURCH_COMMAND.GET_CHURCHES},  // This command must match the @MessagePattern in the Auth Microservice
+            { page, limit }  // This is the payload sent to the microservice
+        );
+    }
 }

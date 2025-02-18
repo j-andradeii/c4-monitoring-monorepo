@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Req, UseGuards, UseInterceptors, UsePipes, UseFilters } from "@nestjs/common";
+import { Body, Controller, Get, Post, Req, UseGuards, UseInterceptors, UsePipes, UseFilters, Query } from "@nestjs/common";
 import { ChurchMicroserviceService } from "../../microservices/church-microservice/church-microservice.service";
 import { JwtAuthGuard } from "../../guards/guards/jwt-auth.guard";
 import { TransformResponseInterceptor } from "../../interceptors/transform-response.interceptor";
@@ -14,12 +14,22 @@ export class ChurchController {
 
  
 
+    // @Get()
+    // // @UseGuards(OptionalJwtAuthGuard) // ✅ Optional guard
+    // @UseGuards(JwtAuthGuard)
+    // @UseInterceptors(TransformResponseInterceptor<any>)
+    // async getAuth(@Req() req: any): Promise<any> {
+    //     return await this.churchMicroserviceService.authenticateUser();
+    // }
+
     @Get()
-    // @UseGuards(OptionalJwtAuthGuard) // ✅ Optional guard
     @UseGuards(JwtAuthGuard)
     @UseInterceptors(TransformResponseInterceptor<any>)
-    async getAuth(@Req() req: any): Promise<any> {
-        return await this.churchMicroserviceService.authenticateUser();
+    async getChurches(
+        @Query('page') page = 1,   // Default page is 1 if not provided
+        @Query('limit') limit = 10 // Default limit is 10 if not provided
+    ): Promise<any> {
+        return await this.churchMicroserviceService.getChurches(page, limit);
     }
 }
 

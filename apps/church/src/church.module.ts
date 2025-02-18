@@ -13,6 +13,8 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { CreateChurchCampusHandler } from './orchestrations/create-church-campus.handler';
 import { RandomNumberGeneratorService } from './service/random-number-generator.service';
 import { ChurchCampusClosureService } from './service/church-campus-closure.service';
+import { GetChurchesHandler } from './orchestrations/get-churches.handler';
+import { ChurchesRepository } from './repositories/churches-repositories';
 
 @Module({
   imports: [
@@ -37,9 +39,11 @@ import { ChurchCampusClosureService } from './service/church-campus-closure.serv
     ChurchController
   ],
   providers: [  
+    ChurchesRepository,
     ChurchService,
     CreateChurchHandler,
     CreateChurchCampusHandler,
+    GetChurchesHandler,
     ChurchCampusClosureService,
     RandomNumberGeneratorService    
   ],

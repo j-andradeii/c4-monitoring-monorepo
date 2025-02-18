@@ -14,9 +14,8 @@ import {
       const response = ctx.getResponse<Response>();
       const status =
         exception 
-          ?  exception.statusCode
+          ? exception.status ||  exception.statusCode
           : HttpStatus.INTERNAL_SERVER_ERROR;
-        console.log("exception", exception);
       response.status(status).json({
         data: null,
         statusCode: status,
