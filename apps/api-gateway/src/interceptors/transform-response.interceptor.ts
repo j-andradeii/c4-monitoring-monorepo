@@ -31,6 +31,9 @@ import {
               ? error.getStatus()
               : HttpStatus.INTERNAL_SERVER_ERROR;
   
+            console.log("error", error.message);
+
+            console.log("statusCode", statusCode);
           return throwError(() => ({
             statusCode,
             error: error.message || 'Internal Server Error',

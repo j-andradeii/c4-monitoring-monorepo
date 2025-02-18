@@ -1,7 +1,10 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
+import { DataSource } from "typeorm";
 
 @Injectable()
 export abstract class AbstractOrchestrator<D, R> {
+
+    constructor(protected readonly dataSource: DataSource) {}
 
     public async orchestrate(request: D): Promise<R> {
         try {

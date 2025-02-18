@@ -1,22 +1,18 @@
-import { Body, Controller, Get, Post, Req, UseGuards, UseInterceptors } from "@nestjs/common";
-import { AuthMicroserviceService } from "../../microservices/auth-microservice/auth-microservice.service";
+import { Body, Controller, Get, Post, Req, UseGuards, UseInterceptors, UsePipes, UseFilters } from "@nestjs/common";
 import { ChurchMicroserviceService } from "../../microservices/church-microservice/church-microservice.service";
 import { JwtAuthGuard } from "../../guards/guards/jwt-auth.guard";
 import { TransformResponseInterceptor } from "../../interceptors/transform-response.interceptor";
-import { OptionalJwtAuthGuard } from "../../guards/guards/jwt-auth-optional.guard";
+import { API_PREFIX, ChurchCampusCreationDto, ValidationPipe } from "@app/libs";
+import { ExceptionsHandler } from "@nestjs/core/exceptions/exceptions-handler";
+import { AllExceptionsFilter } from "../../interceptors/exception-filter";
 
-@Controller("church")
+@Controller(`${API_PREFIX.V1}/churches`)
+@UseFilters(AllExceptionsFilter) // ✅ Apply exception filter to this controller
 export class ChurchController {
     constructor(private churchMicroserviceService: ChurchMicroserviceService) {
     }
 
-    @Post()
-    @UseGuards(JwtAuthGuard)
-    @UseInterceptors(TransformResponseInterceptor<any>)
-    async createChurch(@Body() body: any): Promise<any> {
-        console.log(body);
-        return "";
-    }
+ 
 
     @Get()
     // @UseGuards(OptionalJwtAuthGuard) // ✅ Optional guard

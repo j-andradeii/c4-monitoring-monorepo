@@ -6,6 +6,7 @@ export const AUTH_COMMAND = {
 
 export const CHURCH_COMMAND = {
     CREATE_CHURCH: 'create_church',
+    CREATE_CHURCH_CAMPUS: 'create_church_campus',
 }
 
 
