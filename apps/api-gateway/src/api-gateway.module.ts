@@ -13,6 +13,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './strategy/jwt.strategy';
 import { AccessTokenMiddleware } from './middleware/access-token-middleware';
 import { ApiCryptoService } from './api-crypto-service';
+import { TransformResponseInterceptor } from './interceptors/transform-response.interceptor';
 
 @Module({
   imports: [
@@ -35,7 +36,8 @@ import { ApiCryptoService } from './api-crypto-service';
   providers: [
     ApiGatewayService, 
     JwtStrategy,
-    ApiCryptoService
+    ApiCryptoService,
+    TransformResponseInterceptor
   ],
 })
 export class ApiGatewayModule implements NestModule{
