@@ -32,8 +32,6 @@ export class AccessTokenMiddleware implements NestMiddleware {
     }
 
 
-
-
     // If needed, verify or validate the token here
     // e.g., decode it, check against a database, etc.
 
