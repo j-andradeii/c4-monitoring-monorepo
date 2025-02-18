@@ -21,13 +21,11 @@ export class CreateChurchCampusHandler extends AbstractOrchestrator<ChurchCampus
   
 
     execute(command: CreateChurchCampusCommand): Promise<any> {
-        console.log("CreateChurchCampusHandler execute", command);
         return this.orchestrate(command.churchCampusCreationDto);
     }
 
 
     protected async preProcess(request: ChurchCampusCreationDto): Promise<ChurchCampusCreationDto> {
-        console.log("CreateChurchHandler preProcess", request);
         return request;
     }
     protected async doProcess(request: ChurchCampusCreationDto): Promise<any> {
