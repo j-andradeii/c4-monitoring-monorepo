@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ApiGatewayController } from './api-gateway.controller';
 import { ApiGatewayService } from './api-gateway.service';
 import { AuthMicroserviceModule } from './microservices/auth-microservice/auth-microservice.module';
@@ -11,6 +11,8 @@ import { ConfigModule } from '@nestjs/config';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './strategy/jwt.strategy';
+import { AccessTokenMiddleware } from './middleware/access-token-middleware';
+import { ApiCryptoService } from './api-crypto-service';
 
 @Module({
   imports: [
@@ -32,7 +34,14 @@ import { JwtStrategy } from './strategy/jwt.strategy';
   ],
   providers: [
     ApiGatewayService, 
-    JwtStrategy
+    JwtStrategy,
+    ApiCryptoService
   ],
 })
-export class ApiGatewayModule {}
+export class ApiGatewayModule implements NestModule{
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(AccessTokenMiddleware)     // the middleware
+      .forRoutes('*');                 // apply to all routes or specify specific route paths
+  }
+}
