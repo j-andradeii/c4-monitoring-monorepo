@@ -52,10 +52,10 @@ export class CreateChurchCampusHandler extends AbstractOrchestrator<ChurchCampus
 
 
               // **Dynamically Create the Table**
-            await this.churchCampusClosureService.ensureChurchCampusClosureTable(queryRunner, savedChurchCampus.reference_id);
+            // await this.churchCampusClosureService.ensureChurchCampusClosureTable(queryRunner, savedChurchCampus.reference_id); //move this to members microservice
             
             await queryRunner.commitTransaction();
-            return request;
+            return savedChurchCampus;
         } catch (error) {
             // Rollback the transaction in case of an error
             await queryRunner.rollbackTransaction();
@@ -68,7 +68,6 @@ export class CreateChurchCampusHandler extends AbstractOrchestrator<ChurchCampus
 
 
     protected async postProcess(data: any): Promise<any> {
-        console.log("CreateChurchHandler postProcess", data);
         return data;
     }
 

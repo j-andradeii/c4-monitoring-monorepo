@@ -1,15 +1,14 @@
-import { Body, Controller, Get, Post, Req, UseGuards, UseInterceptors, UsePipes, UseFilters, Query } from "@nestjs/common";
-import { ChurchMicroserviceService } from "../../microservices/church-microservice/church-microservice.service";
+import { Body, Controller, Get, Req, UseGuards, UseInterceptors, UsePipes, UseFilters, Query } from "@nestjs/common";
 import { JwtAuthGuard } from "../../guards/guards/jwt-auth.guard";
 import { TransformResponseInterceptor } from "../../interceptors/transform-response.interceptor";
-import { API_PREFIX, ChurchCampusCreationDto, ValidationPipe } from "@app/libs";
-import { ExceptionsHandler } from "@nestjs/core/exceptions/exceptions-handler";
+import { API_PREFIX} from "@app/libs";
 import { AllExceptionsFilter } from "../../interceptors/exception-filter";
+import { ChurchService } from "../../service/church-service";
 
 @Controller(`${API_PREFIX.V1}/churches`)
 @UseFilters(AllExceptionsFilter) // ✅ Apply exception filter to this controller
 export class ChurchController {
-    constructor(private churchMicroserviceService: ChurchMicroserviceService) {
+    constructor(private churchService: ChurchService) {
     }
 
  
@@ -29,7 +28,7 @@ export class ChurchController {
         @Query('page') page = 1,   // Default page is 1 if not provided
         @Query('limit') limit = 10 // Default limit is 10 if not provided
     ): Promise<any> {
-        return await this.churchMicroserviceService.getChurches(page, limit);
+        return await this.churchService.getChurches(page, limit);
     }
 }
 

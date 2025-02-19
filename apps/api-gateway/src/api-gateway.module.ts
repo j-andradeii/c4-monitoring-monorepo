@@ -1,6 +1,6 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ApiGatewayController } from './api-gateway.controller';
-import { ApiGatewayService } from './api-gateway.service';
+import { ApiGatewayService } from './service/api-gateway.service';
 import { AuthMicroserviceModule } from './microservices/auth-microservice/auth-microservice.module';
 import { AuthController } from './controllers/auth/auth-controller';
 import { ChurchMicroserviceModule } from './microservices/church-microservice/church-microservice.module';
@@ -12,9 +12,10 @@ import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './strategy/jwt.strategy';
 import { AccessTokenMiddleware } from './middleware/access-token-middleware';
-import { ApiCryptoService } from './api-crypto-service';
+import { ApiCryptoService } from './service/api-crypto-service';
 import { TransformResponseInterceptor } from './interceptors/transform-response.interceptor';
 import { ChurchCampusController } from './controllers/church/church-campus.controller';
+import { ChurchService } from './service/church-service';
 
 @Module({
   imports: [
@@ -39,7 +40,8 @@ import { ChurchCampusController } from './controllers/church/church-campus.contr
     ApiGatewayService, 
     JwtStrategy,
     ApiCryptoService,
-    TransformResponseInterceptor
+    TransformResponseInterceptor,
+    ChurchService
   ],
 })
 export class ApiGatewayModule implements NestModule{

@@ -2,7 +2,7 @@
 import { Injectable, NestMiddleware } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
 import * as crypto from 'crypto';
-import { ApiCryptoService } from '../api-crypto-service';
+import { ApiCryptoService } from '../service/api-crypto-service';
 @Injectable()
 export class AccessTokenMiddleware implements NestMiddleware {
 

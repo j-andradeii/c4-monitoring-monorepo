@@ -8,11 +8,18 @@ export class MembersController {
 
   @MessagePattern({ cmd: 'members_authenticate' })
   async authenticate(data: any): Promise<any> {
-    console.log("recieved-MembersControllermembers controller");
+    console.log("recieved-MembersControllermembers controller1", data);
     return {
       name: "Joseph andrade 10 members-microservice"
     };
   }
 
+  @MessagePattern({ cmd: 'create_church_campus_closure' })
+  async createChurchCampusClosure(data: any): Promise<any> {
+    console.log("recieved-MembersControllermembers controller", data);
+    return {
+      name: "Joseph andrade 10 members-microservice"
+    };
+  }
 
 }

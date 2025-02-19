@@ -22,11 +22,7 @@ export class ChurchController {
 
   @MessagePattern({ cmd: CHURCH_COMMAND.CREATE_CHURCH_CAMPUS })
   async createChurchCampus(data: ChurchCampusCreationDto): Promise<any> {
-    console.log(data);
-    await this.commandBus.execute(new CreateChurchCampusCommand(data));
-    return {
-      name: "Church Campus Creation Dto"
-    };
+    return await this.commandBus.execute(new CreateChurchCampusCommand(data));
   }
 
   @MessagePattern({ cmd: CHURCH_COMMAND.GET_CHURCHES })
