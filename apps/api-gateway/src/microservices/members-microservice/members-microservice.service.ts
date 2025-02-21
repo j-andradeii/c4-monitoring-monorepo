@@ -16,11 +16,11 @@ export class MembersMicroserviceService {
         );
     }
 
-    async createChurchCampusClosure(churchCampus: any) {
+    async createChurchCampusClosure(referenceId: string) {
         try{
             const memberResponse = await this.membersClient.send(
                 { cmd: 'create_church_campus_closure' },  // This command must match the @MessagePattern in the Auth Microservice
-                churchCampus  // This is the payload sent to the microservice
+                { referenceId: referenceId }  // This is the payload sent to the microservice
             );
             return await lastValueFrom(memberResponse);
         } catch(error) {

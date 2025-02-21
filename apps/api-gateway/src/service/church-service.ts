@@ -15,7 +15,9 @@ export class ChurchService {
 
     async createChurchCampus(churchCampusCreationDto: ChurchCampusCreationDto) {
         const churchCampus = await this.churchMicroserviceService.createChurchCampus(churchCampusCreationDto);
-        const memberCreate= await this.membersMicroserviceService.createChurchCampusClosure(churchCampus);
+        const referenceId = churchCampus.reference_id;
+        const memberCreate = await this.membersMicroserviceService.createChurchCampusClosure(referenceId);
+        console.log("memberCreate", memberCreate);
         return churchCampus;
     }
 }

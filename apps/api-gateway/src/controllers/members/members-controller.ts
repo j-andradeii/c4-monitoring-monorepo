@@ -11,7 +11,6 @@ export class MembersController {
     @Get()
     @UseGuards(JwtAuthGuard)
     async getMembers(): Promise<any> {
-        console.log("members controller");
         const user = await this.membersMicroserviceService.authenticateUser();
         return user;
     }
