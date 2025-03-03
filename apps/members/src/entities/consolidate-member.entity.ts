@@ -17,11 +17,11 @@ export class ConsolidateMember {
      * - {cascade: true} means operations on ContactInfo will cascade to the related Member
      * - {eager: true} means the Member will be automatically loaded when ContactInfo is retrieved
      */
-    @ManyToOne(() => Member, member => member.consolidator_members, {cascade: true, eager: true})
+    @ManyToOne(() => Member, member => member.consolidator_members, {cascade: true, eager: true, nullable: false})
     @JoinColumn({ name: 'consolidator_id' })
     consolidator: Member;
 
-    @ManyToOne(() => Member, member => member.consolidatee_members, {cascade: true, eager: true})
+    @ManyToOne(() => Member, member => member.consolidatee_members, {cascade: true, eager: true, nullable: false})
     @JoinColumn({ name: 'consolidatee_id' })
     consolidatee: Member;
 
