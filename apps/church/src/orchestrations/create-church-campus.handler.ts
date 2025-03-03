@@ -28,6 +28,7 @@ export class CreateChurchCampusHandler extends AbstractOrchestrator<ChurchCampus
     protected async preProcess(request: ChurchCampusCreationDto): Promise<ChurchCampusCreationDto> {
         return request;
     }
+    
     protected async doProcess(request: ChurchCampusCreationDto): Promise<any> {
 
         const queryRunner: QueryRunner = this.dataSource.createQueryRunner();
