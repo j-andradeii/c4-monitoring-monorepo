@@ -6,10 +6,10 @@ const routes: Routes = [
   {
       path: '',
       pathMatch: 'full',
-      redirectTo: 'signin'
+      redirectTo: ''
   },
   {
-    path: 'signin',
+    path: '',
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
   },
   {
