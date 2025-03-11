@@ -1,0 +1,67 @@
+:root {
+    --curved-radius: 5px;
+}
+
+
+@mixin font-regular {
+  // font-family: var(--LT) !important;
+  font-family: var(--LT), sans-serif !important;
+  // color: var(--dark);
+  // font-weight: 400 !important;
+}
+
+@mixin font-huge {
+  font-family: var(--LT), sans-serif !important;
+
+  color: var(--dark);
+  font-size: 40px;
+}
+
+@mixin font-title {
+  font-family: var(--LT), sans-serif !important;
+
+  color: var(--dark);
+  font-weight: 600;
+  font-size: 24px;
+}
+
+@mixin font-bold {
+  font-family: var(--LT), sans-serif !important;
+//   font-weight: 600 !important;
+}
+
+@mixin font-sf-pro-regular {
+    font-family: var(--SR);
+}
+
+@mixin font-sf-pro-semi-bold {
+  font-family: var(--SSB);
+}
+
+@mixin font-header {
+  font-family: var(--HR) !important;
+  font-weight: 600 !important;
+}
+
+@mixin shadow {
+  box-shadow: 0 15px 25px -5px rgba(0,0,0,0.08);
+  -webkit-box-shadow: 0 15px 25px -5px rgba(0,0,0,0.08);
+  -moz-box-shadow: 0 15px 25px -5px rgba(0,0,0,0.08);
+}
+
+@mixin image-crop {
+  object-fit: cover;
+  object-position: center;
+}
+
+
+@mixin ellipsis($width) {
+  width: $width;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
+
