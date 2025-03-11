@@ -17,7 +17,7 @@ export class AppComponent implements OnInit{
   title = 'gwc-monitoring-webapp';
 
   constructor(private churchService: ChurchService, private cryptoService: CryptoService, private apiEventService: ApiEventService) {
-    // this.churchService.getChurches();
+    this.churchService.getChurches();
   }
 
   async ngOnInit(): Promise<void> {
