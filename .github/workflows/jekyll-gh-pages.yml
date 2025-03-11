@@ -1,49 +1,50 @@
-name: Deploy Angular App to GitHub Pages
+name: Deploy to Cloudflare Pages
 
 on:
-  push:
-    branches: ["master"]
-  workflow_dispatch:
-
-permissions:
-  contents: write
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: true  # Better to cancel previous deployments
+  pull_request:
+    types: [closed]
+    branches:
+      - master  # Replace with your default branch, e.g., main or master
+      - IMP-DEPLOYMENT-CLOUDFLARE-SCRIPT
+      - staging
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    if: github.event.pull_request.merged == true
+    permissions:
+      contents: read
+      deployments: write
+    name: Deploy to Cloudflare Pages
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
       - name: Install Dependencies
         run: npm install
 
-      - name: Build Angular App
-        run: npm run build -- --base-href=/gwc-monitoring-webapp/ -c=production
+      - name: Build Project Prod
+        if: github.base_ref == 'master'
+        run: npm run build -- -c=production
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Build Project Staging
+        if: github.base_ref == 'staging'
+        run: npm run build -- -c=staging  
+
+      - name: Build Project IMP-DEPLOYMENT-CLOUDFLARE-SCRIPT
+        if: github.base_ref == 'IMP-DEPLOYMENT-CLOUDFLARE-SCRIPT'
+        run: npm run build -- -c=staging    
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/pages-action@1
         with:
-          path: dist/gwc-monitoring-webapp/browser/.  # Replace with your actual Angular project name
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: ${{ secrets.CF_PROJECT_NAME }}  # Replace with your Cloudflare Pages project name
+          directory: './dist/gwc-monitoring-webapp/browser'  # Replace with your Angular project's dist folder
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+
+
+# apiTOKEN = B7aRMzhIySQ-az4GIzO1U9yNwwtUcv3Dt2YfF_QR
