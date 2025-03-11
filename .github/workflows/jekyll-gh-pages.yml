@@ -1,8 +1,9 @@
 name: Deploy Angular App to GitHub Pages
 
 on:
-  push:
-    branches: ["master"]
+  pull_request:
+    types: [closed]
+    branches: ["master", "staging"]
   workflow_dispatch:
 
 permissions:
