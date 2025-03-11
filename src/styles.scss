@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+@import './assets/scss/pallete.scss';
+@import './assets/scss/font.scss';
+
+
+body {
+    @include font-regular();
+    margin: 0;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: var(--LT), sans-serif;
+    margin-block-start: 0 !important;
+    margin-block-end: 0 !important;
+}
+
+
+
+p {
+    @include font-regular();
+    margin-block-start: 0 !important;
+    margin-block-end: 0 !important;
+}
+
+.p-button {
+    background-color: var(--primary) !important;
+    color: #fff !important;
+}

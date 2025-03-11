@@ -9,7 +9,6 @@ import {ToastModule} from 'primeng/toast';
 import { GwcToastComponent } from './components/gwc-toast/gwc-toast.component';
 import { ConfirmationService, MessageService } from "primeng/api";
 
-
 @NgModule({
     imports:[
         CommonModule,
@@ -19,7 +18,7 @@ import { ConfirmationService, MessageService } from "primeng/api";
         ToastModule
     ],
     declarations:[
-        GwcToastComponent
+        GwcToastComponent,
     ],
     exports:[
         //MODULES
