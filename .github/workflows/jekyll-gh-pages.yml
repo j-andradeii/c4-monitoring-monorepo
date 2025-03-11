@@ -42,7 +42,7 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: ${{ secrets.CF_PROJECT_NAME }}  # Replace with your Cloudflare Pages project name
-          directory: './dist/acps-conference/browser'  # Replace with your Angular project's dist folder
+          directory: './dist/gwc-monitoring-webapp/browser'  # Replace with your Angular project's dist folder
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
 
