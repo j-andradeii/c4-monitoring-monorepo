@@ -6,7 +6,7 @@ services:
       - '.:/app'
       - '/app/node_modules'
     command: >
-        bash -c "node -v && ng version && ng serve --open --host 0.0.0.0 --watch --poll=2000"
+        bash -c "node -v && ng version && ng serve -c=local --open --host 0.0.0.0 --watch --poll=2000"
     container_name: gwc-monitoring-webapp
     ports:
       - "4200:4200"

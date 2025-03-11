@@ -6,11 +6,15 @@ const routes: Routes = [
   {
       path: '',
       pathMatch: 'full',
-      redirectTo: 'signin'
+      redirectTo: ''
   },
   {
     path: 'signin',
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+  },
+  {
+    path: '',
+    loadChildren: () => import('./public-pages/public-pages.portal.module').then(m => m.PublicPagesPortalModule)
   },
   {
     path: '**',
