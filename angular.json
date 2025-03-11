@@ -71,10 +71,44 @@
               ],
               "outputHashing": "all"
             },
+            "staging": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "4mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2mb",
+                  "maximumError": "4mb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "namedChunks": true
+            },
+            "local": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -85,8 +119,14 @@
             "production": {
               "buildTarget": "gwc-monitoring-webapp:build:production"
             },
+            "staging": {
+              "buildTarget": "gwc-monitoring-webapp:build:staging"
+            },
             "development": {
               "buildTarget": "gwc-monitoring-webapp:build:development"
+            },
+            "local": {
+              "buildTarget": "gwc-monitoring-webapp:build:local"
             }
           },
           "defaultConfiguration": "development"
