@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'signin',
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+  },
+  {
+    path: '**',
+    redirectTo: 'signin' // Replace '' with your default route 
   }
 ];
 
