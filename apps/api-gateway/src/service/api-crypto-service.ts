@@ -10,7 +10,7 @@ export class ApiCryptoService {
       // Use ENCRYPTION_PASSWORD from the environment or a default value.
       const password = process.env.X_ACCESS_TOKEN_ENCRYPTION_PASSWORD;
       // Derive a 32-byte key from the password (ensure you use a secure salt in production).
-      this.key = crypto.scryptSync(password, 'salt', 32);
+      this.key = crypto.scryptSync(password, 'salt', 32, { N: 1024, r: 8, p: 1 });
     }
 
 
