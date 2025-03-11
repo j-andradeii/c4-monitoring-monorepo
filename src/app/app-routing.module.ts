@@ -9,21 +9,21 @@ const routes: Routes = [
       redirectTo: ''
   },
   {
-    path: 'signin',
-    loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
-  },
-  {
     path: '',
     loadChildren: () => import('./public-pages/public-pages.portal.module').then(m => m.PublicPagesPortalModule)
+  },
+  {
+    path: 'signin',
+    loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
   },
   {
     path: 'church-campus-admin',
     loadChildren: () => import('./church-campus-admin/church-campus-admin-portal.module').then(m => m.ChurchCampusAdminPortalModule)
   },
-  {
-    path: '**',
-    redirectTo: '' // Replace '' with your default route 
-  }
+  // {
+  //   path: '**',
+  //   redirectTo: '' // Replace '' with your default route 
+  // }
 ];
 
 @NgModule({
