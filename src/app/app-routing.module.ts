@@ -18,7 +18,10 @@ const routes: Routes = [
   },
   {
     path: 'church-campus-admin',
-    loadChildren: () => import('./church-campus-admin/church-campus-admin-portal.module').then(m => m.ChurchCampusAdminPortalModule)
+    loadChildren: () => import('./church-campus-admin/church-campus-admin-portal.module').then(m => m.ChurchCampusAdminPortalModule),
+    data: {
+      preload: true,
+    }
   },
   // {
   //   path: '**',
