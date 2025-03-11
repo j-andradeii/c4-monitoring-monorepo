@@ -14,14 +14,13 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'signin' // Replace '' with your default route 
+    redirectTo: '' // Replace '' with your default route 
   }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
     preloadingStrategy: CustomPreloadingStrategyService,
-    useHash: true
 })],
   exports: [RouterModule]
 })
