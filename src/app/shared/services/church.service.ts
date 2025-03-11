@@ -31,6 +31,7 @@ export class ChurchService extends AbstractHttpHandler {
             this.apiEventsService.sendEvent({ type: eventType, status: ApiEventStatus.COMPLETED, spinner: false });
         })
     }
+    
 
 
     protected override handleErrors<T>(eventType: ApiEventType, response?: T): (error: any) => T {
