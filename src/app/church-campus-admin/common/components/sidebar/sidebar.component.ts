@@ -91,7 +91,7 @@ export class SidebarComponent implements OnInit {
             this.cdr.markForCheck();
           });
         }
-      }, 200);
+      }, 300);
     });
   }
 
