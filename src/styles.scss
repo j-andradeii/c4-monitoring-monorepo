@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import './assets/scss/pallete.scss';
 @import './assets/scss/font.scss';
+@import './assets/scss/override.scss';
 
 
 body {
@@ -22,7 +23,117 @@ p {
     margin-block-end: 0 !important;
 }
 
-.p-button {
-    background-color: var(--primary) !important;
-    color: #fff !important;
+
+.w-100 {
+    width: 100% !important;
 }
+
+.w-90 {
+    width: 90% !important;
+}
+
+.w-95 {
+    width: 95% !important;
+}
+
+.w-80 {
+    width: 80% !important;
+}
+
+.w-70 {
+    width: 70% !important;
+}
+
+.w-50 {
+    width: 50% !important;
+}
+
+.w-40 {
+    width: 40% !important;
+}
+
+.w-35 {
+    width: 35% !important;
+}
+
+.w-30 {
+    width: 30% !important;
+}
+
+.w-20 {
+    width: 20% !important;
+}
+
+.w-15 {
+    width: 15% !important;
+}
+
+
+
+.v-100 {
+    min-height: 100vh !important;
+}
+
+.v-95 {
+    min-height: 93vh !important;
+}
+
+.v-90 {
+    min-height: 90vh !important;
+}
+
+.v-85 {
+    min-height: 85vh !important;
+}
+
+.v-80 {
+    min-height: 80vh !important;
+}
+
+.v-70 {
+    min-height: 70vh !important;
+}
+
+.v-50 {
+    min-height: 50vh !important;
+}
+
+.v-60 {
+    min-height: 60vh !important;
+}
+
+.v-10 {
+    min-height: 10vh !important;
+}
+
+.v-5 {
+    min-height: 5vh !important;
+}
+
+.v-100-force {
+    height: 100vh !important;
+}
+
+.v-80-force {
+    height: 80vh !important;
+}
+
+.v-60-force {
+    height: 60vh !important;
+}
+
+.v-50-force {
+    height: 50vh !important;
+}
+
+
+.page-container {
+    height: 100%;
+    overflow-y: auto;
+    padding-bottom: 15px !important;
+    padding: 12px 4px 8px 12px;
+    @media (min-width: 1500px) {
+        padding: 24px 8px 16px 24px !important;
+    }
+}
+

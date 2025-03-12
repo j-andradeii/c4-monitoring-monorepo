@@ -1,0 +1,30 @@
+.breadcrumb-container {
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #e2e8f0;
+    padding: .5rem 2rem;
+    background-color: white;
+}
+
+
+::ng-deep .p-breadcrumb {
+    background: var(--p-breadcrumb-background);
+    padding: 8px !important;
+}
+
+::ng-deep .p-breadcrumb-item-link {
+    font-size: 14px !important;
+}
+
+::ng-deep .p-breadcrumb-item-icon  {
+    font-size: 14px !important;
+}
+
+::ng-deep .p-breadcrumb-separator  {
+    .p-icon {
+        width: 12px !important;
+        height: 12px !important;
+        color: var(--dark-secondary) !important;
+    }
+}

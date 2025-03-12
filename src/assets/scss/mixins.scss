@@ -6,6 +6,7 @@
 @mixin font-regular {
   // font-family: var(--LT) !important;
   font-family: var(--LT), sans-serif !important;
+  color: var(--dark);
   // color: var(--dark);
   // font-weight: 400 !important;
 }

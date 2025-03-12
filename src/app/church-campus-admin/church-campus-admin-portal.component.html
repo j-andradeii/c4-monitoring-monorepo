@@ -1,19 +1,29 @@
-<main class="overflow-x-hidden">
-    <div class="main-container v-95 w-100">
-        <div class="grid grid-nogutter flex justify-content-center">
+<main #mainDiv class="overflow-x-hidden">
+    <div class="main-container w-100 v-95">
+        <div #headerDiv class="grid grid-nogutter flex justify-content-center">
             <div class="col-fixed" style="width: 100%">
                 <app-header ></app-header>
             </div>
         </div>
-        <div class="grid grid-nogutter flex justify-content-center">
-            <div class="col-fixed" style="width: 100%">
-                <div class="w-100">
+
+        <div class="grid grid-nogutter">
+            <div #sideBarDiv class="col-fixed sidebar-div" *ngIf="clientScrollWidth > ResponsiveConfig.MEDIUM_BREAKPOINT">
+                <div style="width: 100%">
+                    <app-sidebar></app-sidebar>
+                </div>
+            </div>
+
+            <div #routerDiv class="col-fixed router-div" [ngStyle]="{ 'width': mainNavBarResponsiveWidth }">
+                <div style="width: 100%">
+                    <app-nav-breadcrumbs></app-nav-breadcrumbs>
+                </div>
+                <div style="width: 100%">
                     <router-outlet></router-outlet>
                 </div>
             </div>
         </div>
     </div>
     <div class="main-container w-100">
-        <app-footer></app-footer>
+        <!-- <app-footer></app-footer> -->
     </div>
 </main>

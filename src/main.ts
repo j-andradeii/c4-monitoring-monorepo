@@ -6,6 +6,7 @@ import { environment } from './environments/environment';
 
 
 if (environment.production) {
+  // Enables Angular’s production mode to turn off dev-specific log messages and checks
   enableProdMode();
 }
 
