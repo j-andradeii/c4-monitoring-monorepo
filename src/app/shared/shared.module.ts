@@ -5,9 +5,16 @@ import { CommonModule } from "@angular/common";
 //PRIMENG COMPONENTS
 import { ButtonModule } from 'primeng/button';
 import {ToastModule} from 'primeng/toast';
+import { DialogModule } from 'primeng/dialog';
+import { ConfirmationService, MessageService } from "primeng/api";
+import { DynamicDialog, DialogService } from 'primeng/dynamicdialog';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { MenuModule } from 'primeng/menu';
+import { PanelMenuModule } from 'primeng/panelmenu';
+import { AccordionModule } from 'primeng/accordion';
 
 import { GwcToastComponent } from './components/gwc-toast/gwc-toast.component';
-import { ConfirmationService, MessageService } from "primeng/api";
+import { TestDialogComponent } from './components/test-dialog/test-dialog.component';
 
 @NgModule({
     imports:[
@@ -15,10 +22,17 @@ import { ConfirmationService, MessageService } from "primeng/api";
         FormsModule,
         ReactiveFormsModule,
         ButtonModule,
-        ToastModule
+        ToastModule,
+        DialogModule,
+        DynamicDialog,
+        BreadcrumbModule,
+        MenuModule,
+        PanelMenuModule,
+        AccordionModule   
     ],
     declarations:[
         GwcToastComponent,
+        TestDialogComponent,
     ],
     exports:[
         //MODULES
@@ -27,14 +41,20 @@ import { ConfirmationService, MessageService } from "primeng/api";
         ReactiveFormsModule,
         ButtonModule,
         ToastModule,
+        DialogModule,
+        BreadcrumbModule,
+        MenuModule,
+        PanelMenuModule,
+        AccordionModule,   
 
         //COMPONENTS
-        GwcToastComponent
+        GwcToastComponent,
+        TestDialogComponent,
     ],
     providers:[
         MessageService,
         ConfirmationService,
-        // DialogService
+        DialogService
     ]
 })
 export class SharedModule { }

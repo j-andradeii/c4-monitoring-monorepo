@@ -5,9 +5,7 @@
   width: 4px;
   height: 10px;
 }
-.p-component {
-  font-family: "Titillium Web", sans-serif !important;
-}
+
 /* Track */
 ::-webkit-scrollbar-track {
   background: #dad9d9; 
@@ -23,6 +21,11 @@
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(178, 184, 227, 0.1);
   border-radius: var(--curved-radius);
+}
+
+.p-component {
+  // font-family: "Titillium Web", sans-serif !important;
+  font-family: var(--LT), sans-serif !important;
 }
 
 .acps-input-container {

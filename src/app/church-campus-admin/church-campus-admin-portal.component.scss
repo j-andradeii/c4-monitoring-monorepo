@@ -1,0 +1,18 @@
+
+
+.main-container {
+    overflow: hidden;
+    div.router-div {
+      padding: 0;
+      margin: 0;
+      overflow: auto !important;   
+      background-color: var(--content-background);
+    }
+
+    div.sidebar-div  {
+        overflow: hidden !important;
+        width: var(--side-bar-width);
+    }
+}
+
+

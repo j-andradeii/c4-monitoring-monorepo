@@ -1,6 +1,10 @@
-<div class="grid grid-nogutter">
-
-    <div class="col-12">
-        <h1>Church Campus Admin</h1>
+<header class="header-container">
+    <div class="grid grid-nogutter">
+        <div #sideNavBar class="col-fixed side-top-bar"  *ngIf="clientScrollWidth > ResponsiveConfig.MEDIUM_BREAKPOINT">
+            <p> {{sideNavBarWidth}}</p>
+        </div>
+        <div #mainNavBar class="col-fixed main-top-bar"  [ngStyle]="{ 'width': mainNavBarResponsiveWidth }">
+            <p> b {{mainNavBarResponsiveWidth}}</p>
+        </div>
     </div>
-</div>
+</header>
