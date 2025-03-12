@@ -43,14 +43,17 @@ export abstract class AbstractAdminPortalComponent implements OnInit, AfterViewI
             distinctUntilChanged(),
         )
         .subscribe((documentWindowHeight) => {
-            if(documentWindowHeight && this.headerDiv && this.routerDiv && this.sideBarDiv) {
+            if(documentWindowHeight && this.headerDiv && this.routerDiv) {
                 const headerHeight = this.headerDiv.nativeElement.offsetHeight;
                 const height = documentWindowHeight - this.headerDiv.nativeElement.offsetHeight;
                 this.routerDiv.nativeElement.style.height = `${height}px`;
-                this.sideBarDiv.nativeElement.style.height = `${height}px`;
                 this.churchAdminUtilityService.headerHeight$.next(headerHeight);
                 this.churchAdminUtilityService.routerDivHeight$.next(height);
-                this.churchAdminUtilityService.sideBarDivHeight$.next(height);
+
+                if(this.sideBarDiv) {
+                    this.sideBarDiv.nativeElement.style.height = `${height}px`;
+                    this.churchAdminUtilityService.sideBarDivHeight$.next(height);
+                }
                 this.cd.detectChanges();
             }
         });

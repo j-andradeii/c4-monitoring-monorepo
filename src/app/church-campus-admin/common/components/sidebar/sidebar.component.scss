@@ -4,6 +4,15 @@
         border-width: 1px 2px 1px 1px;
         border-style: solid;
         border-color: #e2e8f0;
+
+        .user-info {
+            width: 100%;
+
+            p {
+                font-size: 14px;
+                font-weight: 700;
+            }
+        }
     }
 
     .sidebar-body {
