@@ -27,7 +27,6 @@ export abstract class AbstractHeaderResponsiveComponent implements OnInit{
        .subscribe((clientScrollWidth) => {
             this.clientScrollWidth = clientScrollWidth;
             this.cd.detectChanges();
-            console.log(this.clientScrollWidth);
        });
     }
 
@@ -55,5 +54,10 @@ export abstract class AbstractHeaderResponsiveComponent implements OnInit{
 
     }
 
+
+    showSideBar() {
+        const adminSideBarToggle = !this.churchAdminUtilityService.adminSideBarToggle$.value;
+        this.churchAdminUtilityService.adminSideBarToggle$.next(adminSideBarToggle);
+    }
 }
 
