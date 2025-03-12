@@ -6,6 +6,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NavBreadcrumbsComponent } from './components/nav-breadcrumbs/nav-breadcrumbs.component';
 import { SidebarMenuComponent } from './components/sidebar-menu/sidebar-menu.component';
+import { OverlaySidebarComponent } from './components/overlay-sidebar/overlay-sidebar.component';
 
 
 
@@ -19,13 +20,15 @@ import { SidebarMenuComponent } from './components/sidebar-menu/sidebar-menu.com
         SidebarComponent,
         NavBreadcrumbsComponent,
         SidebarMenuComponent,
+        OverlaySidebarComponent,
     ],
     exports:[
         HeaderComponent,
         FooterComponent,
         SidebarComponent,
         NavBreadcrumbsComponent,
-        SidebarMenuComponent
+        SidebarMenuComponent,
+        OverlaySidebarComponent
     ]
 })
 export class ChurchCampusAdminCommonModule { }

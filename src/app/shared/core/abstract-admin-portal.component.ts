@@ -34,6 +34,7 @@ export abstract class AbstractAdminPortalComponent implements OnInit, AfterViewI
         )
         .subscribe((clientScrollWidth) => {
             this.clientScrollWidth = clientScrollWidth;
+            this.churchAdminUtilityService.adminSideBarToggle$.next(false);
             this.cd.detectChanges();
         });
 
@@ -54,6 +55,8 @@ export abstract class AbstractAdminPortalComponent implements OnInit, AfterViewI
                     this.sideBarDiv.nativeElement.style.height = `${height}px`;
                     this.churchAdminUtilityService.sideBarDivHeight$.next(height);
                 }
+
+                this.churchAdminUtilityService.adminSideBarToggle$.next(false);
                 this.cd.detectChanges();
             }
         });

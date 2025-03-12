@@ -4,6 +4,17 @@
             <p> {{sideNavBarWidth}}</p>
         </div>
         <div #mainNavBar class="col-fixed main-top-bar"  [ngStyle]="{ 'width': mainNavBarResponsiveWidth }">
+
+            <div class="grid grid-nogutter">
+                <div class="col-12">
+                    <ng-container *ngIf="clientScrollWidth < ResponsiveConfig.MEDIUM_BREAKPOINT">
+                        <p-button icon="pi pi-bars" [rounded]="false" [text]="true" severity="danger" 
+                        (click)="showSideBar()" />
+                    </ng-container>
+
+                </div>
+            </div>
+            
             <p> b {{mainNavBarResponsiveWidth}}</p>
         </div>
     </div>

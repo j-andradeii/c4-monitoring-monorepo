@@ -12,6 +12,9 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { MenuModule } from 'primeng/menu';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { AccordionModule } from 'primeng/accordion';
+import { DrawerModule } from 'primeng/drawer';
+
+
 
 import { GwcToastComponent } from './components/gwc-toast/gwc-toast.component';
 import { TestDialogComponent } from './components/test-dialog/test-dialog.component';
@@ -28,7 +31,8 @@ import { TestDialogComponent } from './components/test-dialog/test-dialog.compon
         BreadcrumbModule,
         MenuModule,
         PanelMenuModule,
-        AccordionModule   
+        AccordionModule,
+        DrawerModule  
     ],
     declarations:[
         GwcToastComponent,
@@ -46,7 +50,8 @@ import { TestDialogComponent } from './components/test-dialog/test-dialog.compon
         MenuModule,
         PanelMenuModule,
         AccordionModule,   
-
+        DrawerModule,
+        
         //COMPONENTS
         GwcToastComponent,
         TestDialogComponent,
