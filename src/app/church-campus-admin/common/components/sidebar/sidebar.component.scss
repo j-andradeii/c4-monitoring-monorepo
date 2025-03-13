@@ -1,7 +1,7 @@
 .sidebar-container {
     .sidebar-header {
         min-height: var(--header-height);
-        border-width: 1px 2px 1px 1px;
+        border-width: 1px 1px 1px 1px;
         border-style: solid;
         border-color: #e2e8f0;
 
@@ -39,4 +39,14 @@
     // padding: 0 !important;
     border: 0 !important;
 }
+
+
+::ng-deep .church-campus-admin-sidebar-menu,  .p-panelmenu {
+    padding-left: 1rem !important;
+    gap: 0.8rem !important;
+}
+
+
+
+
 
