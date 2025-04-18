@@ -1,0 +1,6 @@
+export enum DevionalStatus {
+    COMPLETE = 'COMPLETE',
+    NEAR_COMPLETE = 'NEAR_COMPLETE',
+    INCONSISTENT = 'INCONSISTENT',
+    MISSED = 'MISSED'
+}

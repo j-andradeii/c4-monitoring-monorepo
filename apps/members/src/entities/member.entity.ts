@@ -1,5 +1,9 @@
-import { Entity, Index, PrimaryGeneratedColumn, Column, OneToOne, OneToMany } from 'typeorm';
+import { Entity, Index, PrimaryGeneratedColumn, Column, OneToOne, OneToMany, JoinColumn } from 'typeorm';
 import { ChurchCampusMember } from './church-campus-member.entity';
+import { ContactInfo } from './contact-info.entity';
+import { SocialInfo } from './social-infos.entity';
+import { ConsolidateMember } from './consolidate-member.entity';
+import { MemberDevotional } from './member-devotional.entity';
 
 @Entity()
 @Index(['id'], { unique: true })  // Unique composite index on id and user_id
@@ -36,4 +40,18 @@ export class Member {
     @OneToMany(() => ChurchCampusMember, churchCampusMember => churchCampusMember.member)
     church_campus_members: ChurchCampusMember[];
 
+    @OneToMany(() => ContactInfo, contactInfo => contactInfo.member)
+    contact_infos: ContactInfo[];  
+
+    @OneToMany(() => SocialInfo, socialInfo => socialInfo.member)
+    social_infos: SocialInfo[];
+
+    @OneToMany(() => ConsolidateMember, consolidateMember => consolidateMember.consolidator)
+    consolidator_members: ConsolidateMember[];
+
+    @OneToMany(() => ConsolidateMember, consolidateMember => consolidateMember.consolidatee)
+    consolidatee_members: ConsolidateMember[];
+
+    @OneToMany(() => MemberDevotional, memberDevotional => memberDevotional.member)
+    member_devotionals: MemberDevotional[];
 }

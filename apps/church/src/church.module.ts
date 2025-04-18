@@ -10,6 +10,11 @@ import { ChurchContactInfo } from './entities/church-contact-info.entity';
 import { ChurchCampus } from './entities/church-campus.entity';
 import { CreateChurchHandler } from './orchestrations/create-church.handler';
 import { CqrsModule } from '@nestjs/cqrs';
+import { CreateChurchCampusHandler } from './orchestrations/create-church-campus.handler';
+import { RandomNumberGeneratorService } from './service/random-number-generator.service';
+import { ChurchCampusClosureService } from './service/church-campus-closure.service';
+import { GetChurchesHandler } from './orchestrations/get-churches.handler';
+import { ChurchesRepository } from './repositories/churches-repositories';
 
 @Module({
   imports: [
@@ -34,8 +39,13 @@ import { CqrsModule } from '@nestjs/cqrs';
     ChurchController
   ],
   providers: [  
+    ChurchesRepository,
     ChurchService,
-    CreateChurchHandler
+    CreateChurchHandler,
+    CreateChurchCampusHandler,
+    GetChurchesHandler,
+    ChurchCampusClosureService,
+    RandomNumberGeneratorService    
   ],
 })
 export class ChurchModule {}

@@ -5,6 +5,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Member } from './entities/member.entity';
 import typeorm from './orm-config';
+import { CreateChurchCampusMemberClosureHandler } from './orchestrations/create-church-campus-member-closure.handler';
+import { CqrsModule } from '@nestjs/cqrs';
+import { ChurchCampusClosureService } from './service/church-campus-closure.service';
 
 @Module({
   imports: [
@@ -23,8 +26,13 @@ import typeorm from './orm-config';
     }),
 
     TypeOrmModule.forFeature([Member]),
+    CqrsModule
   ],
   controllers: [MembersController],
-  providers: [MembersService],
+  providers: [
+    MembersService,
+    CreateChurchCampusMemberClosureHandler,
+    ChurchCampusClosureService
+  ],
 })
 export class MembersModule {}

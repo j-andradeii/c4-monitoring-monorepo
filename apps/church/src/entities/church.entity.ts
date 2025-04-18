@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, Index, OneToMany, OneToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, Index, OneToMany, OneToOne, CreateDateColumn } from 'typeorm';
 import { ChurchCampus } from './church-campus.entity';
 import { ChurchContactInfo } from './church-contact-info.entity';
 import { ChurchAddress } from './church-address.entity';
@@ -16,8 +16,8 @@ export class Church {
   @Column({ type: 'varchar', length: 255, nullable: false })
   name: string;
 
-  @Column({ type: 'timestamptz', nullable: false })
-  created_at: string;  // UTC datetime
+  @CreateDateColumn({ type: 'timestamptz' }) // Automatically sets value upon creation
+  created_at: Date;
 
   @Column({ type: 'varchar', length: 255, nullable: true })
   timezone: string;

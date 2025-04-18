@@ -2,12 +2,10 @@ import { Column, Entity, Index, JoinColumn, ManyToOne, OneToMany, PrimaryGenerat
 import { Church } from './church.entity';
 import { ChurchStaff } from './church-statff.entity';
 import { ChurchCampusStaff } from './church-campus-staff.entity';
+import { ChurchCampusType } from '../enums/church-campus-type';
 
 
-export enum ChurchCampusType {
-    MAIN = 'MAIN',
-    BRANCH = 'BRANCH',
-}
+
 
 @Entity()
 @Index(['id'], { unique: true })  // Unique composite index on id and user_id
