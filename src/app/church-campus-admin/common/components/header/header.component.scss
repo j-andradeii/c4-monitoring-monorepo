@@ -6,6 +6,7 @@
     padding: 0px;
 
 
+
     .side-top-bar {
         width: var(--side-top-bar-width);
         height: var(--header-height);
@@ -14,5 +15,7 @@
     .main-top-bar {
         // width: calc(100% - var(--side-top-bar-width));
         height: var(--header-height);
+        display: flex;
+        align-items: center;
     }
 }

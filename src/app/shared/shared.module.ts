@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
-
+import { RouterModule } from '@angular/router'; // <--- Import RouterModule
 //PRIMENG COMPONENTS
 import { ButtonModule } from 'primeng/button';
 import {ToastModule} from 'primeng/toast';
@@ -32,7 +32,8 @@ import { TestDialogComponent } from './components/test-dialog/test-dialog.compon
         MenuModule,
         PanelMenuModule,
         AccordionModule,
-        DrawerModule  
+        DrawerModule,
+        RouterModule
     ],
     declarations:[
         GwcToastComponent,
@@ -51,6 +52,8 @@ import { TestDialogComponent } from './components/test-dialog/test-dialog.compon
         PanelMenuModule,
         AccordionModule,   
         DrawerModule,
+        RouterModule,
+        
         
         //COMPONENTS
         GwcToastComponent,

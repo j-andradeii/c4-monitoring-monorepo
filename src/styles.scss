@@ -131,11 +131,11 @@ p {
     height: 100%;
     overflow-y: auto;
     padding-bottom: 15px !important;
-    padding: 1rem 1.5rem;
+    padding: 1rem 0rem;
 
 
     @media screen and (min-width: 1600px) {
-        padding: 1rem 2.5rem !important;
+        padding: 1rem 0rem;
     }
 }
 

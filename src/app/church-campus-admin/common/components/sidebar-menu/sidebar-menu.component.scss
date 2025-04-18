@@ -5,15 +5,16 @@
 ::ng-deep .church-campus-admin-sidebar-menu .p-panelmenu-panel {
     overflow: hidden;
     border: none;
+    padding: 0 !important;
 }
 
 ::ng-deep .church-campus-admin-sidebar-menu .p-panelmenu-header[id*="HEADER"] {
-    font-size: 12px;
-    font-weight: 800;
+    font-size: 13px;
+    font-weight: 600;
     text-transform: uppercase;  
 
     p {
-        color: var(--dark-tertiary) !important;
+        color: var(--dark) !important;
     }
     .p-panelmenu-header-content {
         &:hover {
@@ -36,8 +37,28 @@
 
 ::ng-deep .church-campus-admin-sidebar-menu .p-panelmenu-header[id*="ITEM"] {
     font-size: 14px;
+
+    .p-panelmenu-header-content {
+        a {
+            padding: 0.5rem !important;
+            text-decoration: none;
+        }
+
+        span {
+            padding-left: 0.5rem !important;
+        }
+    }
+    .p-panelmenu-header-link  {
+        padding:  0.5rem !important;
+    }
 }
 
 ::ng-deep .church-campus-admin-sidebar-menu .p-panelmenu-item[id*="ITEM"] {
     font-size: 14px;
+
+    .p-panelmenu-item-content {
+        a {
+            text-decoration: none;
+        }
+    }
 }

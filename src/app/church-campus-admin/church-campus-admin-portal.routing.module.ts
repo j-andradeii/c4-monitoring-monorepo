@@ -16,6 +16,10 @@ const routes: Routes = [
                 path: 'dashboard',
                 loadChildren: () => import('./church-campus-dashboard/church-campus-dashboard.module').then(m => m.ChurchCampusDashboardModule),
             },
+            {
+                path: 'church-detail',
+                loadChildren: () => import('./church-campus-detail/church-campus-dashboard.module').then(m => m.ChurchCampusDetailModule),
+            },
         ]
     }
 ];
