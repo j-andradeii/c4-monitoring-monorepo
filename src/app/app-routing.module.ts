@@ -6,7 +6,7 @@ const routes: Routes = [
   {
       path: '',
       pathMatch: 'full',
-      redirectTo: ''
+      redirectTo: 'church-campus-admin'
   },
   {
     path: '',
@@ -23,10 +23,10 @@ const routes: Routes = [
       preload: true,
     }
   },
-  // {
-  //   path: '**',
-  //   redirectTo: '' // Replace '' with your default route 
-  // }
+  {
+    path: '**',
+    redirectTo: 'church-campus-admin' // Replace '' with your default route 
+  }
 ];
 
 @NgModule({

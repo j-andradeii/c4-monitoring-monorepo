@@ -15,6 +15,8 @@ export abstract class AbstractAdminPortalComponent implements OnInit, AfterViewI
     readonly ResponsiveConfig = ResponsiveConfig;
 
     clientScrollWidth: number = 0;
+    adminActivateSidebarToggle: boolean = false;
+
 
     constructor(public churchAdminUtilityService: ChurchAdminUtilityService,
                 public renderer: Renderer2,
@@ -60,6 +62,17 @@ export abstract class AbstractAdminPortalComponent implements OnInit, AfterViewI
                 this.cd.detectChanges();
             }
         });
+
+        this.churchAdminUtilityService.adminActivateSidebarToggle$
+        .pipe(
+            untilDestroyed(this),
+            distinctUntilChanged(),
+        )
+        .subscribe((adminActivateSidebarToggle:boolean)=>{
+            // console.log(adminActivateSidebarToggle)
+            this.adminActivateSidebarToggle = adminActivateSidebarToggle;
+            this.cd.detectChanges();
+        })
     }
 
     

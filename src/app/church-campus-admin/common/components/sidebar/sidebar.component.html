@@ -1,29 +1,5 @@
 <aside  class="sidebar-container" #sidebarDiv >
-    <div class="sidebar-header" #sidebarHeaderDiv>
-        <p-accordion 
-            [value]="0"
-            [collapseIcon]="'pi pi-angle-down'"
-            [expandIcon]="'pi pi-angle-down'"
-            (valueChange)="updateSideBarBodyheight($event)">
 
-            <p-accordion-panel [value]="1">
-                <p-accordion-header>
-                    <div class="grid grid-nogutter align-items-center user-info">
-                        <div class="col-4">
-                            <img src="assets/images/logo.png" alt="logo" class="w-full">
-                        </div> 
-                        <div class="col-8">
-                            <p>Header 1</p>
-                        </div>
-                    </div>
-                </p-accordion-header>
-
-                <p-accordion-content>
-                    <p-menu [model]="items" styleClass="sidebar-header-menu" />
-                </p-accordion-content>
-            </p-accordion-panel>
-        </p-accordion>
-    </div>
 
     <div class="sidebar-body pt-2 pb-2" #sidebarBodyDiv [ngStyle]="{'height': calculateSideBarBodyHeight}">
         <app-sidebar-menu></app-sidebar-menu>

@@ -16,6 +16,7 @@ export class ChurchAdminUtilityService {
     public documentWindowHeight$ = new BehaviorSubject<number>(undefined);
 
     public adminSideBarToggle$ = new BehaviorSubject<boolean>(false);
+    public adminActivateSidebarToggle$ = new BehaviorSubject<boolean>(true);
 
 
 }

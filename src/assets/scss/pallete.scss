@@ -28,14 +28,20 @@
 
 
     --content-background: #F8F9FAFF;
+    --surface-overlay: white;
+    --surface-ground: #f1f5f9;
 
 
     //BREAKPOINTS
-    --breakpoint-md: 768px  ;
+    --breakpoint-md: 768px;
     --breakpoint-lg: 992px;
     --breakpoint-xl: 1200px;
     --breakpoint-xxl: 1400px;
     --breakpoint-xxxl: 1600px;
+
+
+    //DURATIONS
+    --layout-section-transition-duration: .2s;
 }
 
   

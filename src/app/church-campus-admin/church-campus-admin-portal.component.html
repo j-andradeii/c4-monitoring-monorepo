@@ -6,16 +6,16 @@
             </div>
         </div>
 
-        <div class="grid grid-nogutter">
-            <div #sideBarDiv class="col-fixed sidebar-div" *ngIf="clientScrollWidth > ResponsiveConfig.MEDIUM_BREAKPOINT">
+        <div class="grid grid-nogutter" [ngClass]="adminActivateSidebarToggle ? 'layout-static': 'layout-static-inactive'">
+            <div class="sidebar-div" >
                 <div style="width: 100%">
                     <app-sidebar></app-sidebar>
                 </div>
             </div>
 
-            <app-overlay-sidebar></app-overlay-sidebar>
+            <app-overlay-sidebar></app-overlay-sidebar> 
 
-            <div #routerDiv class="col-fixed router-div" [ngStyle]="{ 'width': mainNavBarResponsiveWidth }">
+            <div  class="router-div ">
                 <div style="width: 100%">
                     <app-nav-breadcrumbs></app-nav-breadcrumbs>
                 </div>

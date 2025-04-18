@@ -59,5 +59,10 @@ export abstract class AbstractHeaderResponsiveComponent implements OnInit{
         const adminSideBarToggle = !this.churchAdminUtilityService.adminSideBarToggle$.value;
         this.churchAdminUtilityService.adminSideBarToggle$.next(adminSideBarToggle);
     }
+
+    inactiveSideBar() {
+        const adminActivateSidebarToggle = !this.churchAdminUtilityService.adminActivateSidebarToggle$.value;
+        this.churchAdminUtilityService.adminActivateSidebarToggle$.next(adminActivateSidebarToggle);
+    }
 }
 

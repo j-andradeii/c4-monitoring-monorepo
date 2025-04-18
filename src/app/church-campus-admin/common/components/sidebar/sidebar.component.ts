@@ -64,8 +64,6 @@ export class SidebarComponent implements OnInit {
     ];
 
 
-
-
   }
 
   get calculateSideBarBodyHeight(): string {
