@@ -37,6 +37,7 @@
 
 ::ng-deep .church-campus-admin-sidebar-menu .p-panelmenu-header[id*="ITEM"] {
     font-size: 14px;
+    color: var(--dark) !important;
 
     .p-panelmenu-header-content {
         a {
@@ -47,6 +48,12 @@
         span {
             padding-left: 0.5rem !important;
         }
+
+        img {
+            margin-top: -2px;
+            height: 20px;
+            width: 20px;
+        }
     }
     .p-panelmenu-header-link  {
         padding:  0.5rem !important;
@@ -55,10 +62,18 @@
 
 ::ng-deep .church-campus-admin-sidebar-menu .p-panelmenu-item[id*="ITEM"] {
     font-size: 14px;
+    margin-top: 2px;
+    color: var(--dark) !important;
 
     .p-panelmenu-item-content {
         a {
             text-decoration: none;
+        }
+
+        img {
+            margin-top: -2px;
+            height: 20px;
+            width: 20px;
         }
     }
 }

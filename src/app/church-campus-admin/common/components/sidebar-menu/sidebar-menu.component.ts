@@ -25,24 +25,24 @@ export class SidebarMenuComponent implements OnInit {
       {
         id: SideBarItemType.ITEM,
         label: 'Dashboard',
-        icon: 'pi pi-palette',
+        icon: 'assets/svgs/dashboard.svg',
         route: 'dashboard',
       },
       {
         id: SideBarItemType.ITEM,
         label: 'Church Information',
-        icon: 'pi pi-palette',
+        icon: 'assets/svgs/information.svg',
         items: [
           {
             id: SideBarItemType.ITEM,
             label: 'Church Detail',
-            icon: 'pi pi-palette',
+            icon: 'assets/svgs/church-info.svg',
             route: 'church-detail',
           },
           {
             id: SideBarItemType.ITEM,
             label: 'Pastoral Staffs',
-            icon: 'pi pi-palette',
+            icon: 'assets/svgs/pastoral-staff-2.svg',
             route: 'church-detail',
           }
         ]
@@ -50,7 +50,7 @@ export class SidebarMenuComponent implements OnInit {
       {
         id: SideBarItemType.ITEM,
         label: 'Campaigns',
-        icon: 'pi pi-palette',
+        icon: 'assets/svgs/campaigns.svg',
       },
       {
         id: SideBarItemType.HEADER,
@@ -59,7 +59,7 @@ export class SidebarMenuComponent implements OnInit {
       {
         id: SideBarItemType.ITEM,
         label: 'Gateway Church Members',
-        icon: 'pi pi-palette',
+        icon: 'assets/svgs/members.svg',
         route: 'church-detail',
       },
       {
@@ -69,13 +69,13 @@ export class SidebarMenuComponent implements OnInit {
       {
         id: SideBarItemType.ITEM,
         label: 'Prayer of 3',
-        icon: 'pi pi-palette',
+        icon: 'assets/svgs/prayer-of-3.svg',
         route: 'church-detail',
       },
       {
         id: SideBarItemType.ITEM,
-        label: 'Evangelism',
-        icon: 'pi pi-palette',
+        label: 'Evangelize',
+        icon: 'assets/svgs/evangelism-2.svg',
         route: 'church-detail',
       },
       {
@@ -85,7 +85,7 @@ export class SidebarMenuComponent implements OnInit {
       {
         id: SideBarItemType.ITEM,
         label: 'Life Change',
-        icon: 'pi pi-palette',
+        icon: 'assets/svgs/consolidation.svg',
         route: 'church-detail',
       },
       {
@@ -95,7 +95,7 @@ export class SidebarMenuComponent implements OnInit {
       {
         id: SideBarItemType.ITEM,
         label: 'Events',
-        icon: 'pi pi-palette',
+        icon: 'assets/svgs/events.svg',
         route: 'church-detail',
       },
     ];

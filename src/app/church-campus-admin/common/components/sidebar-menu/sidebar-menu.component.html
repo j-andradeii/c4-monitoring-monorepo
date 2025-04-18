@@ -10,18 +10,19 @@
                         <a  *ngIf="item.route; else urlRef" class="flex align-items-center
                             cursor-pointer text-color px-3 py-2"
                             [routerLink]="item.route" >
-                            <span [class]="item.icon"></span>
+                            <!-- <span [class]="item.icon"></span> -->
+                             <img [src]="item.icon" />
                             <span class="ml-2">{{ item.label }}</span>
                         </a>
                     <ng-template #urlRef>
                         <a *ngIf="item.url; else noLink" [href]="item.url" class="flex align-items-center
                             cursor-pointer text-color px-3 py-2">
-                            <span [class]="item.icon"></span>
+                            <img [src]="item.icon" />
                             <span class="ml-2">{{ item.label }}</span>
                         </a>
                         <ng-template #noLink>
                             <span class="flex items-center cursor-pointer text-surface-700 dark:text-surface-0 px-4 py-2">
-                                <span [class]="item.icon"></span>
+                                <img [src]="item.icon" />
                                 <span class="ml-2">{{ item.label }}</span>
                                 <ng-container *ngIf="item.items && item.items.length > 0">
                                     <i  class="pi ml-auto" [ngClass]="item.expanded ? 'pi-angle-up primary' : ' pi-angle-down primary'"></i>
