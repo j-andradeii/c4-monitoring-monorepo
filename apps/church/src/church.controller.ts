@@ -6,6 +6,7 @@ import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { CreateChurchCommand } from './cqrs/commands/create-church-command';
 import { CreateChurchCampusCommand } from './cqrs/commands/create-church-campus-command';
 import { GetChurchesQuery } from './cqrs/queries/get-churches.query';
+import { GetChurchCampusByIdQuery } from './cqrs/queries/get-church-campus-by-id-query';
 
 @Controller()
 export class ChurchController {
@@ -22,7 +23,7 @@ export class ChurchController {
 
   @MessagePattern({ cmd: CHURCH_COMMAND.GET_CHURCH_CAMPUS_BY_ID })
   async getChurchCampusById(id: string): Promise<any> {
-    return id;
+    return await this.queryBus.execute(new GetChurchCampusByIdQuery(id));
   }
 
   @MessagePattern({ cmd: CHURCH_COMMAND.CREATE_CHURCH_CAMPUS })
@@ -34,7 +35,6 @@ export class ChurchController {
   async getChurches(data: PaginationDto): Promise<any> {
     return await this.queryBus.execute(new GetChurchesQuery(data));
   }
-
 
   
 } 

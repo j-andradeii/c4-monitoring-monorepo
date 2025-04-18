@@ -15,6 +15,8 @@ import { RandomNumberGeneratorService } from './service/random-number-generator.
 import { ChurchCampusClosureService } from './service/church-campus-closure.service';
 import { GetChurchesHandler } from './orchestrations/get-churches.handler';
 import { ChurchesRepository } from './repositories/churches-repositories';
+import { ChurchCampussesRepository } from './repositories/church-campus.repositories';
+import { GetChurchCampusByIdHandler } from './orchestrations/get-church-campus-by-id.handler';
 
 @Module({
   imports: [
@@ -40,10 +42,12 @@ import { ChurchesRepository } from './repositories/churches-repositories';
   ],
   providers: [  
     ChurchesRepository,
+    ChurchCampussesRepository,
     ChurchService,
     CreateChurchHandler,
     CreateChurchCampusHandler,
     GetChurchesHandler,
+    GetChurchCampusByIdHandler,
     ChurchCampusClosureService,
     RandomNumberGeneratorService    
   ],

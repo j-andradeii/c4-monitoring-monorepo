@@ -3,6 +3,7 @@ import { Repository } from "typeorm";
 import { Church } from "../entities/church.entity";
 import { Injectable } from "@nestjs/common";
 import { PaginationDto } from "@app/libs";
+import { ChurchCampus } from "../entities/church-campus.entity";
 
 @Injectable()
 export class ChurchesRepository {
@@ -23,5 +24,9 @@ export class ChurchesRepository {
         };
 
     }
+
+    // async findOne(id: string): Promise<ChurchCampus> {
+    //     return  await this.churchesRepository.findOneBy({id})
+    // }
 
 }
