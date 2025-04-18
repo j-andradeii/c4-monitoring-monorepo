@@ -22,7 +22,6 @@ export class GetChurchesHandler extends AbstractOrchestrator<PaginationDto, any>
 
 
     protected async preProcess(request: PaginationDto): Promise<PaginationDto> {
-    
         return await request;
     }
     protected async doProcess(request: PaginationDto): Promise<any> {

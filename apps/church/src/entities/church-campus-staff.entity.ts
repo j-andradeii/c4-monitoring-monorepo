@@ -12,6 +12,9 @@ export class ChurchCampusStaff {
     @Column({ type: 'uuid', name: 'member_id', nullable: true })
     member_id: string;
 
+    @Column({default: false}) // TypeORM infers the database type from the TypeScript type 'boolean'
+    is_hierarchy_root: boolean;
+
     @Column({ type: 'enum', enum: ChurchRole, default: ChurchRole.PASTOR })
     role: ChurchRole;   
 
