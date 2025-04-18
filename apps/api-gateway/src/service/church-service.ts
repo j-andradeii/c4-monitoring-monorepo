@@ -9,6 +9,11 @@ export class ChurchService {
     constructor( private readonly churchMicroserviceService: ChurchMicroserviceService,
                  private readonly membersMicroserviceService: MembersMicroserviceService) {}
     
+
+    async getChurchCampusById(id: string) {
+        return await this.churchMicroserviceService.getChurchCampusById(id);
+    }
+
     async getChurches(page: number, limit: number) {
         return await this.churchMicroserviceService.getChurches(page, limit);
     }
@@ -17,7 +22,6 @@ export class ChurchService {
         const churchCampus = await this.churchMicroserviceService.createChurchCampus(churchCampusCreationDto);
         const referenceId = churchCampus.reference_id;
         const memberCreate = await this.membersMicroserviceService.createChurchCampusClosure(referenceId);
-        console.log("memberCreate", memberCreate);
         return churchCampus;
     }
 }

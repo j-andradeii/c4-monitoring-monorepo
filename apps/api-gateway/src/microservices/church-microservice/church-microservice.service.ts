@@ -29,6 +29,19 @@ export class ChurchMicroserviceService {
     }
 
 
+    async getChurchCampusById(id: string) {
+        try{
+            const churchCampusResponse = this.churchClient.send(
+                {cmd: CHURCH_COMMAND.GET_CHURCH_CAMPUS_BY_ID},  // This command must match the @MessagePattern in the Auth Microservice
+                id
+            );
+            return await lastValueFrom(churchCampusResponse);
+        } catch(error) {
+            throw error;
+        }
+    }
+
+
     async getChurches(page: number, limit: number) {
         return await this.churchClient.send(
             { cmd: CHURCH_COMMAND.GET_CHURCHES},  // This command must match the @MessagePattern in the Auth Microservice

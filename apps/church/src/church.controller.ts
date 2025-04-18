@@ -20,6 +20,11 @@ export class ChurchController {
     };
   }
 
+  @MessagePattern({ cmd: CHURCH_COMMAND.GET_CHURCH_CAMPUS_BY_ID })
+  async getChurchCampusById(id: string): Promise<any> {
+    return id;
+  }
+
   @MessagePattern({ cmd: CHURCH_COMMAND.CREATE_CHURCH_CAMPUS })
   async createChurchCampus(data: ChurchCampusCreationDto): Promise<any> {
     return await this.commandBus.execute(new CreateChurchCampusCommand(data));

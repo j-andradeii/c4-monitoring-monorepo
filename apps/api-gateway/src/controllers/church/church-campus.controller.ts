@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UseFilters, UseGuards, UseInterceptors, UsePipes } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, UseFilters, UseGuards, UseInterceptors, UsePipes } from "@nestjs/common";
 import { AllExceptionsFilter } from "../../interceptors/exception-filter";
 import { API_PREFIX, ChurchCampusCreationDto, ValidationPipe } from "@app/libs";
 import { JwtAuthGuard } from "../../guards/guards/jwt-auth.guard";
@@ -11,6 +11,19 @@ export class ChurchCampusController {
     constructor(private churchService: ChurchService) {
     }
 
+
+    @Get(':id')
+    @UseGuards(JwtAuthGuard)
+    @UseInterceptors(TransformResponseInterceptor<any>)
+    @UsePipes(ValidationPipe) // Use the pipe on this method
+    async getChurchCampus(@Param('id') id: string): Promise<any> {
+        try {
+            return this.churchService.getChurchCampusById(id);
+        //    return this.churchService.createChurchCampus(body);
+        } catch(error: any) {
+            throw error
+        }
+    }
 
     @Post()
     @UseGuards(JwtAuthGuard)

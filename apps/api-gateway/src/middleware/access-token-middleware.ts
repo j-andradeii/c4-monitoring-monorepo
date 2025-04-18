@@ -13,8 +13,12 @@ export class AccessTokenMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction) {
     // Retrieve the X-ACCESS-TOKEN header (case-insensitive)
     const token = req.header('X-ACCESS-TOKEN');
-    const tokenTime = req.header('X-ACCESS');
 
+
+    // const tokenTime = req.header('X-ACCESS');
+    const tokenTime = this.apiCryptoService.encrypt(String(new Date().getTime()))
+
+    console.log(this.apiCryptoService.encrypt(String(new Date().getTime())));
 
     // console.log("origin", req.get('origin'));
     const decryptedToken = this.apiCryptoService.decrypt(token);
