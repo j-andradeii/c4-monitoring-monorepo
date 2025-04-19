@@ -19,6 +19,18 @@ export class MembersMicroserviceService {
         );
     }
 
+    async getManyMembersByIds(member_ids: string[]) {
+        try{
+            const memberResponse = await this.membersClient.send(
+                { cmd: MEMBER_COMMAND.GET_MEMBERS_BY_IDS },  // This command must match the @MessagePattern in the Auth Microservice
+                member_ids  // This is the payload sent to the microservice
+            );
+            return await lastValueFrom(memberResponse);
+        } catch(error) {
+            throw error;
+        }
+    }
+
     async createChurchCampusClosure(referenceId: string) {
         try{
             const memberResponse = await this.membersClient.send(

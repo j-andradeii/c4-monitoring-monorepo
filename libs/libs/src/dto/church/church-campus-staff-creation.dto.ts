@@ -1,17 +1,11 @@
 import { ValidateNested, IsDefined, IsBoolean, IsOptional, IsEnum } from 'class-validator';
 import { Type } from 'class-transformer';
 import { MemberCreationDto } from '../member/member.creation.dto'; // Adjust path if necessary
+import { ChurchRole } from '../church-role.enum';
 
 // Define or import the ChurchRole enum
 // If it exists elsewhere (e.g., libs/common/enums), import it instead:
 // import { ChurchRole } from '@app/common/enums/church-role.enum';
-enum ChurchRole {
-    STAFF = 'STAFF',
-    MEMFBER = 'MEMBER',
-    PASTOR = 'PASTOR',
-    SENIOR_PASTOR = 'SENIOR_PASTOR',
-    PRIMARY = 'PRIMARY'
-}
 
 export class ChurchCampusStaffCreationDto {
     @IsDefined({ message: 'Member details are required' })

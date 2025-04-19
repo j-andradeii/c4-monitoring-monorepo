@@ -1,15 +1,14 @@
 import { Injectable } from "@nestjs/common";
 import { QueryRunner } from "typeorm";
+import { CONST } from "../core/constants";
 
 
 @Injectable()
 export class ChurchCampusClosureService {
 
-    private readonly churchCampusTablePrefix = "church_campus_";
-    private readonly churchCampusClosureTableSuffix = "_closure";
 
     async ensureChurchCampusClosureTable(queryRunner: QueryRunner, referenceId: string): Promise<void> {
-        const tableName = `${this.churchCampusTablePrefix}${referenceId}${this.churchCampusClosureTableSuffix}`;
+        const tableName = `${CONST.churchCampusTablePrefix}${referenceId}${CONST.churchCampusClosureTableSuffix}`;
 
         try {
             // ✅ Check if the table exists within the transaction

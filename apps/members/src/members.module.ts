@@ -10,6 +10,9 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { ChurchCampusClosureService } from './service/church-campus-closure.service';
 import { CreateMemberHandler } from './orchestrations/create-member.handler';
 import { FallbackCreateMemberHandler } from './orchestrations/fallback-create-member.handler';
+import { DiscipleshipService } from './service/discipleship.service';
+import { MemberRepository } from './repositories/member-repositories';
+import { GetMembersByIdsHandler } from './orchestrations/get-member-by-ids.handler';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -32,10 +35,13 @@ import { FallbackCreateMemberHandler } from './orchestrations/fallback-create-me
   controllers: [MembersController],
   providers: [
     MembersService,
+    MemberRepository,
     CreateChurchCampusMemberClosureHandler,
     CreateMemberHandler,
+    GetMembersByIdsHandler,
     FallbackCreateMemberHandler,
     ChurchCampusClosureService,
+    DiscipleshipService
   ],
 })
 export class MembersModule {}

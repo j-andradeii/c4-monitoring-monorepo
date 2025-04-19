@@ -1,16 +1,18 @@
 import { Controller, Get } from '@nestjs/common';
 import { MembersService } from './members.service';
 import { MessagePattern } from '@nestjs/microservices';
-import { CommandBus } from '@nestjs/cqrs';
+import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { CreateChurchCampusMemberClosureCommand } from './cqrs/commands/create-church-campus-member-closure.command';
 import { MEMBER_COMMAND } from '@app/libs';
 import { MemberCreationDto } from '@app/libs/dto/member/member.creation.dto';
 import { CreateMemberCommand } from './cqrs/commands/create-member.command';
 import { FallbackCreateMemberCommand } from './cqrs/commands/fallback-create-member.command';
+import { GetMembersByIdsQuery } from './cqrs/queries/get-members-by-ids-query';
 @Controller()
 export class MembersController {
   constructor(private readonly membersService: MembersService,
-              private readonly commandBus: CommandBus) {}
+              private readonly commandBus: CommandBus,
+              private readonly queryBus: QueryBus) {}
 
   @MessagePattern({ cmd: 'members_authenticate' })
   async authenticate(data: any): Promise<any> {
@@ -18,6 +20,16 @@ export class MembersController {
     return {
       name: "Joseph andrade 10 members-microservice"
     };
+  }
+
+
+  @MessagePattern({cmd: MEMBER_COMMAND.GET_MEMBERS_BY_IDS})
+  async getMembersByIds(data:any) {
+    try {
+      return await this.queryBus.execute(new GetMembersByIdsQuery(data));
+    } catch(error) {
+      throw error;
+    }
   }
 
   @MessagePattern({ cmd: 'create_church_campus_closure' })

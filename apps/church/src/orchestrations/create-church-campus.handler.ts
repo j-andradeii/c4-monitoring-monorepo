@@ -66,12 +66,6 @@ export class CreateChurchCampusHandler extends AbstractOrchestrator<ChurchCampus
 
                 await queryRunner.manager.save(ChurchCampusAddress, churchCampusAddress);
             }
-
-
-
-
-              // **Dynamically Create the Table**
-            // await this.churchCampusClosureService.ensureChurchCampusClosureTable(queryRunner, savedChurchCampus.reference_id); //move this to members microservice
             
             await queryRunner.commitTransaction();
             return savedChurchCampus;

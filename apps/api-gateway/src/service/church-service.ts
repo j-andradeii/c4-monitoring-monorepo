@@ -5,6 +5,7 @@ import { ChurchCampusCreationDto } from "@app/libs";
 import { ChurchCampusStaffCreationDto } from "@app/libs/dto/church/church-campus-staff-creation.dto";
 import { Member } from "apps/members/src/entities/member.entity";
 import { ChurchCampusStaff } from "apps/church/src/entities/church-campus-staff.entity";
+import { ChurchCampusDto } from "@app/libs/dto/church/church-campus.dto";
 
 @Injectable()
 export class ChurchService {
@@ -13,12 +14,47 @@ export class ChurchService {
                  private readonly membersMicroserviceService: MembersMicroserviceService) {}
     
 
-    async getChurchCampusById(id: string) {
+    async getChurchCampusById(id: string): Promise<ChurchCampusDto> {
         return await this.churchMicroserviceService.getChurchCampusById(id);
     }
 
     async getChurches(page: number, limit: number) {
         return await this.churchMicroserviceService.getChurches(page, limit);
+    }
+
+    async getChurchCampusStaffs(church_campus_id: string, page: number, limit: number): Promise<any> {
+        try {
+
+            const staffsResponse = await this.churchMicroserviceService.getChurchCampusStaffs(church_campus_id, page, limit);
+
+            const member_ids = staffsResponse.staffs
+            .filter(staff => staff.member_id) // Filter out any null member_ids
+            .map(staff => staff.member_id);
+
+            const members = await this.membersMicroserviceService.getManyMembersByIds(member_ids);
+
+            const memberMap = new Map();
+            members.forEach(member => {
+                memberMap.set(member.id, member);
+            });
+            
+            // 5. Combine the data
+            const enrichedStaffs = staffsResponse.staffs.map(staff => {
+                const memberDetails = staff.member_id ? memberMap.get(staff.member_id) : null;
+                
+                return {
+                    ...staff,
+                    member: memberDetails, // Add the member details
+                };
+            });
+
+            return {
+                staffs: enrichedStaffs,
+                total: staffsResponse.total
+            } 
+        } catch(error) {
+            throw error;
+        }
     }
 
     async createChurchCampus(churchCampusCreationDto: ChurchCampusCreationDto) {
@@ -48,6 +84,10 @@ export class ChurchService {
 
             throw error;
         }
+    }
+
+    async insertToClosureCampusStaff(campus_id: string, campus_staff_id: string) {
+
     }
 
  

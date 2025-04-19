@@ -8,7 +8,6 @@ import { ChurchCampus } from "../entities/church-campus.entity";
 @Injectable()
 export class ChurchesRepository {
     constructor(@InjectRepository(Church)private readonly churchesRepository: Repository<Church>) {
-
     }
 
     async findAll(paginationDto: PaginationDto): Promise<{ churches: Church[], total: number }>{
@@ -22,11 +21,5 @@ export class ChurchesRepository {
             churches: data,
             total
         };
-
     }
-
-    // async findOne(id: string): Promise<ChurchCampus> {
-    //     return  await this.churchesRepository.findOneBy({id})
-    // }
-
 }
