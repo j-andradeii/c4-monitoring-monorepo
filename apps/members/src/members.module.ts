@@ -8,6 +8,7 @@ import typeorm from './orm-config';
 import { CreateChurchCampusMemberClosureHandler } from './orchestrations/create-church-campus-member-closure.handler';
 import { CqrsModule } from '@nestjs/cqrs';
 import { ChurchCampusClosureService } from './service/church-campus-closure.service';
+import { CreateMemberHandler } from './orchestrations/create-member.handler';
 
 @Module({
   imports: [
@@ -32,7 +33,8 @@ import { ChurchCampusClosureService } from './service/church-campus-closure.serv
   providers: [
     MembersService,
     CreateChurchCampusMemberClosureHandler,
-    ChurchCampusClosureService
+    CreateMemberHandler,
+    ChurchCampusClosureService,
   ],
 })
 export class MembersModule {}

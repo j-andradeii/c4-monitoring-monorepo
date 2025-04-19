@@ -7,6 +7,7 @@ import { CreateChurchCommand } from './cqrs/commands/create-church-command';
 import { CreateChurchCampusCommand } from './cqrs/commands/create-church-campus-command';
 import { GetChurchesQuery } from './cqrs/queries/get-churches.query';
 import { GetChurchCampusByIdQuery } from './cqrs/queries/get-church-campus-by-id-query';
+import { CreateChurchCampusStaffCommand } from './cqrs/commands/create-church-campus-staff.command';
 
 @Controller()
 export class ChurchController {
@@ -23,12 +24,11 @@ export class ChurchController {
 
   @MessagePattern({ cmd: CHURCH_COMMAND.GET_CHURCH_CAMPUS_BY_ID })
   async getChurchCampusById(id: string): Promise<any> {
-    return await this.queryBus.execute(new GetChurchCampusByIdQuery(id));
-  }
-
-  @MessagePattern({ cmd: CHURCH_COMMAND.CREATE_CHURCH_CAMPUS })
-  async createChurchCampus(data: ChurchCampusCreationDto): Promise<any> {
-    return await this.commandBus.execute(new CreateChurchCampusCommand(data));
+    try {
+      return await this.queryBus.execute(new GetChurchCampusByIdQuery(id));
+    } catch(error) {
+      throw error;
+    }
   }
 
   @MessagePattern({ cmd: CHURCH_COMMAND.GET_CHURCHES })
@@ -36,5 +36,20 @@ export class ChurchController {
     return await this.queryBus.execute(new GetChurchesQuery(data));
   }
 
-  
+
+  @MessagePattern({ cmd: CHURCH_COMMAND.CREATE_CHURCH_CAMPUS })
+  async createChurchCampus(data: ChurchCampusCreationDto): Promise<any> {
+    return await this.commandBus.execute(new CreateChurchCampusCommand(data));
+  }
+
+
+  @MessagePattern({ cmd: CHURCH_COMMAND.CREATE_CHURCH_CAMPUS_STAFF })
+  async createChurchCampusStaff(data: any): Promise<any> {
+    try {
+      return await this.commandBus.execute(new CreateChurchCampusStaffCommand(data));
+    } catch(error) {
+      throw error;
+    }
+  }
+
 } 

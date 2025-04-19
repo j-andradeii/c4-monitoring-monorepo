@@ -1,5 +1,6 @@
-import { IsString, IsInt, Min, Max, ValidateNested, MinLength, IsDefined, IsEnum } from 'class-validator';
+import { IsString, IsInt, Min, Max, ValidateNested, MinLength, IsDefined, IsEnum, IsOptional, IsArray, ArrayMinSize } from 'class-validator';
 import { ChurchCreationDto } from "./church-creation.dto";
+import { ChurchCampusAddressCreationDto } from './church-campus-address.creation.dto'; // Import the address DTO
 import { Type } from 'class-transformer';
 
 enum ChurchCampusType {
@@ -13,10 +14,23 @@ export class ChurchCampusCreationDto {
     @IsString({ message: 'Church campus type is required' })
     church_campus_type: ChurchCampusType;
 
+    @IsString()
+    @IsOptional()
+    tag_line?: string;
+
+    @IsString()
+    @IsOptional()
+    description?: string;
 
     @IsDefined({ message: 'Church is required' }) // Ensure address is required
     @ValidateNested() // Validate the nested DTO
     @Type(() => ChurchCreationDto) // This tells class-transformer to transform the object into the DTO
     church: ChurchCreationDto;
 
+    @IsDefined({ message: 'At least one address is required' })
+    @IsArray()
+    @ValidateNested({ each: true }) // Validate each object in the array
+    @ArrayMinSize(1, { message: 'At least one address must be provided' })
+    @Type(() => ChurchCampusAddressCreationDto)
+    addresses: ChurchCampusAddressCreationDto[];
 }

@@ -3,6 +3,9 @@ import { MembersService } from './members.service';
 import { MessagePattern } from '@nestjs/microservices';
 import { CommandBus } from '@nestjs/cqrs';
 import { CreateChurchCampusMemberClosureCommand } from './cqrs/commands/create-church-campus-member-closure.command';
+import { MEMBER_COMMAND } from '@app/libs';
+import { MemberCreationDto } from '@app/libs/dto/member/member.creation.dto';
+import { CreateMemberCommand } from './cqrs/commands/create-member.command';
 @Controller()
 export class MembersController {
   constructor(private readonly membersService: MembersService,
@@ -19,6 +22,16 @@ export class MembersController {
   @MessagePattern({ cmd: 'create_church_campus_closure' })
   async createChurchCampusClosure(data: any): Promise<any> {
     return await this.commandBus.execute(new CreateChurchCampusMemberClosureCommand(data.referenceId));
+  }
+
+
+  @MessagePattern({cmd: MEMBER_COMMAND.CREATE_MEMBER})
+  async createMember(data: MemberCreationDto) {
+    try {
+      return await this.commandBus.execute(new CreateMemberCommand(data));
+    } catch(error) {
+      throw error;
+    }
   }
 
 }

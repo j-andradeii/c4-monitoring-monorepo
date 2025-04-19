@@ -17,6 +17,7 @@ import { GetChurchesHandler } from './orchestrations/get-churches.handler';
 import { ChurchesRepository } from './repositories/churches-repositories';
 import { ChurchCampussesRepository } from './repositories/church-campus.repositories';
 import { GetChurchCampusByIdHandler } from './orchestrations/get-church-campus-by-id.handler';
+import { CreateChurchCampusStaffHandler } from './orchestrations/create-church-campus-staff.handler';
 
 @Module({
   imports: [
@@ -46,6 +47,7 @@ import { GetChurchCampusByIdHandler } from './orchestrations/get-church-campus-b
     ChurchService,
     CreateChurchHandler,
     CreateChurchCampusHandler,
+    CreateChurchCampusStaffHandler,
     GetChurchesHandler,
     GetChurchCampusByIdHandler,
     ChurchCampusClosureService,

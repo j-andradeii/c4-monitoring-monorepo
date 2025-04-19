@@ -1,5 +1,6 @@
 
 import { CHURCH_COMMAND, ChurchCampusCreationDto } from '@app/libs';
+import { ChurchCampusStaffCreationDto } from '@app/libs/dto/church/church-campus-staff-creation.dto';
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { lastValueFrom } from 'rxjs';
@@ -28,6 +29,21 @@ export class ChurchMicroserviceService {
         }
     }
 
+    async createChurchCampusStaff(campus_id:string, member_id: string, churchCampusStaffCreationDto: ChurchCampusStaffCreationDto) {
+        try{
+            const churchCampusStaffResponse = this.churchClient.send(
+                { cmd: CHURCH_COMMAND.CREATE_CHURCH_CAMPUS_STAFF},  // This command must match the @MessagePattern in the Auth Microservice
+                {
+                    campus_id,
+                    member_id,
+                    churchCampusStaffCreationDto,
+                }  // This is the payload sent to the microservice
+            );
+            return await lastValueFrom(churchCampusStaffResponse);
+        } catch(error) {
+            throw error;
+        }
+    }
 
     async getChurchCampusById(id: string) {
         try{

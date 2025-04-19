@@ -4,6 +4,7 @@ import { AbstractOrchestrator } from "./abstract-orchestrator";
 import { DataSource } from "typeorm";
 import { ChurchesRepository } from "../repositories/churches-repositories";
 import { ChurchCampussesRepository } from "../repositories/church-campus.repositories";
+import { BadRequestException } from "@nestjs/common";
 
 @QueryHandler(GetChurchCampusByIdQuery)
 export class GetChurchCampusByIdHandler extends AbstractOrchestrator<string, any> implements IQueryHandler<GetChurchCampusByIdQuery> {
@@ -13,7 +14,6 @@ export class GetChurchCampusByIdHandler extends AbstractOrchestrator<string, any
         super(dataSource);
     }
     
-
     execute(query: GetChurchCampusByIdQuery): Promise<any> {
         return this.orchestrate(query.id);
     }
@@ -22,7 +22,7 @@ export class GetChurchCampusByIdHandler extends AbstractOrchestrator<string, any
         return await request;
     }
     protected async doProcess(request: string): Promise<any> {
-        const churches = await this.churchCampussesRepository.findOne(request);
+        const churches = await this.churchCampussesRepository.findOneWithRelations(request);
         return await churches;
     }
     protected async postProcess(data: any): Promise<any> {
