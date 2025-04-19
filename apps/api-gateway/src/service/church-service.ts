@@ -25,7 +25,7 @@ export class ChurchService {
     async getChurchCampusStaffs(church_campus_id: string, page: number, limit: number): Promise<any> {
         try {
 
-            const staffsResponse = await this.churchMicroserviceService.getChurchCampusStaffs(church_campus_id, page, limit);
+            const staffsResponse = await this.churchMicroserviceService.getChurchCampusStaffs(church_campus_id, null, null);
 
             const member_ids = staffsResponse.staffs
             .filter(staff => staff.member_id) // Filter out any null member_ids
@@ -86,8 +86,25 @@ export class ChurchService {
         }
     }
 
-    async insertToClosureCampusStaff(campus_id: string, campus_staff_id: string) {
+    async createChurchCampusHierarchyRoots(campus_id: string) {
+  
 
+        try {
+            const staffsResponse = await this.churchMicroserviceService.getChurchCampusStaffs(campus_id, null, null);
+            const rootStaffs = staffsResponse.staffs.filter((v)=>{
+                return v.is_hierarchy_root;
+            });
+
+            const member_ids = rootStaffs
+            .filter(staff => staff.member_id) // Filter out any null member_ids
+            .map(staff => staff.member_id);
+
+            console.log(member_ids);
+
+            return rootStaffs;
+        } catch(error) {
+            throw error;
+        }
     }
 
  

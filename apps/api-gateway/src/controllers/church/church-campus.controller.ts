@@ -70,14 +70,13 @@ export class ChurchCampusController {
         }
     }
 
-    @Post(':id/churchCampusStaffs/:campus_staff_id') 
+    @Post(':id/heirarchyRoots') 
     @UseGuards(JwtAuthGuard)
     @UseInterceptors(TransformResponseInterceptor<any>)
     @UsePipes(ValidationPipe) // Use the pipe on this method for the body
-    async insertToClosureCampusStaff(@Param('id') campus_id: string,
-                                     @Param('campus_staff_id') campus_staff_id: string,) {
+    async createChurchCampusHeirarchyRoot(@Param('id') campus_id: string) {
         try {
-            return campus_staff_id;//
+            return await this.churchService.createChurchCampusHierarchyRoots(campus_id)
         } catch(error: any) {
             throw error
         }
