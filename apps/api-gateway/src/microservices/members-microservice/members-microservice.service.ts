@@ -50,4 +50,16 @@ export class MembersMicroserviceService {
     }
 
    
+
+    async fallbackCreateMember(member_id: string) {
+        try{
+            const memberResponse = await this.membersClient.send(
+                { cmd: MEMBER_COMMAND.FALLBACK_CREATE_MEMBER },  // This command must match the @MessagePattern in the Auth Microservice
+                member_id  // This is the payload sent to the microservice
+            );
+            return await lastValueFrom(memberResponse);
+        } catch(error) {
+            throw error;
+        }
+    }   
 }

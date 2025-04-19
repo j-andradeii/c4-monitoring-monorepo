@@ -3,6 +3,8 @@ import { ChurchMicroserviceService } from "../microservices/church-microservice/
 import { MembersMicroserviceService } from "../microservices/members-microservice/members-microservice.service";
 import { ChurchCampusCreationDto } from "@app/libs";
 import { ChurchCampusStaffCreationDto } from "@app/libs/dto/church/church-campus-staff-creation.dto";
+import { Member } from "apps/members/src/entities/member.entity";
+import { ChurchCampusStaff } from "apps/church/src/entities/church-campus-staff.entity";
 
 @Injectable()
 export class ChurchService {
@@ -27,13 +29,26 @@ export class ChurchService {
     }
 
     async createChurchCampusStaff(campus_id:string, churchCampusStaffCreationDto: ChurchCampusStaffCreationDto) {
-        const churchCampus =  await this.churchMicroserviceService.getChurchCampusById(campus_id);
-        const member = await this.membersMicroserviceService.createMember(churchCampus, churchCampusStaffCreationDto.member);
-        const member_id = member.id;
-        const churchCampusStaff = await this.churchMicroserviceService.createChurchCampusStaff(campus_id, member_id, churchCampusStaffCreationDto);
-        return {
-            member,
-            churchCampusStaff
-        };
+
+        let member = null;
+        let churchCampusStaff = null;
+        try {
+            const churchCampus =  await this.churchMicroserviceService.getChurchCampusById(campus_id);
+            member = await this.membersMicroserviceService.createMember(churchCampus, churchCampusStaffCreationDto.member);
+            const member_id = member.id;
+            churchCampusStaff = await this.churchMicroserviceService.createChurchCampusStaff(campus_id, member_id, churchCampusStaffCreationDto);
+            return {
+                member,
+                churchCampusStaff
+            };
+        } catch(error) {
+            if(member) {
+                await this.membersMicroserviceService.fallbackCreateMember(member.id)
+            }
+
+            throw error;
+        }
     }
+
+ 
 }

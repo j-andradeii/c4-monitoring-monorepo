@@ -4,6 +4,7 @@ import { AbstractOrchestrator } from "./abstract-orchestrator";
 import { DataSource, QueryRunner } from "typeorm";
 import { ChurchCampusStaff } from "../entities/church-campus-staff.entity";
 import { ChurchCampussesRepository } from "../repositories/church-campus.repositories";
+import { BadRequestException } from "@nestjs/common";
 
 @CommandHandler(CreateChurchCampusStaffCommand)
 export class CreateChurchCampusStaffHandler extends AbstractOrchestrator<CreateChurchCampusStaffCommandDto, any> implements ICommandHandler<CreateChurchCampusStaffCommand> {
@@ -19,7 +20,7 @@ export class CreateChurchCampusStaffHandler extends AbstractOrchestrator<CreateC
     }
 
     protected async preProcess(request: CreateChurchCampusStaffCommandDto): Promise<CreateChurchCampusStaffCommandDto> {
-       return await request;
+        return await request;
     }
 
     protected async doProcess(request: CreateChurchCampusStaffCommandDto): Promise<any> {

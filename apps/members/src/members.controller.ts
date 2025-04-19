@@ -6,6 +6,7 @@ import { CreateChurchCampusMemberClosureCommand } from './cqrs/commands/create-c
 import { MEMBER_COMMAND } from '@app/libs';
 import { MemberCreationDto } from '@app/libs/dto/member/member.creation.dto';
 import { CreateMemberCommand } from './cqrs/commands/create-member.command';
+import { FallbackCreateMemberCommand } from './cqrs/commands/fallback-create-member.command';
 @Controller()
 export class MembersController {
   constructor(private readonly membersService: MembersService,
@@ -29,6 +30,15 @@ export class MembersController {
   async createMember(data: MemberCreationDto) {
     try {
       return await this.commandBus.execute(new CreateMemberCommand(data));
+    } catch(error) {
+      throw error;
+    }
+  }
+
+  @MessagePattern({cmd: MEMBER_COMMAND.FALLBACK_CREATE_MEMBER})
+  async fallbackCreateMember(data: string) {
+    try {
+      return await this.commandBus.execute(new FallbackCreateMemberCommand(data));
     } catch(error) {
       throw error;
     }

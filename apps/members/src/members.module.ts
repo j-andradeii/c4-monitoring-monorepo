@@ -9,7 +9,7 @@ import { CreateChurchCampusMemberClosureHandler } from './orchestrations/create-
 import { CqrsModule } from '@nestjs/cqrs';
 import { ChurchCampusClosureService } from './service/church-campus-closure.service';
 import { CreateMemberHandler } from './orchestrations/create-member.handler';
-
+import { FallbackCreateMemberHandler } from './orchestrations/fallback-create-member.handler';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -34,6 +34,7 @@ import { CreateMemberHandler } from './orchestrations/create-member.handler';
     MembersService,
     CreateChurchCampusMemberClosureHandler,
     CreateMemberHandler,
+    FallbackCreateMemberHandler,
     ChurchCampusClosureService,
   ],
 })

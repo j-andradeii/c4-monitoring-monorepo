@@ -14,6 +14,8 @@ export const CHURCH_COMMAND = {
     GET_CHURCH_CAMPUS_BY_ID: 'get_church_campus_by_id',
     UPDATE_CHURCH_CAMPUS: 'update_church_campus',
     DELETE_CHURCH_CAMPUS: 'delete_church_campus',
+
+    FALLBACK_CREATE_CHURCH_CAMPUS_STAFF: 'fallback_create_church_campus_staff',
 }
 
 
@@ -21,6 +23,8 @@ export const MEMBER_COMMAND = {
     CREATE_MEMBER: 'create_member',
     GET_MEMBER: 'get_member',
     GET_MEMBERS: 'get_members',
+
+    FALLBACK_CREATE_MEMBER: 'fallback_create_member',
 }
 
 
