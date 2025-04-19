@@ -27,6 +27,13 @@ export class ChurchCampus {
     @Column({ type: 'text', nullable: true})
     description: string;
 
+    @Column({
+        type: 'date',
+        name: 'established_date',
+        nullable: true,
+    })
+    established_date: Date;
+
     @ManyToOne(() => Church, church => church.church_campuses)  // Many-to-one relationship with Order
     @JoinColumn({ name: 'church_id' })  // Foreign key column for order_id
     church: Church;

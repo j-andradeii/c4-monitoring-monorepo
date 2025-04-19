@@ -5,7 +5,7 @@ import { RpcException } from '@nestjs/microservices';
 @Catch()
 export class RpcExceptionFilter implements ExceptionFilter {
   catch(exception: any, host: ArgumentsHost): Observable<any> {
-    let status = HttpStatus.INTERNAL_SERVER_ERROR;
+    let status = exception.status || HttpStatus.INTERNAL_SERVER_ERROR;
     let message = 'Internal server error';
     let error = 'Internal Server Error';
     

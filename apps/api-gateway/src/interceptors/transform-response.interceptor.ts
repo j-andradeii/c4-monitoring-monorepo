@@ -27,13 +27,10 @@ import {
         catchError((error) => {
           // Extract status code if it's an HttpException
           let statusCode =
-            error instanceof HttpException
-              ? error.getStatus()
+            error 
+              ? error.statusCode
               : HttpStatus.INTERNAL_SERVER_ERROR;
   
-            console.log("error", error.message);
-
-            console.log("statusCode", statusCode);
           return throwError(() => ({
             statusCode,
             error: error.message || 'Internal Server Error',

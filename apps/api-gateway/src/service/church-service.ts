@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { ChurchMicroserviceService } from "../microservices/church-microservice/church-microservice.service";
 import { MembersMicroserviceService } from "../microservices/members-microservice/members-microservice.service";
 import { ChurchCampusCreationDto } from "@app/libs";
@@ -70,6 +70,7 @@ export class ChurchService {
         let churchCampusStaff = null;
         try {
             const churchCampus =  await this.churchMicroserviceService.getChurchCampusById(campus_id);
+            
             member = await this.membersMicroserviceService.createMember(churchCampus, churchCampusStaffCreationDto.member);
             const member_id = member.id;
             churchCampusStaff = await this.churchMicroserviceService.createChurchCampusStaff(campus_id, member_id, churchCampusStaffCreationDto);
