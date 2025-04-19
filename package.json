@@ -27,7 +27,7 @@
     "start:gateway": "nodemon --watch 'apps/api-gateway/src/**' --exec 'ts-node -r tsconfig-paths/register' apps/api-gateway/src/main.ts",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/apps/c4-monitoring-monorepo/main",
+    "start:prod": "node dist/apps/api-gateway/main.js",
     "start:prod:church": "node dist/apps/church/main.js",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
