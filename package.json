@@ -11,6 +11,7 @@
     "build:church": "nest build church && npx tsc --project apps/church/tsconfig.app.json",
     "build:members": "nest build members && npx tsc --project apps/members/tsconfig.app.json",
     "build:gateway": "nest build api-gateway && npx tsc --project apps/api-gateway/tsconfig.app.json",
+    "build:auth": "nest build auth && npx tsc --project apps/auth/tsconfig.app.json",
     "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
     "start": "nest start",
     "typeorm:church": "typeorm-ts-node-commonjs -d apps/church/src/orm-config.ts",
