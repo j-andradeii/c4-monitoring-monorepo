@@ -3,7 +3,7 @@ name: Deploy Microservices to Railway
 on:
   push:
     branches:
-      - main # Or your primary deployment branch
+      - master # Or your primary deployment branch
 
 jobs:
   # --- Deploy API Gateway (No DB) ---
