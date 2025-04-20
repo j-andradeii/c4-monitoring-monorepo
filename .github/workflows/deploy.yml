@@ -39,7 +39,7 @@ jobs:
         # It relies on environment variables being set correctly on Railway
         run: railway up --service ${{ env.APP_NAME }}
         env:
-          RAILWAY_TOKEN: ${{secrets.RAILWAY_TOKEN}}
+          RAILWAY_TOKEN: b00927bc-0c33-4053-a42a-12c667144147
   # --- Deploy Members Service (Requires members-db and rabbitmq) ---
   deploy-members:
     name: Deploy Members Service
