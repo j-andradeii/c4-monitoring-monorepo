@@ -3,11 +3,11 @@ import { Repository } from "typeorm";
 import { Church } from "../entities/church.entity";
 import { Injectable } from "@nestjs/common";
 import { PaginationDto } from "@app/libs";
+import { ChurchCampus } from "../entities/church-campus.entity";
 
 @Injectable()
 export class ChurchesRepository {
     constructor(@InjectRepository(Church)private readonly churchesRepository: Repository<Church>) {
-
     }
 
     async findAll(paginationDto: PaginationDto): Promise<{ churches: Church[], total: number }>{
@@ -21,7 +21,5 @@ export class ChurchesRepository {
             churches: data,
             total
         };
-
     }
-
 }

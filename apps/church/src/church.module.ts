@@ -15,6 +15,12 @@ import { RandomNumberGeneratorService } from './service/random-number-generator.
 import { ChurchCampusClosureService } from './service/church-campus-closure.service';
 import { GetChurchesHandler } from './orchestrations/get-churches.handler';
 import { ChurchesRepository } from './repositories/churches-repositories';
+import { ChurchCampussesRepository } from './repositories/church-campus.repositories';
+import { GetChurchCampusByIdHandler } from './orchestrations/get-church-campus-by-id.handler';
+import { CreateChurchCampusStaffHandler } from './orchestrations/create-church-campus-staff.handler';
+import { GetChuchCampusStaffsHandler } from './orchestrations/get-church-campus-staffs.handler';
+import { ChurchCampusStaffRepository } from './repositories/church-campus-staff.repositories';
+import { ChurchCampusStaff } from './entities/church-campus-staff.entity';
 
 @Module({
   imports: [
@@ -32,7 +38,7 @@ import { ChurchesRepository } from './repositories/churches-repositories';
       }),
     }),
 
-    TypeOrmModule.forFeature([Church, ChurchAddress, ChurchContactInfo, ChurchCampus ]),
+    TypeOrmModule.forFeature([Church, ChurchAddress, ChurchContactInfo, ChurchCampus, ChurchCampusStaff ]),
     CqrsModule
   ],
   controllers: [
@@ -40,10 +46,15 @@ import { ChurchesRepository } from './repositories/churches-repositories';
   ],
   providers: [  
     ChurchesRepository,
+    ChurchCampussesRepository,
+    ChurchCampusStaffRepository,
     ChurchService,
     CreateChurchHandler,
     CreateChurchCampusHandler,
+    CreateChurchCampusStaffHandler,
     GetChurchesHandler,
+    GetChurchCampusByIdHandler,
+    GetChuchCampusStaffsHandler,
     ChurchCampusClosureService,
     RandomNumberGeneratorService    
   ],

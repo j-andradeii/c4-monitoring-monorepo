@@ -13,14 +13,6 @@ export class ChurchController {
 
  
 
-    // @Get()
-    // // @UseGuards(OptionalJwtAuthGuard) // ✅ Optional guard
-    // @UseGuards(JwtAuthGuard)
-    // @UseInterceptors(TransformResponseInterceptor<any>)
-    // async getAuth(@Req() req: any): Promise<any> {
-    //     return await this.churchMicroserviceService.authenticateUser();
-    // }
-
     @Get()
     @UseGuards(JwtAuthGuard)
     @UseInterceptors(TransformResponseInterceptor<any>)
@@ -30,6 +22,8 @@ export class ChurchController {
     ): Promise<any> {
         return await this.churchService.getChurches(page, limit);
     }
+
+
 }
 
 

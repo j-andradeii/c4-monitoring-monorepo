@@ -7,6 +7,7 @@ import { Church } from "../entities/church.entity";
 import { ChurchCampus } from "../entities/church-campus.entity";
 import { RandomNumberGeneratorService } from "../service/random-number-generator.service";
 import { ChurchCampusClosureService } from "../service/church-campus-closure.service";
+import { ChurchCampusAddress } from "../entities/church-campus-address.entity";
 
 @CommandHandler(CreateChurchCampusCommand)
 export class CreateChurchCampusHandler extends AbstractOrchestrator<ChurchCampusCreationDto, any> implements ICommandHandler<CreateChurchCampusCommand> {
@@ -48,12 +49,23 @@ export class CreateChurchCampusHandler extends AbstractOrchestrator<ChurchCampus
             const churchCampus = new ChurchCampus();
             churchCampus.church = church;
             churchCampus.church_campus_type = request.church_campus_type;
+            churchCampus.tag_line = request.tag_line;
+            churchCampus.description = request.description;
             churchCampus.reference_id = this.randomNumberGeneratorService.generateUnique8DigitNumber();
+
             const savedChurchCampus = await queryRunner.manager.save(ChurchCampus, churchCampus);
 
+            for(const addressRequestDto of request.addresses) {
+                const churchCampusAddress = new ChurchCampusAddress();
+                churchCampusAddress.churchCampus = savedChurchCampus;
+                churchCampusAddress.city = addressRequestDto.city;
+                churchCampusAddress.location_name = addressRequestDto.location_name;
+                churchCampusAddress.state = addressRequestDto.state;
+                churchCampusAddress.street = addressRequestDto.street;
+                churchCampusAddress.zip_code = addressRequestDto.zip_code;
 
-              // **Dynamically Create the Table**
-            // await this.churchCampusClosureService.ensureChurchCampusClosureTable(queryRunner, savedChurchCampus.reference_id); //move this to members microservice
+                await queryRunner.manager.save(ChurchCampusAddress, churchCampusAddress);
+            }
             
             await queryRunner.commitTransaction();
             return savedChurchCampus;

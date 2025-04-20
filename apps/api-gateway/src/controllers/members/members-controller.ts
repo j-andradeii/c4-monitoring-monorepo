@@ -8,6 +8,7 @@ export class MembersController {
     constructor(private membersMicroserviceService: MembersMicroserviceService) {
     }
 
+    
     @Get()
     @UseGuards(JwtAuthGuard)
     async getMembers(): Promise<any> {

@@ -9,7 +9,7 @@ import { MembersMicroserviceService } from './members-microservice.service';
             name: 'MEMBERS_SERVICE',
             transport: Transport.RMQ,
             options: {
-              urls: ['amqp://user:password@rabbitmq:5672'],
+              urls: [process.env.RABBITMQ_URL],
               queue: 'members_queue',
               queueOptions: {
                 durable: false,
