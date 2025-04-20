@@ -34,12 +34,12 @@ jobs:
       - name: Install Railway CLI
         run: npm install -g @railway/cli
 
-      - name: Deploy to Railway (${{ env.APP_NAME }})
+      - name: Deploy to Railway (${{ env.APP_NAME }} - ${{secrets.RAILWAY_TOKEN}})
         # This command deploys the built code to the corresponding Railway service
         # It relies on environment variables being set correctly on Railway
         run: railway up --service ${{ env.APP_NAME }}
         env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+          RAILWAY_TOKEN: ${{secrets.RAILWAY_TOKEN}}
 
   # --- Deploy Members Service (Requires members-db and rabbitmq) ---
   deploy-members:
