@@ -40,7 +40,6 @@ jobs:
         run: railway up --service ${{ env.APP_NAME }}
         env:
           RAILWAY_TOKEN: ${{secrets.RAILWAY_TOKEN}}
-
   # --- Deploy Members Service (Requires members-db and rabbitmq) ---
   deploy-members:
     name: Deploy Members Service
