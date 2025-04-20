@@ -1,0 +1,128 @@
+name: Deploy Microservices to Railway
+
+on:
+  push:
+    branches:
+      - main # Or your primary deployment branch
+
+jobs:
+  # --- Deploy API Gateway (No DB) ---
+  deploy-api-gateway:
+    name: Deploy API Gateway
+    runs-on: ubuntu-latest
+    environment: production # Optional: Link to GitHub Environment
+    env:
+      APP_NAME: api-gateway
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18' # Use your project's Node.js version
+          cache: 'npm' # Or 'yarn'
+
+      - name: Install Dependencies (Monorepo)
+        run: npm ci # Or yarn install --frozen-lockfile
+
+      - name: Build Application (${{ env.APP_NAME }})
+        # Ensure your build script correctly builds the specific app
+        run: npm run build ${{ env.APP_NAME }}
+
+      - name: Install Railway CLI
+        run: npm install -g @railway/cli
+
+      - name: Deploy to Railway (${{ env.APP_NAME }})
+        # This command deploys the built code to the corresponding Railway service
+        # It relies on environment variables being set correctly on Railway
+        run: railway up --service ${{ env.APP_NAME }}
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+
+  # --- Deploy Members Service (Requires members-db and rabbitmq) ---
+  deploy-members:
+    name: Deploy Members Service
+    runs-on: ubuntu-latest
+    needs: deploy-api-gateway # Optional: Define dependencies if needed
+    environment: production
+    env:
+      APP_NAME: members
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      - name: Install Dependencies (Monorepo)
+        run: npm ci
+      - name: Build Application (${{ env.APP_NAME }})
+        run: npm run build ${{ env.APP_NAME }}
+      - name: Install Railway CLI
+        run: npm install -g @railway/cli
+      - name: Deploy to Railway (${{ env.APP_NAME }})
+        run: railway up --service ${{ env.APP_NAME }}
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+
+  # --- Deploy Church Service (Requires church-db and rabbitmq) ---
+  deploy-church:
+    name: Deploy Church Service
+    runs-on: ubuntu-latest
+    needs: deploy-api-gateway # Optional
+    environment: production
+    env:
+      APP_NAME: church
+
+    steps:
+      # ... (Checkout, Setup Node, Install Deps, Build - same as above) ...
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      - name: Install Dependencies (Monorepo)
+        run: npm ci
+      - name: Build Application (${{ env.APP_NAME }})
+        run: npm run build ${{ env.APP_NAME }}
+      - name: Install Railway CLI
+        run: npm install -g @railway/cli
+      - name: Deploy to Railway (${{ env.APP_NAME }})
+        run: railway up --service ${{ env.APP_NAME }}
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+
+  # --- Deploy Auth Service (Requires auth-db and rabbitmq) ---
+  deploy-auth:
+    name: Deploy Auth Service
+    runs-on: ubuntu-latest
+    needs: deploy-api-gateway # Optional
+    environment: production
+    env:
+      APP_NAME: auth
+
+    steps:
+      # ... (Checkout, Setup Node, Install Deps, Build - same as above) ...
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+      - name: Install Dependencies (Monorepo)
+        run: npm ci
+      - name: Build Application (${{ env.APP_NAME }})
+        run: npm run build ${{ env.APP_NAME }}
+      - name: Install Railway CLI
+        run: npm install -g @railway/cli
+      - name: Deploy to Railway (${{ env.APP_NAME }})
+        run: railway up --service ${{ env.APP_NAME }}
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
