@@ -47,8 +47,8 @@ const config = {
   synchronize: false,
   extra: {
     max: 20,
-    poolSize: parseInt(process.env.DB_POOL_SIZE || '25'), // Max connections per app instance (Increased default to 15)
-    connectionTimeoutMillis: parseInt(process.env.DB_CONNECTION_TIMEOUT || '5000'), // How long to wait for a connection from the pool (Increased default to 15s)
+    poolSize: parseInt(process.env.DB_POOL_SIZE || '15'), // Max connections per app instance (Increased default to 15)
+    connectionTimeoutMillis: parseInt(process.env.DB_CONNECTION_TIMEOUT || '15000'), // How long to wait for a connection from the pool (Increased default to 15s)
     idleTimeoutMillis: parseInt(process.env.DB_IDLE_TIMEOUT || '30000'), // How long a connection can be idle before being closed
     query_timeout: parseInt(process.env.DB_QUERY_TIMEOUT || '10000'), // Max time (ms) per query (client-side)
   },
