@@ -66,6 +66,14 @@ export class ChurchMicroserviceService {
         );
     }
 
+    async healthCheck() {
+        const staffResponse = await this.churchClient.send(
+            { cmd: CHURCH_COMMAND.HEALTH_CHECK},  // This command must match the @MessagePattern in the Auth Microservice
+            {}
+        );
+        return await lastValueFrom(staffResponse);
+    }
+
     async getChurchCampusStaffs(church_campus_id: string, page: number, limit: number): Promise<any> {
         const staffResponse = await this.churchClient.send(
             { cmd: CHURCH_COMMAND.GET_CHURCH_CAMPUS_STAFFS},  // This command must match the @MessagePattern in the Auth Microservice

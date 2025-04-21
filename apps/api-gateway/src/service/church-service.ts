@@ -22,6 +22,10 @@ export class ChurchService {
         return await this.churchMicroserviceService.getChurches(page, limit);
     }
 
+    async healthCheck() {
+        return await this.churchMicroserviceService.healthCheck();
+    }
+
     async getChurchCampusStaffs(church_campus_id: string, page: number, limit: number): Promise<any> {
         try {
 
