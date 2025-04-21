@@ -4,7 +4,9 @@ import { ChurchModule } from './church.module';
 import { RpcExceptionFilter } from './filters/rpc-exception.filter';
 async function bootstrap() {
 
-  const rabbitMqUrl = process.env.RABBITMQ_URL || 'amqp://user:password@rabbitmq:5672'; // Default value fallback
+  let rabbitMqUrl = process.env.RABBITMQ_URL || 'amqp://user:password@rabbitmq:5672'; // Default value fallback
+  // Append frameMax directly to the URL as it seems socketOptions isn't working reliably here
+  rabbitMqUrl = rabbitMqUrl.includes('?') ? `${rabbitMqUrl}&frameMax=8192` : `${rabbitMqUrl}?frameMax=8192`;
 
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(ChurchModule, {
     transport: Transport.RMQ,
@@ -13,7 +15,7 @@ async function bootstrap() {
       queue: 'church_queue',
       queueOptions: {
         durable: false
-      },
+      }
     },
   });
   app.useGlobalFilters(new RpcExceptionFilter());

@@ -2,6 +2,10 @@ import { Module } from '@nestjs/common';
 import { AuthMicroserviceService } from './auth-microservice.service';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 
+let rabbitMqUrl = process.env.RABBITMQ_URL || 'amqp://user:password@rabbitmq:5672'; // Default value fallback
+// Append frameMax directly to the URL - THIS IS THE EFFECTIVE METHOD
+rabbitMqUrl = rabbitMqUrl.includes('?') ? `${rabbitMqUrl}&frameMax=8192` : `${rabbitMqUrl}?frameMax=8192`;
+
 
 @Module({
   imports: [
@@ -10,11 +14,11 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
             name: 'AUTH_SERVICE',
             transport: Transport.RMQ,
             options: {
-              urls: [process.env.RABBITMQ_URL],
+              urls: [rabbitMqUrl],
               queue: 'auth_queue',
               queueOptions: {
                 durable: false,
-              },
+              }
             },
           },
     ]),

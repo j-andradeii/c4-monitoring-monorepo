@@ -9,7 +9,7 @@ export class AuthController {
 
   @MessagePattern({ cmd: AUTH_COMMAND.AUTHENTICATE })
   async authenticate(data: { email: string; password: string }) {
-    console.log("AuthController", data);
+    console.log(AUTH_COMMAND.AUTHENTICATE, data);
     return this.authService.login(data.email, data.password);
   }
 
