@@ -28,6 +28,7 @@
     "start:gateway": "nodemon --watch 'apps/api-gateway/src/**' --exec 'ts-node -r tsconfig-paths/register' apps/api-gateway/src/main.ts",
     "railway:deploy:members": "npm run migration:run:members && npm run start:prod:members",
     "railway:deploy:church": "npm run migration:run:church && npm run start:prod:church",
+    "railway:deploy:auth": "npm run start:prod:auth",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod:gateway": "node dist/apps/api-gateway/main.js",
