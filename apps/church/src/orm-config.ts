@@ -38,6 +38,7 @@ const config = {
   autoLoadEntities: true,
   synchronize: false,
 }
+console.log("CHURCH-DB CONFIG", config)
 
 export default registerAs('typeorm', () => config)
 export const connectionSource = new DataSource(config as DataSourceOptions);

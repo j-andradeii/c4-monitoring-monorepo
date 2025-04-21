@@ -40,5 +40,6 @@ const config = {
   synchronize: false,
 }
 
+console.log("MEMBERS-DB CONFIG", config)
 export default registerAs('typeorm', () => config)
 export const connectionSource = new DataSource(config as DataSourceOptions);
