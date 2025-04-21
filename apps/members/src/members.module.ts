@@ -13,6 +13,13 @@ import { FallbackCreateMemberHandler } from './orchestrations/fallback-create-me
 import { DiscipleshipService } from './service/discipleship.service';
 import { MemberRepository } from './repositories/member-repositories';
 import { GetMembersByIdsHandler } from './orchestrations/get-member-by-ids.handler';
+import { ChangeTrackProgress } from './entities/change-track-progress.entity';
+import { ChangeTrack } from './entities/change-track.entity';
+import { ChurchCampusMember } from './entities/church-campus-member.entity';
+import { ConsolidateMember } from './entities/consolidate-member.entity';
+import { ContactInfo } from './entities/contact-info.entity';
+import { MemberDevotional } from './entities/member-devotional.entity';
+import { SocialInfo } from './entities/social-infos.entity';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -29,7 +36,16 @@ import { GetMembersByIdsHandler } from './orchestrations/get-member-by-ids.handl
       }),
     }),
 
-    TypeOrmModule.forFeature([Member]),
+    TypeOrmModule.forFeature([
+      ChangeTrackProgress,
+      ChangeTrack,
+      ChurchCampusMember,
+      ConsolidateMember,
+      ContactInfo,
+      MemberDevotional,
+      Member,
+      SocialInfo
+    ]),
     CqrsModule
   ],
   controllers: [MembersController],
