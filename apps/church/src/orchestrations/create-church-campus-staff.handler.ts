@@ -44,6 +44,8 @@ export class CreateChurchCampusStaffHandler extends AbstractOrchestrator<CreateC
             } catch(error) {
                 await queryRunner.rollbackTransaction();
                 throw error;
+            } finally {
+                await queryRunner.release();
             }
     }
 
