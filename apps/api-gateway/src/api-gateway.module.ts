@@ -24,7 +24,7 @@ import { ChurchService } from './service/church-service';
     // Configure ThrottlerModule
     ThrottlerModule.forRoot([{
       ttl: parseInt(process.env.THROTTLE_TTL || '60000'), // Time-to-live in milliseconds (default: 60 seconds)
-      limit: parseInt(process.env.THROTTLE_LIMIT || '10'), // Max requests per TTL (default: 10)
+      limit: parseInt(process.env.THROTTLE_LIMIT || '30'), // Max requests per TTL (default: 10)
     }]),
     AuthMicroserviceModule,
     ChurchMicroserviceModule,
