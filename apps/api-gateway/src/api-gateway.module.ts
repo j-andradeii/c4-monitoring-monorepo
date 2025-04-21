@@ -1,4 +1,6 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core'; // Import APP_GUARD
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler'; // Import Throttler
 import { ApiGatewayController } from './api-gateway.controller';
 import { ApiGatewayService } from './service/api-gateway.service';
 import { AuthMicroserviceModule } from './microservices/auth-microservice/auth-microservice.module';
@@ -19,6 +21,11 @@ import { ChurchService } from './service/church-service';
 
 @Module({
   imports: [
+    // Configure ThrottlerModule
+    ThrottlerModule.forRoot([{
+      ttl: parseInt(process.env.THROTTLE_TTL || '60000'), // Time-to-live in milliseconds (default: 60 seconds)
+      limit: parseInt(process.env.THROTTLE_LIMIT || '10'), // Max requests per TTL (default: 10)
+    }]),
     AuthMicroserviceModule,
     ChurchMicroserviceModule,
     MembersMicroserviceModule,
@@ -37,11 +44,16 @@ import { ChurchService } from './service/church-service';
     MembersController
   ],
   providers: [
-    ApiGatewayService, 
+    ApiGatewayService,
     JwtStrategy,
     ApiCryptoService,
     TransformResponseInterceptor,
-    ChurchService
+    ChurchService,
+    // Apply ThrottlerGuard globally
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+    },
   ],
 })
 export class ApiGatewayModule implements NestModule{
