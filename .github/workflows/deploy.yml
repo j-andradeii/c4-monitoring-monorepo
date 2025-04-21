@@ -39,7 +39,7 @@ jobs:
         # It relies on environment variables being set correctly on Railway
         run: railway up --service ${{ env.APP_NAME }}
         env:
-          RAILWAY_TOKEN: b00927bc-0c33-4053-a42a-12c667144147
+          RAILWAY_TOKEN: ${{secrets.RAILWAY_TOKEN}}
   # --- Deploy Members Service (Requires members-db and rabbitmq) ---
   deploy-members:
     name: Deploy Members Service
@@ -65,6 +65,12 @@ jobs:
         run: npm install -g @railway/cli
       - name: Deploy to Railway (${{ env.APP_NAME }})
         run: railway up --service ${{ env.APP_NAME }}
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+
+      - name: Run Migrations (${{ env.APP_NAME }})
+        # This command executes the migration script within the deployed service
+        run: railway run --service ${{ env.APP_NAME }} -- npm run typeorm:${{ env.APP_NAME }} migration:run
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
 
@@ -97,6 +103,12 @@ jobs:
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
 
+      - name: Run Migrations (${{ env.APP_NAME }})
+        # This command executes the migration script within the deployed service
+        run: railway run --service ${{ env.APP_NAME }} -- npm run typeorm:${{ env.APP_NAME }} migration:run
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+
   # --- Deploy Auth Service (Requires auth-db and rabbitmq) ---
   deploy-auth:
     name: Deploy Auth Service
@@ -118,7 +130,7 @@ jobs:
       - name: Install Dependencies (Monorepo)
         run: npm ci
       - name: Build Application (${{ env.APP_NAME }})
-        run: npm run build:church
+        run: npm run build:auth
       - name: Install Railway CLI
         run: npm install -g @railway/cli
       - name: Deploy to Railway (${{ env.APP_NAME }})

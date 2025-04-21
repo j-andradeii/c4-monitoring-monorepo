@@ -4,8 +4,9 @@ import { AuthModule } from './auth.module';
 
 async function bootstrap() {
 
-  const rabbitMqUrl = process.env.RABBITMQ_URL || 'amqp://user:password@rabbitmq:5672'; // Default value fallback
-  console.log('rabbitMqUrl', rabbitMqUrl);
+  const rabbitMqUrl = process.env.RABBITMQ_URL || 'amqp://zT3GlkToRo2p50KG:.fmcZE78bOP1AtXD_GOdkqWz8.vCosDy@centerbeam.proxy.rlwy.net:19652'; // Default value fallback
+  
+  console.log(rabbitMqUrl);
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(AuthModule, {
     transport: Transport.RMQ,
     options: {
