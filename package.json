@@ -14,22 +14,18 @@
     "build:auth": "nest build auth && npx tsc --project apps/auth/tsconfig.app.json",
     "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
     "start": "nest start",
-
     "typeorm:church": "typeorm-ts-node-commonjs -d apps/church/src/orm-config.ts",
     "typeorm:prod:church": "cross-env NODE_ENV=production typeorm -d dist/apps/church/apps/church/src/orm-config.js",
     "migration:create:church": "npm run build:church &&  typeorm -- migration:create apps/church/src/db/migrations/ChurchMigrationName",
     "migration:generate:church": "npm run build:church && npm run typeorm:church -- migration:generate apps/church/src/db/migrations/ChurchMigrationName",
     "migration:run:church": "npm run build:church && npm run typeorm:church migration:run",
     "migration:prod:run:church": "npm run build:church && npm run typeorm:prod:church migration:run",
-    
     "typeorm:members": "typeorm-ts-node-commonjs -d apps/members/src/orm-config.ts",
     "typeorm:prod:members": "cross-env NODE_ENV=production typeorm -d dist/apps/members/apps/members/src/orm-config.js",
     "migration:create:members": "npm run build:members &&  typeorm -- migration:create apps/members/src/db/migrations/MembersMigrationName",
     "migration:generate:members": "npm run build:members && npm run typeorm:members -- migration:generate apps/members/src/db/migrations/MembersMigrationName",
     "migration:run:members": "npm run build:members && npm run typeorm:members migration:run",
     "migration:prod:run:members": "npm run build:members && npm run typeorm:prod:members migration:run",
-   
-   
     "start:auth": "nodemon --watch 'apps/auth/src/**' --exec 'ts-node -r tsconfig-paths/register' apps/auth/src/main.ts",
     "start:church": "nodemon --watch 'apps/church/src/**' --exec 'ts-node -r tsconfig-paths/register' apps/church/src/main.ts",
     "start:members": "nodemon --watch 'apps/members/src/**' --exec 'ts-node -r tsconfig-paths/register' apps/members/src/main.ts",
@@ -59,6 +55,7 @@
     "@nestjs/microservices": "^10.4.3",
     "@nestjs/passport": "^11.0.5",
     "@nestjs/platform-express": "^10.0.0",
+    "@nestjs/throttler": "^6.4.0",
     "@nestjs/typeorm": "^10.0.2",
     "amqp-connection-manager": "^4.1.14",
     "amqplib": "^0.10.4",
