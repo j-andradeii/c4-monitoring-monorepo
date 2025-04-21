@@ -11,6 +11,8 @@ const migrationsPath = process.env.NODE_ENV === 'production'
   ? __dirname + '/db/migrations/*.ts' // Use JS files in production
   : __dirname + '/db/migrations/*.ts';  // Use TS files in development
 
+console.log('__dirname: ', __dirname);
+
 // Log the paths for debugging
 console.log('Entities Path:', entitiesPath);
 console.log('Migrations Path:', migrationsPath);
