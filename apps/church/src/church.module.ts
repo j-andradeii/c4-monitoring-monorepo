@@ -21,6 +21,10 @@ import { CreateChurchCampusStaffHandler } from './orchestrations/create-church-c
 import { GetChuchCampusStaffsHandler } from './orchestrations/get-church-campus-staffs.handler';
 import { ChurchCampusStaffRepository } from './repositories/church-campus-staff.repositories';
 import { ChurchCampusStaff } from './entities/church-campus-staff.entity';
+import { ChurchCampusMember } from 'apps/members/src/entities/church-campus-member.entity';
+import { ChurchCampusAddress } from './entities/church-campus-address.entity';
+import { ChurchClosure } from './entities/church-closure.entity';
+import { ChurchStaff } from './entities/church-statff.entity';
 
 @Module({
   imports: [
@@ -38,7 +42,16 @@ import { ChurchCampusStaff } from './entities/church-campus-staff.entity';
       }),
     }),
 
-    TypeOrmModule.forFeature([Church, ChurchAddress, ChurchContactInfo, ChurchCampus, ChurchCampusStaff ]),
+    TypeOrmModule.forFeature([
+        ChurchAddress,
+        ChurchCampusAddress,
+        ChurchCampusStaff,
+        ChurchCampus,
+        ChurchClosure,
+        ChurchContactInfo,
+        ChurchStaff,
+        Church
+    ]),
     CqrsModule
   ],
   controllers: [
