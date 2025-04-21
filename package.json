@@ -16,14 +16,14 @@
     "start": "nest start",
 
     "typeorm:church": "typeorm-ts-node-commonjs -d apps/church/src/orm-config.ts",
-    "typeorm:prod:church": "cross-env NODE_ENV=production typeorm -d dist/apps/church/orm-config.js",
+    "typeorm:prod:church": "cross-env NODE_ENV=production typeorm -d dist/apps/church/apps/church/orm-config.js",
     "migration:create:church": "npm run build:church &&  typeorm -- migration:create apps/church/src/db/migrations/ChurchMigrationName",
     "migration:generate:church": "npm run build:church && npm run typeorm:church -- migration:generate apps/church/src/db/migrations/ChurchMigrationName",
     "migration:run:church": "npm run build:church && npm run typeorm:church migration:run",
     "migration:prod:run:church": "npm run build:church && npm run typeorm:prod:church migration:run",
     
     "typeorm:members": "typeorm-ts-node-commonjs -d apps/members/src/orm-config.ts",
-    "typeorm:prod:members": "cross-env NODE_ENV=production typeorm -d dist/apps/members/orm-config.js",
+    "typeorm:prod:members": "cross-env NODE_ENV=production typeorm -d dist/apps/members/apps/members/src/orm-config.js",
     "migration:create:members": "npm run build:members &&  typeorm -- migration:create apps/members/src/db/migrations/MembersMigrationName",
     "migration:generate:members": "npm run build:members && npm run typeorm:members -- migration:generate apps/members/src/db/migrations/MembersMigrationName",
     "migration:run:members": "npm run build:members && npm run typeorm:members migration:run",
