@@ -26,6 +26,8 @@
     "start:church": "nodemon --watch 'apps/church/src/**' --exec 'ts-node -r tsconfig-paths/register' apps/church/src/main.ts",
     "start:members": "nodemon --watch 'apps/members/src/**' --exec 'ts-node -r tsconfig-paths/register' apps/members/src/main.ts",
     "start:gateway": "nodemon --watch 'apps/api-gateway/src/**' --exec 'ts-node -r tsconfig-paths/register' apps/api-gateway/src/main.ts",
+    "railway:deploy:members": "npm run migration:run:members && nodemon --watch 'apps/members/src/**' --exec 'ts-node -r tsconfig-paths/register' apps/members/src/main.ts",
+    "railway:deploy:church": "npm run migration:run:church && nodemon --watch 'apps/church/src/**' --exec 'ts-node -r tsconfig-paths/register' apps/church/src/main.ts",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/apps/api-gateway/main.js",
