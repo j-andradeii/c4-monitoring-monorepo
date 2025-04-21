@@ -24,6 +24,13 @@ export class ChurchController {
     };
   }
 
+  @MessagePattern({ cmd: CHURCH_COMMAND.HEALTH_CHECK })
+  async healthCheck(data: any): Promise<any> {
+    return {
+      name: "CHURCH MICROSERVICES IS REACHABLE"
+    };
+  }
+
   @MessagePattern({ cmd: CHURCH_COMMAND.GET_CHURCH_CAMPUS_BY_ID })
   async getChurchCampusById(id: string): Promise<ChurchCampusDto> {
     try {

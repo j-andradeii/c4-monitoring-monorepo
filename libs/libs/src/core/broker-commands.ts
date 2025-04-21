@@ -13,6 +13,7 @@ export const CHURCH_COMMAND = {
     GET_CHURCH_CAMPUSES: 'get_church_campuses',
     GET_CHURCH_CAMPUS_BY_ID: 'get_church_campus_by_id',
     GET_CHURCH_CAMPUS_STAFFS: 'get_church_campus_staffs',
+    HEALTH_CHECK: 'health_check',
     UPDATE_CHURCH_CAMPUS: 'update_church_campus',
     DELETE_CHURCH_CAMPUS: 'delete_church_campus',
 

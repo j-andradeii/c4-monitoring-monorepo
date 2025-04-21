@@ -24,6 +24,13 @@ export class ChurchController {
     }
 
 
+    @Get("healthCheck")
+    @UseGuards(JwtAuthGuard)
+    @UseInterceptors(TransformResponseInterceptor<any>)
+    async healthCheck(): Promise<any> {
+        return await this.churchService.healthCheck();
+    }
+
 }
 
 
