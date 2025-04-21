@@ -20,7 +20,7 @@ console.log('Migrations Path:', migrationsPath);
 
 const config = {
   type: 'postgres',
-  url: process.env.DATABASE_URL, // Add this line to use the full 
+  url: process.env.DATABASE_URL || 'postgresql://postgres:WwrasarMpctYMrnHCTkWhTroHvkKXXSf@ballast.proxy.rlwy.net:24400/railway', // Add this line to use the full 
   // host: process.env.POSTGRES_HOST,
   // port: parseInt(process.env.POSTGRES_PORT), // Ensure port is a number
   // username: process.env.POSTGRES_USER,
