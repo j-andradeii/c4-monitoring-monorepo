@@ -4,15 +4,20 @@ import { DataSource, DataSourceOptions } from "typeorm";
 
 dotenvConfig({ path: '.env' });
 const entitiesPath = process.env.NODE_ENV === 'production'
-  ? __dirname + '/entities/*.entity.ts' // Use JS files in production
+  ? __dirname + '/entities/*.entity.js' // Use JS files in production
   : __dirname + '/entities/*.entity.ts';  // Use TS files in development
 
 const migrationsPath = process.env.NODE_ENV === 'production'
-  ? __dirname + '/db/migrations/*.ts' // Use JS files in production
+  ? __dirname + '/db/migrations/*.js' // Use JS files in production
   : __dirname + '/db/migrations/*.ts';  // Use TS files in development
 
 console.log('__dirname: ', __dirname);
 console.log('__dirname: ', __dirname + '../../dist');
+
+const churchDir = __dirname + '../../'
+
+console.log(churchDir);
+
 
 // Log the paths for debugging
 console.log('Entities Path:', entitiesPath);
