@@ -68,11 +68,11 @@ jobs:
         run: railway up --service ${{ env.APP_NAME }}
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-      - name: Run Migrations (${{ env.APP_NAME }})
-        # This command executes the migration script within the deployed service
-        run: railway run --service ${{ env.APP_NAME }} -- npm run migration:run:members
-        env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+      # - name: Run Migrations (${{ env.APP_NAME }})
+      #   # This command executes the migration script within the deployed service
+      #   run: railway run --service ${{ env.APP_NAME }} -- npm run migration:run:members
+      #   env:
+      #     RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
 
   # --- Deploy Church Service (Requires church-db and rabbitmq) ---
   deploy-church:
@@ -100,12 +100,6 @@ jobs:
         run: npm install -g @railway/cli
       - name: Deploy to Railway (${{ env.APP_NAME }})
         run: railway up --service ${{ env.APP_NAME }}
-        env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-
-      - name: Run Migrations (${{ env.APP_NAME }})
-        # This command executes the migration script within the deployed service
-        run: railway run --service ${{ env.APP_NAME }} -- npm run migration:run:church
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
 

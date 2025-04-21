@@ -26,11 +26,11 @@ console.log("DATABASEurl-->", process.env.DATABASE_URL);
 const config = {
   type: 'postgres',
   url: process.env.DATABASE_URL, // Add this line to use the full 
-  host: process.env.POSTGRES_HOST,
-  port: parseInt(process.env.POSTGRES_PORT), // Ensure port is a number
-  username: process.env.POSTGRES_USER,
-  password: process.env.POSTGRES_PASSWORD,
-  database: process.env.POSTGRES_DB,
+  // host: process.env.POSTGRES_HOST,
+  // port: parseInt(process.env.POSTGRES_PORT), // Ensure port is a number
+  // username: process.env.POSTGRES_USER,
+  // password: process.env.POSTGRES_PASSWORD,
+  // database: process.env.POSTGRES_DB,
 
   // Use the resolved paths
   entities: [entitiesPath],
