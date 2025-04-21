@@ -1,4 +1,5 @@
 import { registerAs } from "@nestjs/config";
+import { max } from "class-validator";
 import { config as dotenvConfig } from 'dotenv';
 import { DataSource, DataSourceOptions } from "typeorm";
 
@@ -34,7 +35,8 @@ const config = {
   autoLoadEntities: true,
   synchronize: false,
   extra: {
-    poolSize: parseInt(process.env.DB_POOL_SIZE || '10'), // Max connections per app instance
+    max: 20,
+    poolSize: parseInt(process.env.DB_POOL_SIZE || '20'), // Max connections per app instance (Increased default to 15)
     connectionTimeoutMillis: parseInt(process.env.DB_CONNECTION_TIMEOUT || '15000'), // How long to wait for a connection from the pool (Increased default to 15s)
     idleTimeoutMillis: parseInt(process.env.DB_IDLE_TIMEOUT || '30000'), // How long a connection can be idle before being closed
     query_timeout: parseInt(process.env.DB_QUERY_TIMEOUT || '10000'), // Max time (ms) per query (client-side)
