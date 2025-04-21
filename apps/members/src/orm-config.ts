@@ -15,6 +15,13 @@ const migrationsPath = process.env.NODE_ENV === 'production'
 console.log('Entities Path:', entitiesPath);
 console.log('Migrations Path:', migrationsPath);
 
+console.log("HOST-->", process.env.POSTGRES_HOST);
+console.log("PORT-->", process.env.POSTGRES_PORT);
+console.log("USERNAME-->", process.env.POSTGRES_USER);
+console.log("PASSWORD-->", process.env.POSTGRES_PASSWORD);
+console.log("DATABASE-->", process.env.POSTGRES_DB);
+
+
 const config = {
   type: 'postgres',
   host: process.env.POSTGRES_HOST,
