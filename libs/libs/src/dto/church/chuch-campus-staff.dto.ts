@@ -13,6 +13,11 @@ export class ChurchCampusStaffDto {
     role: ChurchRole;
     church_campus_id: string;
 
+    // @IsDefined({ message: 'Member details are required' })
+    // @ValidateNested()
+    // @Type(() => MemberCreationDto)
+    // member: MemberDtp;
+
 
     @IsDefined({ message: 'ChurchCampusDto details are required' })
     @ValidateNested()

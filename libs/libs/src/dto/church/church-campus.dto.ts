@@ -20,6 +20,7 @@ export class ChurchCampusDto {
     @IsEnum(ChurchCampusType)
     church_campus_type: ChurchCampusType;
 
+
     /**
      * Reference identifier for the church campus
      */

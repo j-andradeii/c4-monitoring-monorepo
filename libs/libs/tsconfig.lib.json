@@ -4,7 +4,12 @@
     "declaration": true,
     "outDir": "../../dist/libs/libs",
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "module": "commonjs",
+    "target": "es6",
+    "esModuleInterop": true,
+    "types": ["node", "jest"],         // Make sure your types include node and jest/mocha if you're using them
+    "skipLibCheck": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist", "test", "**/*spec.ts"]
