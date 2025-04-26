@@ -27,9 +27,6 @@ export class ChurchCampusDto {
     @IsString()
     reference_id: string;
 
-    @IsString()
-    ref_4: string;
-
     /**
      * Optional tag line for the church campus
      */
