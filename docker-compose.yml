@@ -50,7 +50,7 @@ services:
     container_name: auth-service
     volumes:
       - ./apps/auth:/usr/src/app/apps/auth  # Only mount the auth service code if you are focusing on it
-      - ./libs/common:/usr/src/app/libs/common
+      - ./libs/libs:/usr/src/app/libs/libs
       - /usr/src/app/node_modules  # Prevents mounting node_modules, so Docker can use its own node_modules
     ports:
       - "3001:3001"
@@ -74,7 +74,7 @@ services:
     container_name: church-service
     volumes:
       - ./apps/church:/usr/src/app/apps/church  # Mount the church service code
-      - ./libs/common:/usr/src/app/libs/common
+      - ./libs/libs:/usr/src/app/libs/libs
       - /usr/src/app/node_modules  # Prevents mounting node_modules, so Docker can use its own node_modules
     ports:
       - "3002:3002"
@@ -103,7 +103,7 @@ services:
     container_name: members-service
     volumes:
       - ./apps/members:/usr/src/app/apps/members  # Mount the church service code
-      - ./libs/common:/usr/src/app/libs/common
+      - ./libs/libs:/usr/src/app/libs/libs
       - /usr/src/app/node_modules  # Prevents mounting node_modules, so Docker can use its own node_modules
     ports:
       - "3003:3003"
@@ -133,7 +133,7 @@ services:
     container_name: api-gateway
     volumes:
       - ./apps/api-gateway:/usr/src/app/apps/api-gateway  # Only mount the auth service code if you are focusing on it
-      - ./libs/common:/usr/src/app/libs/common
+      - ./libs/libs:/usr/src/app/libs/libs
       - /usr/src/app/node_modules  # Prevents mounting node_modules, so Docker can use its own node_modules
     ports:
       - "3000:3000"

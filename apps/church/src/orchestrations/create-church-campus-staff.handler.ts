@@ -5,9 +5,10 @@ import { DataSource, QueryRunner } from "typeorm";
 import { ChurchCampusStaff } from "../entities/church-campus-staff.entity";
 import { ChurchCampussesRepository } from "../repositories/church-campus.repositories";
 import { BadRequestException } from "@nestjs/common";
+import { ChurchCampusStaffDto } from "@app/libs/dto/church/chuch-campus-staff.dto";
 
 @CommandHandler(CreateChurchCampusStaffCommand)
-export class CreateChurchCampusStaffHandler extends AbstractOrchestrator<CreateChurchCampusStaffCommandDto, any> implements ICommandHandler<CreateChurchCampusStaffCommand> {
+export class CreateChurchCampusStaffHandler extends AbstractOrchestrator<CreateChurchCampusStaffCommandDto, ChurchCampusStaffDto> implements ICommandHandler<CreateChurchCampusStaffCommand> {
     
     constructor(
         protected readonly dataSource: DataSource,
@@ -36,7 +37,7 @@ export class CreateChurchCampusStaffHandler extends AbstractOrchestrator<CreateC
                 churchCampusStaff.church_campus = churchCampus;
                 churchCampusStaff.is_hierarchy_root = request.churchCampusStaffCreationDto.is_hierarchy_root;
                 churchCampusStaff.role = request.churchCampusStaffCreationDto.role;
-                churchCampusStaff.member_id = request.member_id;
+                // churchCampusStaff.member_id = request.member_id;
 
                 const savedChurchCampusStaff = await queryRunner.manager.save(ChurchCampusStaff, churchCampusStaff);
                 await queryRunner.commitTransaction();
