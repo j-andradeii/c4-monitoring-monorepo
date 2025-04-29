@@ -45,7 +45,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./apps/c4-monitoring-monorepo/test/jest-e2e.json",
-     "generate:dto-index": "barrelsby -d libs/libs/src/dto -e index\\.ts -D -l top"
+    "generate:dto-index": "barrelsby -d libs/libs/src/dto -e index\\.ts -D -l top"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
