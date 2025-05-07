@@ -56,7 +56,6 @@
     "@nestjs/microservices": "^10.4.3",
     "@nestjs/passport": "^11.0.5",
     "@nestjs/platform-express": "^10.0.0",
-    "@nestjs/throttler": "^6.4.0",
     "@nestjs/typeorm": "^10.0.2",
     "amqp-connection-manager": "^4.1.14",
     "amqplib": "^0.10.4",
@@ -124,6 +123,11 @@
     ],
     "moduleNameMapper": {
       "^@app/libs(|/.*)$": "<rootDir>/libs/libs/src/$1"
+    }
+  },
+  "overrides": {
+    "@nestjs/throttler": {
+      "@nestjs/core": "^10.0.0"
     }
   }
 }
