@@ -27,6 +27,7 @@ export class GetMemberByAUthIdHandler extends AbstractOrchestrator<string, any> 
         const churchCampusMember = await this.churchCampusMemberRepository.findChurchCampusMemberById(member.id);
         return {
             member_id: member.id,
+            church_id: member.church_id,
             church_campus_id: churchCampusMember.church_campus_id
         }
 
