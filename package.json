@@ -20,19 +20,30 @@
     "migration:generate:church": "npm run build:church && npm run typeorm:church -- migration:generate apps/church/src/db/migrations/ChurchMigrationName",
     "migration:run:church": "npm run build:church && npm run typeorm:church migration:run",
     "migration:prod:run:church": "npm run build:church && npm run typeorm:prod:church migration:run",
+  
+  
     "typeorm:members": "typeorm-ts-node-commonjs -d apps/members/src/orm-config.ts",
     "typeorm:prod:members": "cross-env NODE_ENV=production typeorm -d dist/apps/members/apps/members/src/orm-config.js",
     "migration:create:members": "npm run build:members && npm run typeorm:members -- migration:create apps/members/src/db/migrations/MembersMigrationName",
     "migration:generate:members": "npm run build:members && npm run typeorm:members -- migration:generate apps/members/src/db/migrations/MembersMigrationName",
     "migration:run:members": "npm run build:members && npm run typeorm:members migration:run",
     "migration:prod:run:members": "npm run build:members && npm run typeorm:prod:members migration:run",
+   
+    "typeorm:auth": "typeorm-ts-node-commonjs -d apps/auth/src/orm-config.ts",
+    "typeorm:prod:auth": "cross-env NODE_ENV=production typeorm -d dist/apps/auth/apps/auth/src/orm-config.js",
+    "migration:create:auth": "npm run build:auth && npm run typeorm:auth -- migration:create apps/auth/src/db/migrations/AuthMigrationName",
+    "migration:generate:auth": "npm run build:auth && npm run typeorm:auth -- migration:generate apps/auth/src/db/migrations/AuthMigrationName",
+    "migration:run:auth": "npm run build:auth && npm run typeorm:auth migration:run",
+    "migration:prod:run:auth": "npm run build:auth && npm run typeorm:prod:auth migration:run",
+   
     "start:auth": "nodemon --watch 'apps/auth/src/**' --exec 'ts-node -r tsconfig-paths/register' apps/auth/src/main.ts",
     "start:church": "nodemon --watch 'apps/church/src/**' --exec 'ts-node -r tsconfig-paths/register' apps/church/src/main.ts",
     "start:members": "nodemon --watch 'apps/members/src/**' --exec 'ts-node -r tsconfig-paths/register' apps/members/src/main.ts",
     "start:gateway": "nodemon --watch 'apps/api-gateway/src/**' --exec 'ts-node -r tsconfig-paths/register' apps/api-gateway/src/main.ts",
     "railway:deploy:members": "npm run migration:prod:run:members && npm run start:prod:members",
     "railway:deploy:church": "npm run migration:prod:run:church && npm run start:prod:church",
-    "railway:deploy:auth": "npm run start:prod:auth",
+    "railway:deploy:auth": "npm run migration:prod:run:auth && npm run start:prod:auth",
+    
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod:gateway": "node dist/apps/api-gateway/main.js",
@@ -56,7 +67,6 @@
     "@nestjs/microservices": "^10.4.3",
     "@nestjs/passport": "^11.0.5",
     "@nestjs/platform-express": "^10.0.0",
-    "@nestjs/throttler": "^6.4.0",
     "@nestjs/typeorm": "^10.0.2",
     "amqp-connection-manager": "^4.1.14",
     "amqplib": "^0.10.4",
@@ -124,6 +134,11 @@
     ],
     "moduleNameMapper": {
       "^@app/libs(|/.*)$": "<rootDir>/libs/libs/src/$1"
+    }
+  },
+  "overrides": {
+    "@nestjs/throttler": {
+      "@nestjs/core": "^10.0.0"
     }
   }
 }

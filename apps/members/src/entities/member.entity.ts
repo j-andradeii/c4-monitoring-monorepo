@@ -16,6 +16,9 @@ export class Member {
     @Column({ type: 'uuid', name: 'church_id', nullable: false })
     church_id: string;
 
+    @Index()  // Create an index on church_id
+    @Column({ type: 'uuid', name: 'auth_id', nullable: true })
+    auth_id: string;
 
     @Index()  // Create an index on church_id
     @Column({ type: 'uuid', name: 'church_campus_id', nullable: true })
