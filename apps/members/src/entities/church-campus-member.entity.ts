@@ -19,7 +19,6 @@ export class ChurchCampusMember {
 
 
     @Column({ type: 'enum', enum: GenericStatusEnum, default: GenericStatusEnum.ACTIVE })
-    role: GenericStatusEnum;
-    
+    status: GenericStatusEnum;
 
 }

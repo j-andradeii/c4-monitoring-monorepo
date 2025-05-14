@@ -3,5 +3,6 @@ export enum ChurchRole {
     MEMFBER = 'MEMBER',
     PASTOR = 'PASTOR',
     SENIOR_PASTOR = 'SENIOR_PASTOR',
-    PRIMARY = 'PRIMARY'
+    PRIMARY = 'PRIMARY',
+    ADMIN_STAFF = 'ADMIN_STAFF'
 }
