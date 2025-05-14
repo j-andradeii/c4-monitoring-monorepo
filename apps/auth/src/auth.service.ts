@@ -20,6 +20,11 @@ export class AuthService {
     // Retrieve user from DB
     const user = { id: 1, email: 'test@example.com', password: await bcrypt.hash('password', salt) };
 
+
+    console.log(user);
+
+    console.log(pass);
+
     // Compare password
     if (user && (await bcrypt.compare(pass, user.password))) {
       return { id: user.id, email: user.email };
