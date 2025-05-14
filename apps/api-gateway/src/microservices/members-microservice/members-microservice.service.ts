@@ -12,11 +12,22 @@ export class MembersMicroserviceService {
     constructor( @Inject('MEMBERS_SERVICE') private readonly membersClient: ClientProxy   ) {}
  
     async authenticateUser() {
-        console.log("membersClient", this.membersClient);
         return await this.membersClient.send(
             { cmd: 'members_authenticate' },  // This command must match the @MessagePattern in the Auth Microservice
             { username: 'test', password: 'testa' }  // This is the payload sent to the microservice
         );
+    }
+
+    async getMemberByAuthId(auth_id: string) {
+        try{
+            const memberResponse = await this.membersClient.send(
+                { cmd: MEMBER_COMMAND.GET_MEMBER_BY_AUTH_ID },  // This command must match the @MessagePattern in the Auth Microservice
+                {auth_id}  // This is the payload sent to the microservice
+            );
+            return await lastValueFrom(memberResponse);
+        } catch(error) {
+            throw error;
+        }
     }
 
     async getManyMembersByIds(member_ids: string[]) {

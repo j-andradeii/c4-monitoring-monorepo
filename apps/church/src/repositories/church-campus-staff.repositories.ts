@@ -31,4 +31,10 @@ export class ChurchCampusStaffRepository {
             total
         };
     }
+
+    findByMemberId(member_id: string):Promise<ChurchCampusStaff> {
+        return this.churchCampusStaffsRepository.findOne({
+            where: {member_id: member_id}
+        })
+    }
 }

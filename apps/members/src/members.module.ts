@@ -20,6 +20,8 @@ import { ConsolidateMember } from './entities/consolidate-member.entity';
 import { ContactInfo } from './entities/contact-info.entity';
 import { MemberDevotional } from './entities/member-devotional.entity';
 import { SocialInfo } from './entities/social-infos.entity';
+import { GetMemberByAUthIdHandler } from './orchestrations/get-member-by-auth-id.handler';
+import { ChurchCampusMemberRepository } from './repositories/church-campus-member.repositories';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -52,9 +54,11 @@ import { SocialInfo } from './entities/social-infos.entity';
   providers: [
     MembersService,
     MemberRepository,
+    ChurchCampusMemberRepository,
     CreateChurchCampusMemberClosureHandler,
     CreateMemberHandler,
     GetMembersByIdsHandler,
+    GetMemberByAUthIdHandler,
     FallbackCreateMemberHandler,
     ChurchCampusClosureService,
     DiscipleshipService

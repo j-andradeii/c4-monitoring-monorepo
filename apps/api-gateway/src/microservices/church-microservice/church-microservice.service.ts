@@ -81,4 +81,14 @@ export class ChurchMicroserviceService {
         );
         return await lastValueFrom(staffResponse);
     }
+
+    async getChurchStaffByMemberId(member_id: string) {
+        const staffResponse = await this.churchClient.send(
+            { cmd: CHURCH_COMMAND.GET_CHURCH_CAMPUS_STAFF_BY_MEMBER_ID},  // This command must match the @MessagePattern in the Auth Microservice
+            { member_id }  // This is the payload sent to the microservice
+        );
+        return await lastValueFrom(staffResponse);
+    }
+
+
 }

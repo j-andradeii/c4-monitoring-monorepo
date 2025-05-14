@@ -1,12 +1,15 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs'; 
+import { AuthRepository } from './repositories/auth.repositories';
 
 
 @Injectable()
 export class AuthService {
 
-  constructor(private readonly jwtService: JwtService) {}
+  constructor(private readonly jwtService: JwtService,
+              private authRepository: AuthRepository
+  ) {}
 
 
   getHello(): string {
@@ -17,13 +20,9 @@ export class AuthService {
   private async validateUser(email: string, pass: string) {
 
     const salt = await bcrypt.genSalt(10);  
+
     // Retrieve user from DB
-    const user = { id: 1, email: 'test@example.com', password: await bcrypt.hash('password', salt) };
-
-
-    console.log(user);
-
-    console.log(pass);
+    const user = await this.authRepository.findUserByEmail(email);
 
     // Compare password
     if (user && (await bcrypt.compare(pass, user.password))) {

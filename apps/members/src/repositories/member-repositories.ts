@@ -14,4 +14,10 @@ export class MemberRepository{
             where: {id: In(member_ids)}
         })
     }
+
+    async findByAuthId(auth_id: string): Promise<Member> {
+        return this.memberRepository.findOne({
+            where: {auth_id: auth_id}
+        })
+    }
 }

@@ -25,6 +25,7 @@ import { ChurchCampusMember } from 'apps/members/src/entities/church-campus-memb
 import { ChurchCampusAddress } from './entities/church-campus-address.entity';
 import { ChurchClosure } from './entities/church-closure.entity';
 import { ChurchStaff } from './entities/church-statff.entity';
+import { GetChurchCampusStaffByMemberIdHandler } from './orchestrations/get-church-campus-staff-by-member-id.handler';
 
 @Module({
   imports: [
@@ -65,6 +66,7 @@ import { ChurchStaff } from './entities/church-statff.entity';
     CreateChurchHandler,
     CreateChurchCampusHandler,
     CreateChurchCampusStaffHandler,
+    GetChurchCampusStaffByMemberIdHandler,
     GetChurchesHandler,
     GetChurchCampusByIdHandler,
     GetChuchCampusStaffsHandler,

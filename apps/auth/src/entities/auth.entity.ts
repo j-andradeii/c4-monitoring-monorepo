@@ -17,6 +17,6 @@ export class Auth {
   @Column({ type: 'varchar', nullable: true, unique: true })
   username: string;
 
-  @Column({ type: 'varchar', length: 255, nullable: false, select: false }) // select: false prevents it from being returned by default in queries
+  @Column({ type: 'varchar', length: 255, nullable: false, select: true }) // select: false prevents it from being returned by default in queries
   password: string;
 }

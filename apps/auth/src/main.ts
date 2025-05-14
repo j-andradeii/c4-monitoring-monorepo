@@ -4,6 +4,7 @@ import { AuthModule } from './auth.module';
 
 import * as bcrypt from 'bcryptjs';
 import * as crypto from 'crypto';
+import { RpcExceptionFilter } from './filters/rpc-exception.filter';
 
 
 // Set a random fallback function for bcryptjs
@@ -30,7 +31,6 @@ async function bootstrap() {
   // Append frameMax directly to the URL as it seems socketOptions isn't working reliably here
   rabbitMqUrl = rabbitMqUrl.includes('?') ? `${rabbitMqUrl}&frameMax=8192` : `${rabbitMqUrl}?frameMax=8192`;
 
-  console.log("rabbitMqUrl", rabbitMqUrl);
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(AuthModule, {
     transport: Transport.RMQ,
     options: {
@@ -42,6 +42,7 @@ async function bootstrap() {
     },
   });
 
+  app.useGlobalFilters(new RpcExceptionFilter());
   await app.listen();
 }
 bootstrap();

@@ -8,6 +8,7 @@ import { MemberCreationDto } from '@app/libs/dto/member/member.creation.dto';
 import { CreateMemberCommand } from './cqrs/commands/create-member.command';
 import { FallbackCreateMemberCommand } from './cqrs/commands/fallback-create-member.command';
 import { GetMembersByIdsQuery } from './cqrs/queries/get-members-by-ids-query';
+import { GetMemberByAuthIdQuery } from './cqrs/queries/get-member-by-auth-id.query';
 @Controller()
 export class MembersController {
   constructor(private readonly membersService: MembersService,
@@ -22,6 +23,15 @@ export class MembersController {
     };
   }
 
+
+  @MessagePattern({cmd: MEMBER_COMMAND.GET_MEMBER_BY_AUTH_ID})
+  async getMemberByAuthId(data:any) {
+    try {
+      return await this.queryBus.execute(new GetMemberByAuthIdQuery(data.auth_id));
+    } catch(error) {
+      throw error;
+    }
+  }
 
   @MessagePattern({cmd: MEMBER_COMMAND.GET_MEMBERS_BY_IDS})
   async getMembersByIds(data:any) {

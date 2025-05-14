@@ -18,6 +18,7 @@ import { ApiCryptoService } from './service/api-crypto-service';
 import { TransformResponseInterceptor } from './interceptors/transform-response.interceptor';
 import { ChurchCampusController } from './controllers/church/church-campus.controller';
 import { ChurchService } from './service/church-service';
+import { AuthService } from './service/auth.service';
 
 @Module({
   imports: [
@@ -49,6 +50,7 @@ import { ChurchService } from './service/church-service';
     ApiCryptoService,
     TransformResponseInterceptor,
     ChurchService,
+    AuthService,
     // Apply ThrottlerGuard globally
     {
       provide: APP_GUARD,

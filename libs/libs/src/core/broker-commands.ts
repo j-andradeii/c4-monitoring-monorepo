@@ -13,6 +13,7 @@ export const CHURCH_COMMAND = {
     GET_CHURCH_CAMPUSES: 'get_church_campuses',
     GET_CHURCH_CAMPUS_BY_ID: 'get_church_campus_by_id',
     GET_CHURCH_CAMPUS_STAFFS: 'get_church_campus_staffs',
+    GET_CHURCH_CAMPUS_STAFF_BY_MEMBER_ID: 'get_church_campus_staff_by_member_id',
     HEALTH_CHECK: 'health_check',
     UPDATE_CHURCH_CAMPUS: 'update_church_campus',
     DELETE_CHURCH_CAMPUS: 'delete_church_campus',
@@ -26,6 +27,7 @@ export const MEMBER_COMMAND = {
     GET_MEMBER: 'get_member',
     GET_MEMBERS: 'get_members',
     GET_MEMBERS_BY_IDS: 'get_members_by_ids',
+    GET_MEMBER_BY_AUTH_ID: 'get_member_by_auth_id',
     FALLBACK_CREATE_MEMBER: 'fallback_create_member',
 }
 

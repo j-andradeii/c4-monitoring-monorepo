@@ -6,6 +6,7 @@ export * from "./church-campus-type.enum";
 export * from "./church-role.enum";
 export * from "./generic-status.enum";
 export * from "./pagination.dto";
+export * from "./auth/auth-creds.dto";
 export * from "./church/chuch-campus-staff.dto";
 export * from "./church/church-campus-address.creation.dto";
 export * from "./church/church-campus-creation";
