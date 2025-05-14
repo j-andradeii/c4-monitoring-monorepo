@@ -26,6 +26,7 @@ export const MEMBER_COMMAND = {
     GET_MEMBER: 'get_member',
     GET_MEMBERS: 'get_members',
     GET_MEMBERS_BY_IDS: 'get_members_by_ids',
+    GET_MEMBER_BY_AUTH_ID: 'get_member_by_auth_id',
     FALLBACK_CREATE_MEMBER: 'fallback_create_member',
 }
 

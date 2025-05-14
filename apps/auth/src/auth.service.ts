@@ -21,11 +21,9 @@ export class AuthService {
 
     const salt = await bcrypt.genSalt(10);  
 
-    console.log(email)
     // Retrieve user from DB
     const user = await this.authRepository.findUserByEmail(email);
 
-    console.log(user);
     // Compare password
     if (user && (await bcrypt.compare(pass, user.password))) {
       return { id: user.id, email: user.email };
@@ -46,8 +44,6 @@ export class AuthService {
     if (!user) {
       throw new UnauthorizedException('Invalid credentials');
     }
-
-    console.log("login", user);
 
     // Generate tokens
     const accessToken = this.jwtService.sign({ sub: user.id, email: user.email });
