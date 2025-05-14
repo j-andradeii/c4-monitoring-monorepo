@@ -16,12 +16,10 @@ export class AuthService {
 
     async getSelfInformation(auth_id: string): Promise<SelfInformationDto> {
         const churchCampusMember = await this.membersMicroserviceService.getMemberByAuthId(auth_id);
-        const churchCampusStaff = await this.churchMicroserviceService.getChurchStaffByMemberId(churchCampusMember.member_id);
-        return {
-            member_id: churchCampusMember.member_id,
-            church_id: churchCampusMember.church_id,
-            church_campus_id: churchCampusMember.church_campus_id,
-            church_campus_roles: [churchCampusStaff.role]
+        const churchCampusStaff = await this.churchMicroserviceService.getChurchStaffByMemberId(churchCampusMember.member.id);
+        return  {
+            member: churchCampusMember.member,
+            church_campus_staff: churchCampusStaff
         };
     }
 

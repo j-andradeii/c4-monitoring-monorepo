@@ -1,3 +1,7 @@
+import { Member } from "apps/members/src/entities/member.entity";
+import { ChurchCampusStaffDto } from "../church/chuch-campus-staff.dto";
+import { MemberDto } from "../member/member.dto";
+
 export interface AuthCredsDto {
     email: string;
     password: string;
@@ -10,8 +14,6 @@ export interface AuthDto {
 }
 
 export interface SelfInformationDto {
-    member_id: string;
-    church_id: string;
-    church_campus_id: string;
-    church_campus_roles: Array<string>;
+    member: MemberDto;
+    church_campus_staff: ChurchCampusStaffDto;
 }
