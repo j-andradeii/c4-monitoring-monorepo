@@ -19,6 +19,7 @@ import { TransformResponseInterceptor } from './interceptors/transform-response.
 import { ChurchCampusController } from './controllers/church/church-campus.controller';
 import { ChurchService } from './service/church-service';
 import { AuthService } from './service/auth.service';
+import { SelfController } from './controllers/auth/self-controller';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { AuthService } from './service/auth.service';
   controllers: [
     ApiGatewayController,
     AuthController,
+    SelfController,
     ChurchController,
     ChurchCampusController,
     MembersController
