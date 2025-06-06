@@ -4,6 +4,7 @@ import { ContactInfo } from './contact-info.entity';
 import { SocialInfo } from './social-infos.entity';
 import { ConsolidateMember } from './consolidate-member.entity';
 import { MemberDevotional } from './member-devotional.entity';
+import { MemberAddress } from './member-address.entity';
 
 @Entity()
 @Index(['id'], { unique: true })  // Unique composite index on id and user_id
@@ -42,6 +43,9 @@ export class Member {
 
     @OneToMany(() => ChurchCampusMember, churchCampusMember => churchCampusMember.member)
     church_campus_members: ChurchCampusMember[];
+
+    @OneToMany(() => MemberAddress, memberAddress=> memberAddress.member)
+    member_addresses: MemberAddress[];
 
     @OneToMany(() => ContactInfo, contactInfo => contactInfo.member)
     contact_infos: ContactInfo[];  
