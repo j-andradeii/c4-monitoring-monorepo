@@ -6,6 +6,7 @@ import {
     IsOptional,
     IsEmail,
     IsDate,
+    IsBase64,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 
@@ -34,8 +35,15 @@ export class MemberCreationDto {
     @IsOptional()
     email?: string; // Optional based on nullable: true
 
+    @IsBase64()
+    @IsOptional()
+    photo?: string; // Optional based on nullable: true
+
+
     @IsDate({ message: 'Birthdate must be a valid date' })
     @Type(() => Date) // Ensure input is transformed to a Date object for validation
     @IsOptional()
     birthdate?: Date; // Optional based on nullable: true
+
+
 }

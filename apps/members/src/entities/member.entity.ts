@@ -5,6 +5,7 @@ import { SocialInfo } from './social-infos.entity';
 import { ConsolidateMember } from './consolidate-member.entity';
 import { MemberDevotional } from './member-devotional.entity';
 import { MemberAddress } from './member-address.entity';
+import { GenderEnum } from '../model/gender-enum';
 
 @Entity()
 @Index(['id'], { unique: true })  // Unique composite index on id and user_id
@@ -25,6 +26,9 @@ export class Member {
     @Column({ type: 'uuid', name: 'church_campus_id', nullable: true })
     church_campus_id: string;
 
+    @Column({ type: 'varchar', length: 255, nullable: true })
+    photo_url: string;
+
     @Column({ type: 'varchar', length: 255, nullable: false })
     first_name: string;
 
@@ -36,6 +40,9 @@ export class Member {
 
     @Column({ type: 'timestamptz', nullable: true })
     birthdate: Date;
+
+    @Column({ type: 'enum', enum: GenderEnum, nullable: true })
+    gender: GenderEnum;
 
     @Index()  // Create an index on invited_by
     @Column({ type: 'uuid', name: 'invited_by', nullable: true })
