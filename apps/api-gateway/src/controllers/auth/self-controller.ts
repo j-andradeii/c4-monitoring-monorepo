@@ -24,6 +24,7 @@ export class SelfController {
     @UseInterceptors(TransformResponseInterceptor<any>)
     @UsePipes(ValidationPipe) // Use the pipe on this method
     async getSelfInformation(@AuthUser() loggedInUser: any): Promise<SelfInformationDto> {
+      // @AuthUser() loggedInUser: any used to get the logged in user context
       return await this.authService.getSelfInformation(loggedInUser.userId);
     }
 
