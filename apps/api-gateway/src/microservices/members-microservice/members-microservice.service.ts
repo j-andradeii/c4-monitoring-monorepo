@@ -30,6 +30,18 @@ export class MembersMicroserviceService {
         }
     }
 
+    async getMembers(queryParams: any) {
+        try{
+            const memberResponse = await this.membersClient.send(
+                { cmd: MEMBER_COMMAND.GET_MEMBERS },  // This command must match the @MessagePattern in the Auth Microservice
+                queryParams  // This is the payload sent to the microservice
+            );
+            return await lastValueFrom(memberResponse);
+        } catch(error) {
+            throw error;
+        }
+    }
+
     async getManyMembersByIds(member_ids: string[]) {
         try{
             const memberResponse = await this.membersClient.send(

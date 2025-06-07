@@ -9,6 +9,7 @@ import { CreateMemberCommand } from './cqrs/commands/create-member.command';
 import { FallbackCreateMemberCommand } from './cqrs/commands/fallback-create-member.command';
 import { GetMembersByIdsQuery } from './cqrs/queries/get-members-by-ids-query';
 import { GetMemberByAuthIdQuery } from './cqrs/queries/get-member-by-auth-id.query';
+import { GetMembersQuery } from './cqrs/queries/get-members-query';
 @Controller()
 export class MembersController {
   constructor(private readonly membersService: MembersService,
@@ -32,6 +33,17 @@ export class MembersController {
       throw error;
     }
   }
+
+
+  @MessagePattern({cmd: MEMBER_COMMAND.GET_MEMBERS})
+  async getMembers(data:any) {
+    try {
+      return await this.queryBus.execute(new GetMembersQuery(data));
+    } catch(error) {
+      throw error;
+    }
+  }
+
 
   @MessagePattern({cmd: MEMBER_COMMAND.GET_MEMBERS_BY_IDS})
   async getMembersByIds(data:any) {
