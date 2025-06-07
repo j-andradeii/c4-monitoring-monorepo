@@ -20,6 +20,7 @@ import { ChurchCampusController } from './controllers/church/church-campus.contr
 import { ChurchService } from './service/church-service';
 import { AuthService } from './service/auth.service';
 import { SelfController } from './controllers/auth/self-controller';
+import { MembersService } from './service/member.service';
 
 @Module({
   imports: [
@@ -53,6 +54,7 @@ import { SelfController } from './controllers/auth/self-controller';
     TransformResponseInterceptor,
     ChurchService,
     AuthService,
+    MembersService,
     // Apply ThrottlerGuard globally
     {
       provide: APP_GUARD,

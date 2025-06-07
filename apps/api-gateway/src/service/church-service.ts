@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { ChurchMicroserviceService } from "../microservices/church-microservice/church-microservice.service";
 import { MembersMicroserviceService } from "../microservices/members-microservice/members-microservice.service";
-import { ChurchCampusCreationDto } from "@app/libs";
+import { ChurchCampusCreationDto, MemberCreationDto } from "@app/libs";
 import { ChurchCampusStaffCreationDto } from "@app/libs/dto/church/church-campus-staff-creation.dto";
 import { Member } from "apps/members/src/entities/member.entity";
 import { ChurchCampusStaff } from "apps/church/src/entities/church-campus-staff.entity";
@@ -74,8 +74,14 @@ export class ChurchService {
         let churchCampusStaff = null;
         try {
             const churchCampus =  await this.churchMicroserviceService.getChurchCampusById(campus_id);
+
+            const memberCreationDto: MemberCreationDto = {
+                ...churchCampusStaffCreationDto.member,
+                church_campus_id: churchCampus.id,
+                church_id: churchCampus.church.id
+            }
             
-            member = await this.membersMicroserviceService.createMember(churchCampus, churchCampusStaffCreationDto.member);
+            member = await this.membersMicroserviceService.createMember(memberCreationDto);
             const member_id = member.id;
             churchCampusStaff = await this.churchMicroserviceService.createChurchCampusStaff(campus_id, member_id, churchCampusStaffCreationDto);
             return {

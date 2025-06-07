@@ -17,10 +17,10 @@ export class MemberAddress {
     @Column({ type: 'varchar', length: 255, nullable: false })
     city: string;
 
-    @Column({ type: 'varchar', length: 255, nullable: false })
+    @Column({ type: 'varchar', length: 255, nullable: true })
     state: string;
 
-    @Column({ type: 'varchar', length: 255, nullable: false })
+    @Column({ type: 'varchar', length: 255, nullable: true })
     zip_code: string;
 
 }

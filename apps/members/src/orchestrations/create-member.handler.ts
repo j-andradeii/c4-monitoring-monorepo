@@ -4,6 +4,14 @@ import { AbstractOrchestrator } from "./abstract-orchestrator";
 import { DataSource, QueryRunner } from "typeorm";
 import { Member } from "../entities/member.entity";
 import { MemberCreationDto } from "@app/libs/dto/member/member.creation.dto";
+import { BadRequestException } from "@nestjs/common";
+import { AffliationEnum } from "../model/affliation-enum";
+import { CivilStatus } from "../model/civil-status.enum";
+import { MemberAddress } from "../entities/member-address.entity";
+import { ContactInfo } from "../entities/contact-info.entity";
+import { ContactInfoType } from "../enums/contact-info.enum";
+import { SocialInfo } from "../entities/social-infos.entity";
+import { SocialMediaType } from "../enums/social-media.enum";
 
 @CommandHandler(CreateMemberCommand)
 export class CreateMemberHandler extends AbstractOrchestrator<MemberCreationDto, any> implements ICommandHandler<CreateMemberCommand> {
@@ -37,9 +45,39 @@ export class CreateMemberHandler extends AbstractOrchestrator<MemberCreationDto,
             member.birthdate = request.birthdate;
             member.church_campus_id = request.church_campus_id;
             member.church_id = request.church_id;
+            member.gender = request.gender;
+            member.affliation = AffliationEnum[request.affliation] || null;
+            member.civil_status = CivilStatus[request.civil_status] || null;
 
+
+            member.member_addresses = [];
+            for(const addressRequestDto of request.member_addresses) {
+                const memberAddress = new MemberAddress();
+                memberAddress.city = addressRequestDto.city;
+                memberAddress.street = addressRequestDto.street;
+                member.member_addresses.push(memberAddress);
+            }
+
+            member.contact_infos = [];
+            for(const contactDto of request.member_contacts) {
+                const contactInfo = new ContactInfo();
+                contactInfo.number = contactDto.number;
+                contactInfo.contactInfoType = ContactInfoType[contactDto.contactInfoType];
+                member.contact_infos.push(contactInfo);
+            }
+
+            member.social_infos = [];
+            for(const socialDto of request.member_socials) {
+                const socialInfo = new SocialInfo();
+                socialInfo.name = socialDto.name;
+                socialInfo.social_media_type = SocialMediaType[socialDto.social_media_type];
+                socialInfo.username = socialDto.username;
+                socialInfo.email = socialDto.email;
+                member.social_infos.push(socialInfo)
+            }
             const savedMember = await queryRunner.manager.save(Member, member);
 
+        
             await queryRunner.commitTransaction();
             return savedMember;
         } catch (error) {
@@ -50,7 +88,6 @@ export class CreateMemberHandler extends AbstractOrchestrator<MemberCreationDto,
             // Release the query runner to free up resources
             await queryRunner.release();
         }
-
     }
 
     protected postProcess(data: any): Promise<any> {
