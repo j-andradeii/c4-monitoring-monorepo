@@ -24,6 +24,7 @@ export const CHURCH_COMMAND = {
 
 export const MEMBER_COMMAND = {
     CREATE_MEMBER: 'create_member',
+    CREATE_CELL_MEMBER: 'create_cell_member',
     GET_MEMBER: 'get_member',
     GET_MEMBERS: 'get_members',
     GET_MEMBERS_BY_IDS: 'get_members_by_ids',

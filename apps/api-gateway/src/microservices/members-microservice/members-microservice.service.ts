@@ -79,6 +79,18 @@ export class MembersMicroserviceService {
         }
     }
 
+    async createCellMember( memberCreationDto: MemberCreationDto): Promise<MemberDto> {
+        try{
+            const memberResponse = await this.membersClient.send(
+                { cmd: MEMBER_COMMAND.CREATE_CELL_MEMBER },  // This command must match the @MessagePattern in the Auth Microservice
+                memberCreationDto // This is the payload sent to the microservice
+            );
+            return await lastValueFrom(memberResponse);
+        } catch(error) {
+            throw error;
+        }
+    }
+
    
 
     async fallbackCreateMember(member_id: string) {

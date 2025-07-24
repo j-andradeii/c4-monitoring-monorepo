@@ -10,6 +10,7 @@ import { FallbackCreateMemberCommand } from './cqrs/commands/fallback-create-mem
 import { GetMembersByIdsQuery } from './cqrs/queries/get-members-by-ids-query';
 import { GetMemberByAuthIdQuery } from './cqrs/queries/get-member-by-auth-id.query';
 import { GetMembersQuery } from './cqrs/queries/get-members-query';
+import { CreateCellMemberCommand } from './cqrs/commands/create-cell-member.command';
 @Controller()
 export class MembersController {
   constructor(private readonly membersService: MembersService,
@@ -64,6 +65,16 @@ export class MembersController {
   async createMember(data: MemberCreationDto) {
     try {
       return await this.commandBus.execute(new CreateMemberCommand(data));
+    } catch(error) {
+      throw error;
+    }
+  }
+
+
+    @MessagePattern({cmd: MEMBER_COMMAND.CREATE_CELL_MEMBER})
+  async createCellMember(data: MemberCreationDto) {
+    try {
+      return await this.commandBus.execute(new CreateCellMemberCommand(data));
     } catch(error) {
       throw error;
     }

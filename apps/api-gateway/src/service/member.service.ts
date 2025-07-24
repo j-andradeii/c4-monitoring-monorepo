@@ -21,6 +21,16 @@ export class MembersService {
         }
     }
 
+
+    async createCellMember(memberCreationDto: MemberCreationDto): Promise<any> {
+        try {
+           const member = await this.membersMicroserviceService.createCellMember(memberCreationDto);
+           return member;
+        } catch(error) {
+            throw error;
+        }
+    }
+
     async getMembers(queryParams: any): Promise<any> {
         try {
            const member = await this.membersMicroserviceService.getMembers(queryParams);

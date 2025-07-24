@@ -23,6 +23,7 @@ import { SocialInfo } from './entities/social-infos.entity';
 import { GetMemberByAUthIdHandler } from './orchestrations/get-member-by-auth-id.handler';
 import { ChurchCampusMemberRepository } from './repositories/church-campus-member.repositories';
 import { GetMembersHandler } from './orchestrations/get-members.handler';
+import { CreateCellMemberHandler } from './orchestrations/create-cecll-member.handler';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -58,6 +59,7 @@ import { GetMembersHandler } from './orchestrations/get-members.handler';
     ChurchCampusMemberRepository,
     CreateChurchCampusMemberClosureHandler,
     CreateMemberHandler,
+    CreateCellMemberHandler,
     GetMembersByIdsHandler,
     GetMemberByAUthIdHandler,
     FallbackCreateMemberHandler,

@@ -21,6 +21,7 @@ import { ChurchService } from './service/church-service';
 import { AuthService } from './service/auth.service';
 import { SelfController } from './controllers/auth/self-controller';
 import { MembersService } from './service/member.service';
+import { CellMembersController } from './controllers/members/cell-member-controller';
 
 @Module({
   imports: [
@@ -45,7 +46,8 @@ import { MembersService } from './service/member.service';
     SelfController,
     ChurchController,
     ChurchCampusController,
-    MembersController
+    MembersController,
+    CellMembersController
   ],
   providers: [
     ApiGatewayService,
