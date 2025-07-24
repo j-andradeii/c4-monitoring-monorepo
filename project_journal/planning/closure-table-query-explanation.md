@@ -27,6 +27,12 @@ ancestor_id | descendant_id | depth
 3           | 4             | 1  <-- p matches here
 4           | 4             | 0  <-- p matches here
 ```
+*   INSTERTING: Node 5 as a direct child of Node 3
+
+1           | 5             | 3
+2           | 5             | 2
+3           | 5             | 1
+5           | 5             | 0
 
 *   The condition `p.descendant_id = 4` finds the four rows highlighted above.
 *   The condition `c.ancestor_id = 5` tries to find rows where the `ancestor_id` is 5. **There are no such rows in your sample data.**
@@ -96,3 +102,18 @@ Let's ignore the previous `$1=4, $2=5` for a moment, as it yields no results. Im
     *   From p=(3, 3, 0), c=(5, 5, 0) -> `(3, 5, 0 + 0 + 1)` -> `(3, 5, 1)` <-- This represents the new direct link.
 
 *   **`INSERT` Action:** These three rows `(1, 5, 3)`, `(2, 5, 2)`, and `(3, 5, 1)` would be inserted into the closure table, correctly reflecting that 1 and 2 are now ancestors of 5, and 3 is the direct parent.
+
+```
+ancestor_id | descendant_id | depth
+------------|---------------|-------
+1           | 1             | 0
+1           | 2             | 1
+1           | 3             | 2
+1           | 4             | 3  
+2           | 2             | 0
+2           | 3             | 1
+2           | 4             | 2  
+3           | 3             | 0
+3           | 4             | 1  
+4           | 4             | 0  
+```

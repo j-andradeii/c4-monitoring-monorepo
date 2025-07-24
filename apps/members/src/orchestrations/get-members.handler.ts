@@ -21,14 +21,12 @@ export class GetMembersHandler extends AbstractOrchestrator<any, any> implements
         return request;
     }
     protected async doProcess(request: any): Promise<any> {
-        const paginationDto: PaginationDto = {
-            limit: 10,
-            page: 1,
-        }
-        const membersResponse = await this.memberRepository.findAll(paginationDto);
+        console.log('GetMembersQuery', request);
+ 
+        const membersResponse = await this.memberRepository.findAll(request);
 
 
-        console.log(membersResponse)
+        console.log(membersResponse);
         return membersResponse
     }
     protected async postProcess(data: any): Promise<any> {
