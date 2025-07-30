@@ -1,5 +1,5 @@
 
-import { MEMBER_COMMAND, MemberDto } from '@app/libs';
+import { ChurchCampusDto, MEMBER_COMMAND, MemberDto } from '@app/libs';
 import { ChurchCampusStaffCreationDto } from '@app/libs/dto/church/church-campus-staff-creation.dto';
 import { MemberCreationDto } from '@app/libs/dto/member/member.creation.dto';
 import { Inject, Injectable } from '@nestjs/common';
@@ -79,18 +79,18 @@ export class MembersMicroserviceService {
         }
     }
 
-    async createCellMember( memberCreationDto: MemberCreationDto): Promise<MemberDto> {
+    async createCellMember( memberCreationDto: MemberCreationDto, churchCampus: ChurchCampusDto): Promise<MemberDto> {
         try{
+            memberCreationDto.reference_id = churchCampus.reference_id;
             const memberResponse = await this.membersClient.send(
                 { cmd: MEMBER_COMMAND.CREATE_CELL_MEMBER },  // This command must match the @MessagePattern in the Auth Microservice
-                memberCreationDto // This is the payload sent to the microservice
+               memberCreationDto // This is the payload sent to the microservice
             );
             return await lastValueFrom(memberResponse);
         } catch(error) {
             throw error;
         }
     }
-
    
 
     async fallbackCreateMember(member_id: string) {

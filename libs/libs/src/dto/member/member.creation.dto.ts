@@ -29,6 +29,10 @@ export class MemberCreationDto {
     church_campus_id?: string; // Optional based on nullable: true
 
     @IsString()
+    @IsOptional()
+    reference_id?: string; // Optional based on nullable: true
+
+    @IsString()
     @IsNotEmpty({ message: 'First name is required' })
     @MaxLength(255, { message: 'First name must not exceed 255 characters' })
     first_name: string;

@@ -23,7 +23,7 @@ export class CellMembersController {
                        @Body() body: MemberCreationDto) {
         // const currentUser = await this.authService.getSelfInformation(loggedInUser.userId);
         try {
-            return await this.membersService.createMember(body);
+            return await this.membersService.createCellMember(body);
         } catch(error: any) {
             throw error
         }

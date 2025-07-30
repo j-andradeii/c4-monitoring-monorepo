@@ -24,7 +24,8 @@ export class MembersService {
 
     async createCellMember(memberCreationDto: MemberCreationDto): Promise<any> {
         try {
-           const member = await this.membersMicroserviceService.createCellMember(memberCreationDto);
+           const churchCampus = await this.churchMicroserviceService.getChurchCampusById(memberCreationDto.church_campus_id);
+           const member = await this.membersMicroserviceService.createCellMember(memberCreationDto, churchCampus);
            return member;
         } catch(error) {
             throw error;

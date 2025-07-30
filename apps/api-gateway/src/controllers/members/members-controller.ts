@@ -32,6 +32,8 @@ export class MembersController {
         }
     }
 
+
+
     @Get()
     @UseGuards(JwtAuthGuard)
     @UseInterceptors(TransformResponseInterceptor<any>)

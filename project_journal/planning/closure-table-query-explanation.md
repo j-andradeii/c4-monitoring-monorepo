@@ -28,7 +28,6 @@ ancestor_id | descendant_id | depth
 4           | 4             | 0  <-- p matches here
 ```
 *   INSTERTING: Node 5 as a direct child of Node 3
-
 1           | 5             | 3
 2           | 5             | 2
 3           | 5             | 1
