@@ -34,8 +34,8 @@ export class MembersService {
 
     async getMembers(queryParams: any): Promise<any> {
         try {
-           const member = await this.membersMicroserviceService.getMembers(queryParams);
-           return member;
+           const members = await this.membersMicroserviceService.getMembers(queryParams);
+           return members;
         } catch(error) {
             throw error;
         }
