@@ -22,11 +22,19 @@ export class MemberRepository{
         })
     }
 
+    async findById(id: string): Promise<Member> {
+        return this.memberRepository.findOne({
+            where: {id: id}
+        })
+    }
+
     async findAll(request: any): Promise<any> {
         const queryBuilder = this.memberRepository.createQueryBuilder('member')
             .leftJoinAndSelect('member.member_addresses', 'member_addresses')
             .leftJoinAndSelect('member.contact_infos', 'contact_infos')
             .leftJoinAndSelect('member.social_infos', 'social_infos')
+            .leftJoinAndSelect('member.consolidatee_members', 'consolidatee_members')   
+            .leftJoinAndSelect('consolidatee_members.consolidator', 'consolidator')
             .where("1=1")
 
             

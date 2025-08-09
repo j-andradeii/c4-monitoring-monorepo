@@ -68,6 +68,13 @@ export class MemberCreationDto {
     @IsOptional()
     birthdate?: Date; // Optional based on nullable: true
 
+    @IsString()
+    @IsOptional()
+    invited_by?: string; // Optional based on nullable: true
+
+    @IsString()
+    @IsOptional()
+    cell_leader?: string; // Optional based on nullable: true
 
     @IsOptional() // Allows the field to be absent or an empty array
     @IsArray({ message: 'Member addresses must be an array' }) // Still ensure 

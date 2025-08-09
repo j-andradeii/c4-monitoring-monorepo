@@ -12,12 +12,15 @@ import { SocialMediaType } from "../enums/social-media.enum";
 import { AffliationEnum } from "../model/affliation-enum";
 import { CivilStatus } from "../model/civil-status.enum";
 import { DiscipleshipService } from "../service/discipleship.service";
+import { ConsolidateMember } from "../entities/consolidate-member.entity";
+import { MemberRepository } from "../repositories/member-repositories";
 
 @CommandHandler(CreateCellMemberCommand)
 export class CreateCellMemberHandler extends AbstractOrchestrator<MemberCreationDto, any> implements ICommandHandler<CreateCellMemberCommand> {
 
     constructor(protected readonly dataSource: DataSource,
-                private discipleshipService: DiscipleshipService
+                private discipleshipService: DiscipleshipService,
+                private memberRepository: MemberRepository
     ) {
             super(dataSource);
     }
@@ -35,6 +38,7 @@ export class CreateCellMemberHandler extends AbstractOrchestrator<MemberCreation
     protected async doProcess(request: MemberCreationDto): Promise<any> {
         const queryRunner: QueryRunner = this.dataSource.createQueryRunner();
 
+
         // Start a transaction
         await queryRunner.connect(); // Establish a database connection
         await queryRunner.startTransaction();
@@ -51,8 +55,8 @@ export class CreateCellMemberHandler extends AbstractOrchestrator<MemberCreation
             member.gender = request.gender;
             member.affliation = AffliationEnum[request.affliation] || null;
             member.civil_status = CivilStatus[request.civil_status] || null;
-
-
+            member.invited_by = request?.invited_by;
+            
             member.member_addresses = [];
             for(const addressRequestDto of request.member_addresses) {
                 const memberAddress = new MemberAddress();
@@ -78,11 +82,20 @@ export class CreateCellMemberHandler extends AbstractOrchestrator<MemberCreation
                 socialInfo.email = socialDto.email;
                 member.social_infos.push(socialInfo)
             }
+
+
             const savedMember = await queryRunner.manager.save(Member, member);
 
+            if(request.cell_leader) {
+                const consolidator = await this.memberRepository.findById(request.cell_leader);
+                const consolidateMember = new ConsolidateMember();
+                consolidateMember.church_campus_id = request.church_campus_id;
+                consolidateMember.consolidatee = savedMember;
+                consolidateMember.consolidator = consolidator;
+                const savedConsolidateMember = await queryRunner.manager.save(ConsolidateMember, consolidateMember);
+            }
 
             await this.discipleshipService.addRootDisciple(queryRunner, savedMember.id, request.reference_id)
-            console.log(savedMember);
             await queryRunner.commitTransaction();
             return savedMember;
         } catch (error) {
