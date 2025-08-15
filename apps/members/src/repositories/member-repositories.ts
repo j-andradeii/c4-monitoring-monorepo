@@ -47,8 +47,7 @@ export class MemberRepository{
            queryBuilder.andWhere('member.gender = :gender', { gender: request.gender});
         }
 
-        // queryBuilder.andWhere('member.first_name = :name', {name: 'Joseph'});
-        
+
         if (paginationDto.page && paginationDto.limit) { // Or check if they are numbers
             queryBuilder
                 .skip((paginationDto.page - 1) * paginationDto.limit)
