@@ -6,7 +6,7 @@ async function bootstrap() {
   const app = await NestFactory.create(ApiGatewayModule);
 
   app.enableCors({
-    origin: ['http://localhost:4200', 'http://localhost:56435', 'https://gwc-monitoring-webapp.pages.dev', 'http://localhost:4202'],
+    origin: ['http://localhost:4200', 'http://localhost:56435', 'https://gwc-monitoring-webapp.pages.dev', 'http://localhost:4202', 'http://localhost:4000'],
     credentials: true,
   })
   app.setGlobalPrefix(API_PREFIX.API);  
