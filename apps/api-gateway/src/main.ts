@@ -12,7 +12,9 @@ async function bootstrap() {
       'https://gwc-monitoring-webapp.pages.dev', 
       'http://localhost:4202', 
       'http://localhost:4000',
-      'http://localhost:3004'
+      'http://localhost:3004',
+      'http://localhost:3005',
+      'https://gwc-monitoring-nextjs.vercel.app'
     ],
     credentials: true,
   })
