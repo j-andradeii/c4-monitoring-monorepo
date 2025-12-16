@@ -4,6 +4,7 @@
 
 export * from "./church-campus-type.enum";
 export * from "./church-role.enum";
+export * from "./gender-enum";
 export * from "./generic-status.enum";
 export * from "./pagination.dto";
 export * from "./auth/auth-creds.dto";

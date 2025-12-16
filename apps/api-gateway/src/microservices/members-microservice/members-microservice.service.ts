@@ -1,5 +1,5 @@
 
-import { MEMBER_COMMAND } from '@app/libs';
+import { ChurchCampusDto, MEMBER_COMMAND, MemberDto } from '@app/libs';
 import { ChurchCampusStaffCreationDto } from '@app/libs/dto/church/church-campus-staff-creation.dto';
 import { MemberCreationDto } from '@app/libs/dto/member/member.creation.dto';
 import { Inject, Injectable } from '@nestjs/common';
@@ -23,6 +23,18 @@ export class MembersMicroserviceService {
             const memberResponse = await this.membersClient.send(
                 { cmd: MEMBER_COMMAND.GET_MEMBER_BY_AUTH_ID },  // This command must match the @MessagePattern in the Auth Microservice
                 {auth_id}  // This is the payload sent to the microservice
+            );
+            return await lastValueFrom(memberResponse);
+        } catch(error) {
+            throw error;
+        }
+    }
+
+    async getMembers(queryParams: any) {
+        try{
+            const memberResponse = await this.membersClient.send(
+                { cmd: MEMBER_COMMAND.GET_MEMBERS },  // This command must match the @MessagePattern in the Auth Microservice
+                queryParams  // This is the payload sent to the microservice
             );
             return await lastValueFrom(memberResponse);
         } catch(error) {
@@ -55,13 +67,8 @@ export class MembersMicroserviceService {
     }   
 
 
-    async createMember(churchCampus:any, memberCreationDto: MemberCreationDto) {
+    async createMember( memberCreationDto: MemberCreationDto): Promise<MemberDto> {
         try{
-           memberCreationDto = {
-                ...memberCreationDto,
-                church_campus_id: churchCampus.id,
-                church_id: churchCampus.church.id
-            };
             const memberResponse = await this.membersClient.send(
                 { cmd: MEMBER_COMMAND.CREATE_MEMBER },  // This command must match the @MessagePattern in the Auth Microservice
                 memberCreationDto // This is the payload sent to the microservice
@@ -72,6 +79,18 @@ export class MembersMicroserviceService {
         }
     }
 
+    async createCellMember( memberCreationDto: MemberCreationDto, churchCampus: ChurchCampusDto): Promise<MemberDto> {
+        try{
+            memberCreationDto.reference_id = churchCampus.reference_id;
+            const memberResponse = await this.membersClient.send(
+                { cmd: MEMBER_COMMAND.CREATE_CELL_MEMBER },  // This command must match the @MessagePattern in the Auth Microservice
+               memberCreationDto // This is the payload sent to the microservice
+            );
+            return await lastValueFrom(memberResponse);
+        } catch(error) {
+            throw error;
+        }
+    }
    
 
     async fallbackCreateMember(member_id: string) {

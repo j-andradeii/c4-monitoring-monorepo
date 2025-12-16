@@ -22,6 +22,8 @@ import { MemberDevotional } from './entities/member-devotional.entity';
 import { SocialInfo } from './entities/social-infos.entity';
 import { GetMemberByAUthIdHandler } from './orchestrations/get-member-by-auth-id.handler';
 import { ChurchCampusMemberRepository } from './repositories/church-campus-member.repositories';
+import { GetMembersHandler } from './orchestrations/get-members.handler';
+import { CreateCellMemberHandler } from './orchestrations/create-cell-member.handler';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -57,9 +59,11 @@ import { ChurchCampusMemberRepository } from './repositories/church-campus-membe
     ChurchCampusMemberRepository,
     CreateChurchCampusMemberClosureHandler,
     CreateMemberHandler,
+    CreateCellMemberHandler,
     GetMembersByIdsHandler,
     GetMemberByAUthIdHandler,
     FallbackCreateMemberHandler,
+    GetMembersHandler,
     ChurchCampusClosureService,
     DiscipleshipService
   ],

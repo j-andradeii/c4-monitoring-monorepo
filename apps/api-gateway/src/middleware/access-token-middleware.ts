@@ -16,6 +16,9 @@ export class AccessTokenMiddleware implements NestMiddleware {
 
 
     const tokenTime = req.header('X-ACCESS');
+
+    console.log("token", token);
+    console.log("tokenTime", tokenTime);
     // const tokenTime = this.apiCryptoService.encrypt(String(new Date().getTime()))
 
     // console.log(this.apiCryptoService.encrypt(String(new Date().getTime())));
@@ -24,7 +27,9 @@ export class AccessTokenMiddleware implements NestMiddleware {
     const decryptedToken = this.apiCryptoService.decrypt(token);
     const decryptedTokenTime = this.apiCryptoService.decrypt(tokenTime);
 
-    console.log(decryptedTokenTime);
+
+    console.log("decryptedToken", decryptedToken);
+    console.log("decryptedTokenTime", decryptedTokenTime);
 
 
     // If the token is missing or invalid, you can stop the request here
@@ -35,8 +40,6 @@ export class AccessTokenMiddleware implements NestMiddleware {
     const currentTime = new Date().getTime();
     const isWithinInFiveMinutes = (currentTime - Number(decryptedTokenTime)) <= Number(process.env.X_ACCESS_TOKEN_VALIDITY);
  
-    console.log(isWithinInFiveMinutes, process.env.X_ACCESS_TOKEN_VALIDITY)
-
     if((process.env.X_ACCESS_TOKEN_KEY !== decryptedToken)|| !isWithinInFiveMinutes){ 
       return res.status(403).json({ message: 'Access token invalid' });
     }

@@ -1,27 +1,33 @@
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
-import { CreateMemberCommand } from "../cqrs/commands/create-member.command";
+import { CreateCellMemberCommand } from "../cqrs/commands/create-cell-member.command";
 import { AbstractOrchestrator } from "./abstract-orchestrator";
+import { MemberCreationDto } from "@app/libs";
 import { DataSource, QueryRunner } from "typeorm";
+import { ContactInfo } from "../entities/contact-info.entity";
+import { MemberAddress } from "../entities/member-address.entity";
 import { Member } from "../entities/member.entity";
-import { MemberCreationDto } from "@app/libs/dto/member/member.creation.dto";
-import { BadRequestException } from "@nestjs/common";
+import { SocialInfo } from "../entities/social-infos.entity";
+import { ContactInfoType } from "../enums/contact-info.enum";
+import { SocialMediaType } from "../enums/social-media.enum";
 import { AffliationEnum } from "../model/affliation-enum";
 import { CivilStatus } from "../model/civil-status.enum";
-import { MemberAddress } from "../entities/member-address.entity";
-import { ContactInfo } from "../entities/contact-info.entity";
-import { ContactInfoType } from "../enums/contact-info.enum";
-import { SocialInfo } from "../entities/social-infos.entity";
-import { SocialMediaType } from "../enums/social-media.enum";
+import { DiscipleshipService } from "../service/discipleship.service";
+import { ConsolidateMember } from "../entities/consolidate-member.entity";
+import { MemberRepository } from "../repositories/member-repositories";
 
-@CommandHandler(CreateMemberCommand)
-export class CreateMemberHandler extends AbstractOrchestrator<MemberCreationDto, any> implements ICommandHandler<CreateMemberCommand> {
+@CommandHandler(CreateCellMemberCommand)
+export class CreateCellMemberHandler extends AbstractOrchestrator<MemberCreationDto, any> implements ICommandHandler<CreateCellMemberCommand> {
 
-    constructor(protected readonly dataSource: DataSource) {
-        super(dataSource);
+    constructor(protected readonly dataSource: DataSource,
+                private discipleshipService: DiscipleshipService,
+                private memberRepository: MemberRepository
+    ) {
+            super(dataSource);
     }
-    
-    execute(command: CreateMemberCommand): Promise<MemberCreationDto> {
-        return this.orchestrate(command.memberCreationDto);
+
+
+    execute(command: CreateCellMemberCommand): Promise<any> {
+          return this.orchestrate(command.memberCreationDto);
     }
 
 
@@ -31,6 +37,7 @@ export class CreateMemberHandler extends AbstractOrchestrator<MemberCreationDto,
 
     protected async doProcess(request: MemberCreationDto): Promise<any> {
         const queryRunner: QueryRunner = this.dataSource.createQueryRunner();
+
 
         // Start a transaction
         await queryRunner.connect(); // Establish a database connection
@@ -48,8 +55,8 @@ export class CreateMemberHandler extends AbstractOrchestrator<MemberCreationDto,
             member.gender = request.gender;
             member.affliation = AffliationEnum[request.affliation] || null;
             member.civil_status = CivilStatus[request.civil_status] || null;
-
-
+            member.invited_by = request?.invited_by;
+            
             member.member_addresses = [];
             for(const addressRequestDto of request.member_addresses) {
                 const memberAddress = new MemberAddress();
@@ -75,9 +82,20 @@ export class CreateMemberHandler extends AbstractOrchestrator<MemberCreationDto,
                 socialInfo.email = socialDto.email;
                 member.social_infos.push(socialInfo)
             }
+
+
             const savedMember = await queryRunner.manager.save(Member, member);
 
-        
+            if(request.cell_leader) {
+                const consolidator = await this.memberRepository.findById(request.cell_leader);
+                const consolidateMember = new ConsolidateMember();
+                consolidateMember.church_campus_id = request.church_campus_id;
+                consolidateMember.consolidatee = savedMember;
+                consolidateMember.consolidator = consolidator;
+                const savedConsolidateMember = await queryRunner.manager.save(ConsolidateMember, consolidateMember);
+            }
+
+            await this.discipleshipService.addRootDisciple(queryRunner, savedMember.id, request.reference_id)
             await queryRunner.commitTransaction();
             return savedMember;
         } catch (error) {

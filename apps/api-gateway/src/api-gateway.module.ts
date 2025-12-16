@@ -19,6 +19,9 @@ import { TransformResponseInterceptor } from './interceptors/transform-response.
 import { ChurchCampusController } from './controllers/church/church-campus.controller';
 import { ChurchService } from './service/church-service';
 import { AuthService } from './service/auth.service';
+import { SelfController } from './controllers/auth/self-controller';
+import { MembersService } from './service/member.service';
+import { CellMembersController } from './controllers/members/cell-member-controller';
 
 @Module({
   imports: [
@@ -40,9 +43,11 @@ import { AuthService } from './service/auth.service';
   controllers: [
     ApiGatewayController,
     AuthController,
+    SelfController,
     ChurchController,
     ChurchCampusController,
-    MembersController
+    MembersController,
+    CellMembersController
   ],
   providers: [
     ApiGatewayService,
@@ -51,6 +56,7 @@ import { AuthService } from './service/auth.service';
     TransformResponseInterceptor,
     ChurchService,
     AuthService,
+    MembersService,
     // Apply ThrottlerGuard globally
     {
       provide: APP_GUARD,

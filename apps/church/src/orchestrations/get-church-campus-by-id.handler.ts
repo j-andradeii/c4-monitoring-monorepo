@@ -42,17 +42,17 @@ export class GetChurchCampusByIdHandler extends AbstractOrchestrator<string, Chu
             churchCampusDto.id = churchCampus.id;
             churchCampusDto.church = churchCampus.church;
             churchCampusDto.description = churchCampus.description;
-            // churchCampusDto.reference_id = churchCampus.reference_id;
+            churchCampusDto.reference_id = churchCampus.reference_id;
             churchCampusDto.tag_line = churchCampus.tag_line;
             churchCampusDto.church_campus_type = churchCampus.church_campus_type;
-            return await churchCampusDto;
+            return  churchCampusDto;
         } catch(error) {
             throw error;
         }
     }
 
     protected async postProcess(data: ChurchCampusDto): Promise<ChurchCampusDto> {
-        return await data;
+        return data;
     }
 
 }
