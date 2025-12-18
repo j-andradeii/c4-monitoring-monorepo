@@ -22,6 +22,7 @@ import { AuthService } from './service/auth.service';
 import { SelfController } from './controllers/auth/self-controller';
 import { MembersService } from './service/member.service';
 import { CellMembersController } from './controllers/members/cell-member-controller';
+import { CookieConfigService } from './config/cookie-config.service';
 
 @Module({
   imports: [
@@ -57,6 +58,7 @@ import { CellMembersController } from './controllers/members/cell-member-control
     ChurchService,
     AuthService,
     MembersService,
+    CookieConfigService,
     // Apply ThrottlerGuard globally
     {
       provide: APP_GUARD,
