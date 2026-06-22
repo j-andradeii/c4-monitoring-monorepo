@@ -54,16 +54,16 @@
     "generate:dto-index": "barrelsby -d libs/libs/src/dto -e index\\.ts -D -l top"
   },
   "dependencies": {
-    "@nestjs/common": "^10.0.0",
+    "@nestjs/common": "^11.1.19",
     "@nestjs/config": "^4.0.0",
-    "@nestjs/core": "^10.0.0",
-    "@nestjs/cqrs": "^10.2.7",
+    "@nestjs/core": "^11.1.19",
+    "@nestjs/cqrs": "^11.0.3",
     "@nestjs/jwt": "^11.0.0",
-    "@nestjs/microservices": "^10.4.3",
+    "@nestjs/microservices": "^11.1.19",
     "@nestjs/passport": "^11.0.5",
-    "@nestjs/platform-express": "^10.0.0",
+    "@nestjs/platform-express": "^11.1.19",
     "@nestjs/throttler": "^6.4.0",
-    "@nestjs/typeorm": "^10.0.2",
+    "@nestjs/typeorm": "^11.0.1",
     "amqp-connection-manager": "^4.1.14",
     "amqplib": "^0.10.4",
     "bcryptjs": "^3.0.0",
@@ -81,9 +81,9 @@
     "typeorm": "^0.3.20"
   },
   "devDependencies": {
-    "@nestjs/cli": "^10.0.0",
-    "@nestjs/schematics": "^10.0.0",
-    "@nestjs/testing": "^10.0.0",
+    "@nestjs/cli": "^11.0.0",
+    "@nestjs/schematics": "^11.1.0",
+    "@nestjs/testing": "^11.1.19",
     "@types/express": "^4.17.17",
     "@types/jest": "^29.5.2",
     "@types/jsonwebtoken": "^9.0.8",
@@ -131,11 +131,6 @@
     ],
     "moduleNameMapper": {
       "^@app/libs(|/.*)$": "<rootDir>/libs/libs/src/$1"
-    }
-  },
-  "overrides": {
-    "@nestjs/throttler": {
-      "@nestjs/core": "^10.0.0"
     }
   }
 }

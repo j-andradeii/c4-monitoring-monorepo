@@ -11,7 +11,7 @@ import { MembersMicroserviceModule } from './microservices/members-microservice/
 import { MembersController } from './controllers/members/members-controller';
 import { ConfigModule } from '@nestjs/config';
 import { PassportModule } from '@nestjs/passport';
-import { JwtModule } from '@nestjs/jwt';
+import { JwtModule, JwtSignOptions } from '@nestjs/jwt';
 import { JwtStrategy } from './strategy/jwt.strategy';
 import { AccessTokenMiddleware } from './middleware/access-token-middleware';
 import { ApiCryptoService } from './service/api-crypto-service';
@@ -38,7 +38,10 @@ import { CookieConfigService } from './config/cookie-config.service';
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
       secret: process.env.JWT_SECRET || 'SECRET_KEY', // match Auth microservice
-      signOptions: { expiresIn: process.env.JWT_EXPIRES_IN || '15m' },
+      signOptions: {
+        expiresIn: (process.env.JWT_EXPIRES_IN ||
+          '15m') as JwtSignOptions['expiresIn'],
+      },
     }),
   ],
   controllers: [
