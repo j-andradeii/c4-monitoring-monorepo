@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { JwtModule } from '@nestjs/jwt';
+import type { SignOptions } from 'jsonwebtoken';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Auth } from './entities/auth.entity';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -12,14 +13,14 @@ import { AuthRepository } from './repositories/auth.repositories';
   imports: [
     JwtModule.register({
       secret: process.env.JWT_SECRET,  // Should be in env
-      signOptions: { expiresIn: process.env.JWT_EXPIRES_IN }, // Access token expiry
+      signOptions: { expiresIn: process.env.JWT_EXPIRES_IN as SignOptions['expiresIn'] }, // Access token expiry
     }),
 
     ConfigModule.forRoot({
       isGlobal: true, // Makes ConfigModule available throughout the app
       load: [typeorm], // Load your TypeORM configuration
     }),
-        
+
     // Asynchronously load TypeORM configuration
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule], // Import ConfigModule to access ConfigService
@@ -28,9 +29,9 @@ import { AuthRepository } from './repositories/auth.repositories';
         ...configService.get('typeorm'), // Get the TypeORM config
       }),
     }),
-    
+
     TypeOrmModule.forFeature([
-        Auth
+      Auth
     ]),
   ],
   controllers: [AuthController],
@@ -39,4 +40,4 @@ import { AuthRepository } from './repositories/auth.repositories';
     AuthRepository
   ],
 })
-export class AuthModule {}
+export class AuthModule { }

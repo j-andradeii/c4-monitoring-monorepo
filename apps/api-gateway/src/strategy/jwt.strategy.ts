@@ -1,13 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
+import { Request } from 'express';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor() {
     super({
-      // Where to pull the JWT token from
-      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      // Custom extractor: check cookie first, then Bearer header
+      jwtFromRequest: ExtractJwt.fromExtractors([
+        // 1. Try to extract from cookie first (web clients)
+        (request: Request) => {
+          return request?.cookies?.ACCESS_TOKEN || null;
+        },
+        // 2. Fall back to Bearer token header (mobile/API clients)
+        ExtractJwt.fromAuthHeaderAsBearerToken(),
+      ]),
       // Whether to ignore token expiration errors
       ignoreExpiration: false,
       // Must match the 'secret' or public key used in Auth microservice
