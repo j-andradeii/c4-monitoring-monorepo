@@ -1,20 +1,23 @@
-import { Column, Entity, Index, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, Index, PrimaryGeneratedColumn, Column, JoinColumn, ManyToOne, OneToMany } from "typeorm";
 import { ConsolidateMember } from "./consolidate-member.entity";
-import { ChangeTrack } from "./change-track.entity";
+import { SuynilTrackProgress } from "./suynil-track-progress.entity";
 
 @Entity()
 @Index(['id'], { unique: true })  // Unique composite index on id and user_id
-export class ChangeTrackProgress {
+export class SuynilTrack {
 
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column({ type: 'timestamptz', name: 'session_date_time_done', nullable: false })
-    session_date_time_done: Date;
+
+    @Column({ type: 'timestamptz', name: 'schedule', nullable: true })
+    schedule: Date;
+
+    @Column({ type: 'varchar', length: 255, nullable: true })
+    venue: string;
 
     @Column({ type: 'text', nullable: true })
-    progress_report: string;
-
+    description: string;
 
     @Column({ type: 'varchar', length: 255, nullable: false })
     timezone: string;
@@ -26,10 +29,12 @@ export class ChangeTrackProgress {
      * - {cascade: true} means operations on ContactInfo will cascade to the related Member
      * - {eager: true} means the Member will be automatically loaded when ContactInfo is retrieved
     */
-    @ManyToOne(() => ChangeTrack, changeTrack => changeTrack.change_track_progress, {cascade: true, eager: true})
+    @ManyToOne(() => ConsolidateMember, consolidateMember => consolidateMember.suynil_tracks, {cascade: true, eager: true})
     @JoinColumn({ name: 'consolidate_member_id' })
-    change_track: ChangeTrack;
+    consolidate_member: ConsolidateMember;
 
+    @OneToMany(() => SuynilTrackProgress, suynilTrackProgress => suynilTrackProgress.suynil_track)
+    suynil_track_progress: SuynilTrackProgress[];
 
 
 }

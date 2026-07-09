@@ -1,6 +1,6 @@
 import { Column, Entity, Index, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Member } from "./member.entity";
-import { ChangeTrack } from "./change-track.entity";
+import { SuynilTrack } from "./suynil-track.entity";
 
 @Entity()
 @Index(['id'], { unique: true })  // Unique composite index on id and user_id
@@ -35,7 +35,7 @@ export class ConsolidateMember {
     @Column({ type: 'timestamptz', name: 'promoted_as_disciple_on', nullable: true })
     promoted_as_disciple_on: Date;
 
-    @OneToMany(() => ChangeTrack, changeTrack => changeTrack.consolidate_member)
-    change_tracks: ChangeTrack[];
+    @OneToMany(() => SuynilTrack, suynilTrack => suynilTrack.consolidate_member)
+    suynil_tracks: SuynilTrack[];
 
 }
