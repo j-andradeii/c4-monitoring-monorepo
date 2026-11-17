@@ -1,6 +1,6 @@
 # Use the official Node.js image.
-# Use Node 20 since you mentioned you're using Node v20
-FROM node:20
+# Node 22 LTS (Node 20 reached end-of-life in April 2026)
+FROM node:22
 
 # Set the working directory
 WORKDIR /usr/src/app

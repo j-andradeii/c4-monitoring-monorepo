@@ -12,7 +12,7 @@ services:
       - monitoring-microservice
 
   church-db:
-    image: postgres:13
+    image: postgres:17
     container_name: church-db
     environment:
       POSTGRES_USER: auth_user
@@ -28,7 +28,7 @@ services:
       - monitoring-microservice
 
   members-db:
-    image: postgres:13
+    image: postgres:17
     container_name: members-db
     environment:
       POSTGRES_USER: auth_user
@@ -44,7 +44,7 @@ services:
       - monitoring-microservice
 
   auth-db:
-    image: postgres:13
+    image: postgres:17
     container_name: auth-db
     environment:
       POSTGRES_USER: auth_user
