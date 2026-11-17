@@ -37,7 +37,7 @@ async function bootstrap() {
       urls: [rabbitMqUrl],
       queue: 'auth_queue',  // Ensure this queue name matches the one in the API Gateway
       queueOptions: {
-        durable: false,
+        durable: true,
       }
     },
   });

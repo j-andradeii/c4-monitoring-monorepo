@@ -15,7 +15,7 @@ rabbitMqUrl = rabbitMqUrl.includes('?') ? `${rabbitMqUrl}&frameMax=8192` : `${ra
               urls: [rabbitMqUrl],
               queue: 'church_queue',
               queueOptions: {
-                durable: false,
+                durable: true,
               }
             },
           },

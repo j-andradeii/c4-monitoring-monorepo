@@ -17,7 +17,7 @@ async function testRabbitMQConnection() {
     console.log('Successfully created a channel.');
 
     // 3. Assert a test queue (creates if it doesn't exist, idempotent)
-    await channel.assertQueue(testQueue, { durable: false });
+    await channel.assertQueue(testQueue, { durable: true });
     console.log(`Successfully asserted queue: ${testQueue}`);
 
     // 4. Send a test message

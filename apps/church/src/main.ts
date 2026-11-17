@@ -14,7 +14,7 @@ async function bootstrap() {
       urls: [rabbitMqUrl],
       queue: 'church_queue',
       queueOptions: {
-        durable: false
+        durable: true
       }
     },
   });

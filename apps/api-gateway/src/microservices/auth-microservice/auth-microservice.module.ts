@@ -18,7 +18,7 @@ rabbitMqUrl = rabbitMqUrl.includes('?') ? `${rabbitMqUrl}&frameMax=8192` : `${ra
               urls: [rabbitMqUrl],
               queue: 'auth_queue',
               queueOptions: {
-                durable: false,
+                durable: true,
               }
             },
           },
