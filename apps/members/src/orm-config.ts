@@ -3,7 +3,7 @@ import { max } from "class-validator";
 import { config as dotenvConfig } from 'dotenv';
 import { DataSource, DataSourceOptions } from "typeorm";
 
-dotenvConfig({ path: '.env' });
+dotenvConfig({ path: '.env', quiet: true });
 const entitiesPath = process.env.NODE_ENV === 'production'
   ? __dirname + '/entities/*.entity.js' // Use JS files in production
   : __dirname + '/entities/*.entity.ts';  // Use TS files in development
