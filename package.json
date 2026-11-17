@@ -54,14 +54,14 @@
     "generate:dto-index": "barrelsby -d libs/libs/src/dto -e index\\.ts -D -l top"
   },
   "dependencies": {
-    "@nestjs/common": "^11.1.19",
+    "@nestjs/common": "^11.2.10",
     "@nestjs/config": "^4.0.0",
-    "@nestjs/core": "^11.1.19",
+    "@nestjs/core": "^11.2.10",
     "@nestjs/cqrs": "^11.0.3",
     "@nestjs/jwt": "^11.0.0",
-    "@nestjs/microservices": "^11.1.19",
+    "@nestjs/microservices": "^11.2.10",
     "@nestjs/passport": "^11.0.5",
-    "@nestjs/platform-express": "^11.1.19",
+    "@nestjs/platform-express": "^11.2.10",
     "@nestjs/throttler": "^6.4.0",
     "@nestjs/typeorm": "^11.0.1",
     "amqp-connection-manager": "^4.1.14",
@@ -75,7 +75,7 @@
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",
-    "pg": "^8.13.0",
+    "pg": "^8.23.1",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
     "typeorm": "^0.3.20"
@@ -83,7 +83,7 @@
   "devDependencies": {
     "@nestjs/cli": "^11.0.0",
     "@nestjs/schematics": "^11.1.0",
-    "@nestjs/testing": "^11.1.19",
+    "@nestjs/testing": "^11.2.10",
     "@types/express": "^4.17.17",
     "@types/jest": "^29.5.2",
     "@types/jsonwebtoken": "^9.0.8",
